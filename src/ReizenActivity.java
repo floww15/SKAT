@@ -25,16 +25,18 @@ public class ReizenActivity extends Application {
 		Label lGereizt = new Label("Gereizt bis: ");
 		Button btnNext = new Button("'nächster Wert'");
 		btnNext.setPrefSize(80, 20);
+		Button btnWeg = new Button("Weg");
+		btnWeg.setPrefSize(80, 20);
 
 		VBox rechts = new VBox();
 		rechts.getChildren().add(lGereizt);
 		rechts.getChildren().add(btnNext);
+		rechts.setAlignment(Pos.CENTER);
 		
-		Button btnWeg = new Button("Weg");
-		btnWeg.setPrefSize(80, 20);
 		VBox links = new VBox();
 		links.getChildren().add(lNR);
 		links.getChildren().add(btnWeg);
+		links.setAlignment(Pos.CENTER);
 		
 		TextField field = new TextField();
 		field.setText("Florian mag FX");
@@ -43,6 +45,7 @@ public class ReizenActivity extends Application {
 		hbox.setSpacing(20);
 		hbox.getChildren().addAll(links,rechts,field);
 		hbox.setAlignment(Pos.CENTER);
+		
 		Label labelHeader = new Label("SKAT");
 		labelHeader.setStyle("-fx-font-size:2em");
 
@@ -51,8 +54,8 @@ public class ReizenActivity extends Application {
 		BorderPane.setAlignment(labelHeader, Pos.CENTER);
 		borderPane.setCenter(hbox);
 		
-		Scene scene = new Scene(borderPane, 600,400);
-		primaryStage.setTitle("Skat");
+		Scene scene = new Scene(borderPane, 800,600);
+		primaryStage.setTitle("SKAT");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 

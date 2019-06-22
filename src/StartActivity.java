@@ -48,8 +48,8 @@ public class StartActivity extends Application {
 //		pane.add(labelHeader, 1, 0);
 		pane.setAlignment(Pos.CENTER);
 		borderPane.setCenter(pane);
-		Scene scene = new Scene(borderPane, 600,400);
-		primaryStage.setTitle("Skat");
+		Scene scene = new Scene(borderPane, 700,430);
+		primaryStage.setTitle("SKAT");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
