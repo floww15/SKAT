@@ -21,7 +21,7 @@ public class DrueckenActivity extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		
-		
+		primaryStage.setResizable(false);
 		Button btnAufnehmen= new Button("Skat aufnehmen");
 		btnAufnehmen.setAlignment(Pos.CENTER);
 		

@@ -54,7 +54,7 @@ public class ReizenActivity extends Application {
 		BorderPane.setAlignment(labelHeader, Pos.CENTER);
 		borderPane.setCenter(hbox);
 		
-		Scene scene = new Scene(borderPane, 800,600);
+		Scene scene = new Scene(borderPane, 700,430);
 		primaryStage.setTitle("SKAT");
 		primaryStage.setScene(scene);
 		primaryStage.show();
