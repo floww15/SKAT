@@ -19,9 +19,9 @@ public class StartActivity extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		primaryStage.setResizable(false);
-		Button btnConnect = new Button("Connect");
-		btnConnect.setPrefSize(80,20);
-		Button btnStart = new Button("Start");
+//		Button btnConnect = new Button("Connect");
+//		btnConnect.setPrefSize(80,20);
+		Button btnStart = new Button("Connect");
 		btnStart.setPrefSize(80,20);
 		TextField tfIP = new TextField();
 		TextField tfName = new TextField();
@@ -39,7 +39,7 @@ public class StartActivity extends Application {
 		GridPane pane= new GridPane();
 		pane.setHgap(2);
 		pane.setVgap(2);
-		pane.add(btnConnect, 2,1);
+//		pane.add(btnConnect, 2,1);
 		pane.add(btnStart, 2,2);
 		pane.add(tfIP, 1,1);
 		pane.add(tfName, 1,2);
