@@ -1,3 +1,4 @@
+package Activities;
 import java.awt.Panel;
 
 import javafx.application.Application;
