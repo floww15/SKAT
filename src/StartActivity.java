@@ -15,8 +15,7 @@ public class StartActivity extends Application {
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
-// das ist ein test
-// das ist ein zweiter test
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
