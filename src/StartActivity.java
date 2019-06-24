@@ -1,6 +1,7 @@
 
-import javafx.application.Application;
 
+
+import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,19 +11,19 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class StartActivity extends Application {
+public class StartActivity extends Application{
 	Button btnConnect;
 	TextField tfIP, tfName;
 
-	public static void main(String[] args) {
-		Application.launch(args);
+	public StartActivity(Stage prime) {
+	try {
+		start(prime);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
 	}
 
-	StartActivity() {
-	
-	}
 
-	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		primaryStage.setResizable(false);
