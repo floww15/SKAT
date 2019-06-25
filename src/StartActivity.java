@@ -1,6 +1,4 @@
 
-
-
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,22 +9,25 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class StartActivity extends Application{
+public class StartActivity extends Application {
 	Button btnConnect;
 	TextField tfIP, tfName;
+	CenterClient centerClient;
 
-	public StartActivity(Stage prime) {
-	try {
-		start(prime);
-	} catch (Exception e) {
-		e.printStackTrace();
+	public StartActivity(Stage prime,CenterClient centerClient) {
+		this.centerClient=centerClient;
+		try {
+			start(prime);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	}
-
+	
 
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		primaryStage.setResizable(false);
+
 //		Button btnConnect = new Button("Connect");
 //		btnConnect.setPrefSize(80,20);
 		btnConnect = new Button("Connect");
@@ -44,6 +45,11 @@ public class StartActivity extends Application{
 		borderPane.setTop(labelHeader);
 		BorderPane.setAlignment(labelHeader, Pos.CENTER);
 
+		btnConnect.setOnAction(
+				e->
+					centerClient.registerConnect(getIP(), getName())
+				);
+		
 		GridPane pane = new GridPane();
 		pane.setHgap(2);
 		pane.setVgap(2);
