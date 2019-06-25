@@ -1,3 +1,8 @@
+package Server_Client;
+
+
+
+import Activities.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

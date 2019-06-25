@@ -1,3 +1,4 @@
+package GameClasses;
 
 public class Karte {
 	private String farbe;

@@ -1,3 +1,8 @@
+package Server_Client;
+
+import Activities.*;
+import GameClasses.*;
+
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
