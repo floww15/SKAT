@@ -3,6 +3,7 @@ package Server_Client;
 
 
 import Activities.*;
+import GameClasses.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
