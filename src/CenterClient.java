@@ -9,12 +9,13 @@ public class CenterClient extends Application {
 	SkatClient client;
 	StartActivity startActivity;
 	ReizenActivity reizenActivity;
+	Stage prime;
 
 	@Override
 	public void start(Stage prime) throws Exception {
+		this.prime = prime;
 		client = new SkatClient();
 		startActivity = new StartActivity(prime, this);
-		
 
 	}
 
@@ -27,7 +28,7 @@ public class CenterClient extends Application {
 		if (!alreadyRegistered) {
 			client.connect(ip);
 			client.register(name);
-			alreadyRegistered=true;
+			alreadyRegistered = true;
 		}
 	}
 
