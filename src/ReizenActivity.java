@@ -11,9 +11,17 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ReizenActivity extends Application {
+	Label lNR, lGereizt;
+	Button btnNext, btnWeg;
+	CenterClient centerClient;
 
-	public static void main(String[] args) {
-		Application.launch(args);
+	public ReizenActivity(Stage prime, CenterClient centerClient) {
+		this.centerClient=centerClient;
+		try {
+			start(prime);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -21,11 +29,11 @@ public class ReizenActivity extends Application {
 		// TODO Auto-generated method stub
 		primaryStage.setResizable(false);
 
-		Label lNR = new Label("Spieler NR:");
-		Label lGereizt = new Label("Gereizt bis: ");
-		Button btnNext = new Button("'nächster Wert'");
+		lNR = new Label("Spieler NR:");
+		lGereizt = new Label("Gereizt bis: ");
+		btnNext = new Button("'nächster Wert'");
 		btnNext.setPrefSize(80, 20);
-		Button btnWeg = new Button("Weg");
+		btnWeg = new Button("Weg");
 		btnWeg.setPrefSize(80, 20);
 
 		VBox rechts = new VBox();

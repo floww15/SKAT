@@ -8,11 +8,13 @@ public class CenterClient extends Application {
 
 	SkatClient client;
 	StartActivity startActivity;
+	ReizenActivity reizenActivity;
 
 	@Override
 	public void start(Stage prime) throws Exception {
 		client = new SkatClient();
 		startActivity = new StartActivity(prime, this);
+		
 
 	}
 
