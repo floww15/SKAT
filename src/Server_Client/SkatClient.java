@@ -42,15 +42,21 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 		return worked;
 	}
 
-	public boolean register(String name) {
-		boolean worked = false;
+	public void register(String name) {
+		
 		try {
-			worked = skatServer.register(name);
+			skatServer.register(name,this);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return worked;
+		
+	}
+
+	@Override
+	public void setPos(int pos) throws RemoteException {
+		// TODO Auto-generated method stub
+		this.pos=pos;
 	}
 
 }

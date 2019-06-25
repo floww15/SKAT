@@ -22,7 +22,6 @@ public class CenterClient extends Application {
 		this.prime = prime;
 		client = new SkatClient();
 		startActivity = new StartActivity(prime, this);
-
 	}
 
 	public static void main(String... args) {

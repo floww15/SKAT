@@ -53,14 +53,20 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		}
 	}
 
-	public boolean register(String name) {
+	public void register(String name, RemoteSkatClient client) {
 		if (player < 3) {
 			players[player] = new Player(name);
+			try {
+				client.setPos(player);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			player++;
 			System.out.println(name);
-			return true;
+
 		}
-		return false;
+
 	}
 
 	private void verteilen() {
@@ -95,4 +101,5 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		}
 	}
 
+	
 }
