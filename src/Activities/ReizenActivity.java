@@ -100,8 +100,6 @@ public class ReizenActivity extends Application {
 		Scene scene = new Scene(borderPane, 700, 430);
 		primaryStage.setTitle("SKAT");
 		primaryStage.setScene(scene);
-		primaryStage.show();
-
 		field.setMinHeight(primaryStage.getHeight() / 2);
 
 	}
