@@ -2,7 +2,6 @@ package Activities;
 
 import Server_Client.*;
 
-import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,7 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class StartActivity extends Application {
+public class StartActivity {
 	Button btnConnect;
 	TextField tfIP, tfName;
 	CenterClient centerClient;
@@ -28,7 +27,6 @@ public class StartActivity extends Application {
 	
 
 	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
 		primaryStage.setResizable(false);
 
 //		Button btnConnect = new Button("Connect");
@@ -47,7 +45,14 @@ public class StartActivity extends Application {
 		BorderPane borderPane = new BorderPane();
 		borderPane.setTop(labelHeader);
 		BorderPane.setAlignment(labelHeader, Pos.CENTER);
-
+		String ip = getIP();
+		if (ip.equals("")) {
+			tfIP.setText("localhost");
+		}
+		String name=getName();
+		if (name.equals("")) {
+			tfName.setText("Bier");
+		}
 		btnConnect.setOnAction(
 				e->
 					centerClient.registerConnect(getIP(), getName())

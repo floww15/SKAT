@@ -1,8 +1,5 @@
 package Server_Client;
 
-import Activities.*;
-import GameClasses.*;
-
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -12,7 +9,7 @@ import java.rmi.server.UnicastRemoteObject;
 public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient {
 	CenterClient centerClient;
 	RemoteSkatServer skatServer;
-	int pos;
+	int pos=0;
 	/**
 	 * 
 	 */
@@ -28,11 +25,9 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 		try {
 			skatServer = (RemoteSkatServer) Naming.lookup("//" + ip + ":1099/SkatServer");
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			worked = false;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			worked = false;
 		} catch (NotBoundException e) {
@@ -48,7 +43,6 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 		try {
 			skatServer.register(name, this);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -56,13 +50,11 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 
 	@Override
 	public void setPos(int pos) throws RemoteException {
-		// TODO Auto-generated method stub
 		this.pos = pos;
 	}
 
 	@Override
 	public void startReizen() throws RemoteException {
-		// TODO Auto-generated method stub
 		centerClient.startReizen(pos, skatServer.getKarten(pos));
 
 	}

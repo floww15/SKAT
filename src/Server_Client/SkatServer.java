@@ -1,8 +1,5 @@
 package Server_Client;
 
-import Activities.*;
-import GameClasses.*;
-
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
