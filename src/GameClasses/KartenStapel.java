@@ -1,8 +1,13 @@
 package GameClasses;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class KartenStapel {
+public class KartenStapel implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	ArrayList<Karte> stapel=new ArrayList<Karte>();
 	public KartenStapel() {
 		stapel.add(new Karte("Kreuz","7"));

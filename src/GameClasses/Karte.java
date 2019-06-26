@@ -1,6 +1,12 @@
 package GameClasses;
 
-public class Karte {
+import java.io.Serializable;
+
+public class Karte implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String farbe;
 	private String wert;
 	private int punkte;

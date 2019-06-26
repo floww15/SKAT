@@ -20,50 +20,51 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 	private static final long serialVersionUID = 1L;
 
 	protected SkatClient(CenterClient centerClient) throws RemoteException {
-		this.centerClient=centerClient;
+		this.centerClient = centerClient;
 	}
 
 	public boolean connect(String ip) {
-		boolean worked=true;
+		boolean worked = true;
 		try {
-			skatServer= (RemoteSkatServer) Naming.lookup("//"+ip+":1099/SkatServer");
+			skatServer = (RemoteSkatServer) Naming.lookup("//" + ip + ":1099/SkatServer");
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			worked=false;
+			worked = false;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			worked=false;
+			worked = false;
 		} catch (NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			worked=false;
+			worked = false;
 		}
 		return worked;
 	}
 
 	public void register(String name) {
-		
+
 		try {
-			skatServer.register(name,this);
+			skatServer.register(name, this);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
 	public void setPos(int pos) throws RemoteException {
 		// TODO Auto-generated method stub
-		this.pos=pos;
+		this.pos = pos;
 	}
 
 	@Override
 	public void startReizen() throws RemoteException {
 		// TODO Auto-generated method stub
-		
+		centerClient.startReizen(pos, skatServer.getKarten(pos));
+
 	}
 
 }

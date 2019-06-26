@@ -36,6 +36,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		verteilen();
 	}
 
 	public static void main(String[] args) {
@@ -106,6 +107,20 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		for (int i = 7; i < 10; i++) {
 			p3.add(k.getKarte());
 		}
+	}
+
+	@Override
+	public ArrayList<Karte> getKarten(int pos) throws RemoteException {
+		// TODO Auto-generated method stub
+		switch (pos) {
+		case 0:
+			return p1;
+		case 1:
+			return p2;
+		case 2:
+			return p3;
+		}
+		return null;
 	}
 
 }
