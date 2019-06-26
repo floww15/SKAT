@@ -10,6 +10,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient {
+	CenterClient centerClient;
 	RemoteSkatServer skatServer;
 	int pos;
 	/**
@@ -18,8 +19,8 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 
 	private static final long serialVersionUID = 1L;
 
-	protected SkatClient() throws RemoteException {
-
+	protected SkatClient(CenterClient centerClient) throws RemoteException {
+		this.centerClient=centerClient;
 	}
 
 	public boolean connect(String ip) {
@@ -57,6 +58,12 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 	public void setPos(int pos) throws RemoteException {
 		// TODO Auto-generated method stub
 		this.pos=pos;
+	}
+
+	@Override
+	public void startReizen() throws RemoteException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

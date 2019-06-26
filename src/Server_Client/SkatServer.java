@@ -20,6 +20,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	private ArrayList<Karte> p2 = new ArrayList<Karte>();
 	private ArrayList<Karte> p3 = new ArrayList<Karte>();
 	private ArrayList<Karte> skat = new ArrayList<Karte>();
+	private RemoteSkatClient[] clients = new RemoteSkatClient[3];
 	private Player[] players = new Player[3];
 	int player = 0;
 	/**
@@ -55,9 +56,15 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 
 	public void register(String name, RemoteSkatClient client) {
 		if (player < 3) {
+			clients[player] = client;
 			players[player] = new Player(name);
 			try {
 				client.setPos(player);
+				if (player == 2) {// starten der Reizen Activity
+					clients[0].startReizen();
+					clients[1].startReizen();
+					clients[2].startReizen();
+				}
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -101,5 +108,4 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		}
 	}
 
-	
 }

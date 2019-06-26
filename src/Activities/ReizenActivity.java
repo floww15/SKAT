@@ -1,6 +1,10 @@
 package Activities;
 
+import java.util.ArrayList;
+
 import Server_Client.*;
+import GameClasses.*;
+
 
 import javafx.application.Application;
 
@@ -9,25 +13,39 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ReizenActivity extends Application {
-	Label lNR, lGereizt;
+	Label lNR, lGereizt, lZustand, lEmpty;
 	Button btnNext, btnWeg;
 	TextArea field;
 	CenterClient centerClient;
 
-	public ReizenActivity(Stage prime, CenterClient centerClient) {
+	public ReizenActivity(Stage prime, CenterClient centerClient,int pos, ArrayList<Karte> karten) {
 		this.centerClient = centerClient;
 		try {
 			start(prime);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		lNR.setText(""+pos);
+		switch(pos) {
+		case 0:
+			lZustand.setText("gegeben warten");
+			break;
+		case 1:
+			lZustand.setText("hören");
+			break;
+		case 2:
+			lZustand.setText("sagen");
+			btnNext.setText("18");
+			break;
+		}
+		lGereizt.setText("---");
+		
 
 	}
 	
@@ -42,6 +60,8 @@ public class ReizenActivity extends Application {
 
 		lNR = new Label(); //SpielerNR
 		lGereizt = new Label();//nächster ReizWert oder JA
+		lZustand= new Label();//aktueller Zustand/Aktivität des Spielers
+		lEmpty= new Label();
 		btnNext = new Button();//Aktueller Reizwert
 		btnNext.setPrefSize(80, 20);
 		btnWeg = new Button("Weg");//Weg
@@ -50,11 +70,13 @@ public class ReizenActivity extends Application {
 		VBox rechts = new VBox();
 		rechts.getChildren().add(lGereizt);
 		rechts.getChildren().add(btnNext);
+		rechts.getChildren().add(lZustand);
 		rechts.setAlignment(Pos.CENTER);
 
 		VBox links = new VBox();
 		links.getChildren().add(lNR);
 		links.getChildren().add(btnWeg);
+		links.getChildren().add(lEmpty);
 		links.setAlignment(Pos.CENTER);
 
 		field = new TextArea();
