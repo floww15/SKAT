@@ -20,11 +20,13 @@ public class ReizenActivity {
 	Button btnNext, btnWeg;
 	TextArea field;
 	CenterClient centerClient;
+	ArrayList<Karte> karten;
 	int pos = 0;
 
 	public ReizenActivity(Stage prime, CenterClient centerClient, int pos, ArrayList<Karte> karten) {
 		this.pos = pos;
 		this.centerClient = centerClient;
+		this.karten=karten;
 
 		Platform.runLater(new Runnable() {
 			@Override
@@ -50,6 +52,7 @@ public class ReizenActivity {
 				links.getChildren().add(lEmpty);
 				links.setAlignment(Pos.CENTER);
 
+				
 				field = new TextArea();
 				field.setMaxSize(100, 200);
 				// field.setText("Florian mag FX");
@@ -76,10 +79,10 @@ public class ReizenActivity {
 
 	}
 
-	void changeLabel() {
+	void changeLabelstart() {
 
-		lNR.setText("" + this.pos);
-		switch (this.pos) {
+		lNR.setText("" + pos);
+		switch (pos) {
 		case 0:
 			lZustand.setText("gegeben warten");
 			break;

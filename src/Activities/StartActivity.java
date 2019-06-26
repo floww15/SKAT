@@ -19,6 +19,7 @@ public class StartActivity {
 	public StartActivity(Stage prime,CenterClient centerClient) {
 		this.centerClient=centerClient;
 		try {
+			
 			start(prime);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -45,14 +46,7 @@ public class StartActivity {
 		BorderPane borderPane = new BorderPane();
 		borderPane.setTop(labelHeader);
 		BorderPane.setAlignment(labelHeader, Pos.CENTER);
-		String ip = getIP();
-		if (ip.equals("")) {
-			tfIP.setText("localhost");
-		}
-		String name=getName();
-		if (name.equals("")) {
-			tfName.setText("Bier");
-		}
+	
 		btnConnect.setOnAction(
 				e->
 					centerClient.registerConnect(getIP(), getName())
@@ -77,7 +71,10 @@ public class StartActivity {
 	}
 
 	public String getIP() {
-		return tfIP.getText();
+		 if(tfIP.getText().equals("")) {
+			 return "localhost";
+		 }
+		 return tfIP.getText();
 	}
 
 	public String getName() {

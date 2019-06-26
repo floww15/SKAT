@@ -17,6 +17,7 @@ public class DrueckenActivity {
 	public DrueckenActivity(Stage prime) {
 		start(prime);
 	}
+	
 
 	public void start(Stage primaryStage) {
 		// TODO Auto-generated method stub
