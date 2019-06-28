@@ -38,7 +38,7 @@ public class CenterClient extends Application {
 	}
 
 	public void startReizen(int pos, ArrayList<Karte> karten) {
-		reizenActivity = new ReizenActivity(prime, this, pos, karten);
+		reizenActivity=startActivity.startReizen(pos, karten);
 	}
 
 }

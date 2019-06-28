@@ -1,5 +1,8 @@
 package Activities;
 
+import java.util.ArrayList;
+
+import GameClasses.Karte;
 import Server_Client.*;
 
 import javafx.geometry.Pos;
@@ -15,9 +18,12 @@ public class StartActivity {
 	Button btnConnect;
 	TextField tfIP, tfName;
 	CenterClient centerClient;
+	ReizenActivity reizenActivity;
+	Stage prime;
 
 	public StartActivity(Stage prime,CenterClient centerClient) {
 		this.centerClient=centerClient;
+		this.prime=prime;
 		try {
 			
 			start(prime);
@@ -79,6 +85,10 @@ public class StartActivity {
 
 	public String getName() {
 		return tfName.getText();
+	}
+	
+	public ReizenActivity startReizen(int pos, ArrayList<Karte> karten) {
+		return new ReizenActivity(prime, centerClient, pos, karten);
 	}
 
 }
