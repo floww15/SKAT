@@ -5,6 +5,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.concurrent.Semaphore;
 
 public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient {
 	CenterClient centerClient;
@@ -57,6 +58,20 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 	public void startReizen() throws RemoteException {
 		centerClient.startReizen(pos, skatServer.getKarten(pos));
 
+	}
+	
+	public Semaphore getSem() throws RemoteException {
+		return skatServer.getSem(pos);
+	}
+	
+	public void reizenStartStats() throws RemoteException {
+		centerClient.reizenStartStats();
+	}
+
+	@Override
+	public int getPos() throws RemoteException {
+		// TODO Auto-generated method stub
+		return pos;
 	}
 
 }

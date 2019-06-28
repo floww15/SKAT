@@ -1,5 +1,6 @@
 package Activities;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import Server_Client.*;
@@ -31,6 +32,12 @@ public class ReizenActivity {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
+				try {
+					centerClient.getSem().acquire();
+				} catch (RemoteException | InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				lNR = new Label(); // SpielerNR
 				lGereizt = new Label();// nächster ReizWert oder JA
 				lZustand = new Label();// aktueller Zustand/Aktivität des Spielers
@@ -74,13 +81,24 @@ public class ReizenActivity {
 				Scene scene = new Scene(borderPane, 700, 430);
 				prime.setTitle("SKAT");
 				prime.setScene(scene);
+				try {
+					centerClient.getSem().release();
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 
 	}
 
-	void changeLabelstart() {
-
+	public void changeLabelstart(int pos) {
+		try {
+			centerClient.getSem().acquire();
+		} catch (RemoteException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		lNR.setText("" + pos);
 		switch (pos) {
 		case 0:
@@ -95,7 +113,12 @@ public class ReizenActivity {
 			break;
 		}
 		lGereizt.setText("---");
-
+		try {
+			centerClient.getSem().release();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// public static void main(String[] args) {

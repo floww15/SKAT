@@ -6,6 +6,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
 
 import GameClasses.Karte;
 import GameClasses.KartenStapel;
@@ -19,6 +20,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	private ArrayList<Karte> skat = new ArrayList<Karte>();
 	private RemoteSkatClient[] clients = new RemoteSkatClient[3];
 	private Player[] players = new Player[3];
+	private Semaphore[] semsPlayer = new Semaphore[3];
 	int player = 0;
 	/**
 	 * 
@@ -33,6 +35,9 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		semsPlayer[0] = new Semaphore(1);
+		semsPlayer[1] = new Semaphore(1);
+		semsPlayer[2] = new Semaphore(1);
 		verteilen();
 	}
 
@@ -59,9 +64,14 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 			try {
 				client.setPos(player);
 				if (player == 2) {// starten der Reizen Activity
+
 					clients[0].startReizen();
 					clients[1].startReizen();
 					clients[2].startReizen();
+					clients[0].reizenStartStats();
+					clients[1].reizenStartStats();
+					clients[2].reizenStartStats();
+
 				}
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
@@ -118,6 +128,10 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 			return p3;
 		}
 		return null;
+	}
+
+	public Semaphore getSem(int pos) throws RemoteException {
+		return semsPlayer[pos];
 	}
 
 }
