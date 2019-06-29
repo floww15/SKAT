@@ -88,6 +88,7 @@ public class StartActivity {
 	}
 	
 	public ReizenActivity startReizen(int pos, ArrayList<Karte> karten) {
+		System.out.println(pos);
 		return new ReizenActivity(prime, centerClient, pos, karten);
 	}
 

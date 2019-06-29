@@ -40,6 +40,7 @@ public class CenterClient extends Application {
 	}
 
 	public void startReizen(int pos, ArrayList<Karte> karten) {
+//		System.out.println(pos);
 		reizenActivity=startActivity.startReizen(pos, karten);
 	}
 	

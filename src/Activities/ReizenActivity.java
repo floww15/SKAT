@@ -2,6 +2,7 @@ package Activities;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
 
 import Server_Client.*;
 import GameClasses.*;
@@ -22,22 +23,18 @@ public class ReizenActivity {
 	TextArea field;
 	CenterClient centerClient;
 	ArrayList<Karte> karten;
+	Semaphore sem = new Semaphore(0);
 	int pos = 0;
 
 	public ReizenActivity(Stage prime, CenterClient centerClient, int pos, ArrayList<Karte> karten) {
 		this.pos = pos;
 		this.centerClient = centerClient;
-		this.karten=karten;
+		this.karten = karten;
 
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				try {
-					centerClient.getSem().acquire();
-				} catch (RemoteException | InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				System.out.println(pos);
 				lNR = new Label(); // SpielerNR
 				lGereizt = new Label();// nächster ReizWert oder JA
 				lZustand = new Label();// aktueller Zustand/Aktivität des Spielers
@@ -59,7 +56,6 @@ public class ReizenActivity {
 				links.getChildren().add(lEmpty);
 				links.setAlignment(Pos.CENTER);
 
-				
 				field = new TextArea();
 				field.setMaxSize(100, 200);
 				// field.setText("Florian mag FX");
@@ -81,45 +77,58 @@ public class ReizenActivity {
 				Scene scene = new Scene(borderPane, 700, 430);
 				prime.setTitle("SKAT");
 				prime.setScene(scene);
-				try {
-					centerClient.getSem().release();
-				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				try {
+//					centerClient.getSem().release();
+//				} catch (RemoteException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+				sem.release();
 			}
 		});
 //		changeLabelstart();
-		
+
 	}
 
 	public void changeLabelstart() {
+//		try {
+//			centerClient.getSem().acquire();
+//		} catch (RemoteException | InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		try {
-			centerClient.getSem().acquire();
-		} catch (RemoteException | InterruptedException e) {
+			sem.acquire();
+		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
-		lNR.setText("" + pos);
-		switch (pos) {
-		case 0:
-			lZustand.setText("gegeben warten");
-			break;
-		case 1:
-			lZustand.setText("hören");
-			break;
-		case 2:
-			lZustand.setText("sagen");
-			btnNext.setText("18");
-			break;
-		}
-		lGereizt.setText("---");
-		try {
-			centerClient.getSem().release();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				lNR.setText("" + pos);
+				switch (pos) {
+				case 0:
+					lZustand.setText("gegeben warten");
+					break;
+				case 1:
+					lZustand.setText("hören");
+					break;
+				case 2:
+					lZustand.setText("sagen");
+					btnNext.setText("18");
+					break;
+				}
+				lGereizt.setText("---");
+//		try {
+//			centerClient.getSem().release();
+//		} catch (RemoteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		sem.release();
+			}
+		});
 	}
 
 	// public static void main(String[] args) {

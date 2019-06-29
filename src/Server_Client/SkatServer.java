@@ -35,9 +35,9 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		semsPlayer[0] = new Semaphore(1);
-		semsPlayer[1] = new Semaphore(1);
-		semsPlayer[2] = new Semaphore(1);
+		semsPlayer[0] = new Semaphore(0);
+		semsPlayer[1] = new Semaphore(0);
+		semsPlayer[2] = new Semaphore(0);
 		verteilen();
 	}
 
@@ -57,10 +57,11 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		}
 	}
 
-	public void register(String name, RemoteSkatClient client) {
+	public synchronized void register(String name, RemoteSkatClient client) {
 		if (player < 3) {
 			clients[player] = client;
 			players[player] = new Player(name);
+			System.out.println(name);
 			try {
 				client.setPos(player);
 				if (player == 2) {// starten der Reizen Activity
@@ -68,9 +69,9 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 					clients[0].startReizen();
 					clients[1].startReizen();
 					clients[2].startReizen();
-//					clients[0].reizenStartStats();
-//					clients[1].reizenStartStats();
-//					clients[2].reizenStartStats();
+					clients[0].reizenStartStats();
+					clients[1].reizenStartStats();
+					clients[2].reizenStartStats();
 
 				}
 			} catch (RemoteException e) {
@@ -78,7 +79,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 				e.printStackTrace();
 			}
 			player++;
-			System.out.println(name);
+			
 
 		}
 
