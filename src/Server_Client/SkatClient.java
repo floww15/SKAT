@@ -7,6 +7,8 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.concurrent.Semaphore;
 
+import javafx.application.Platform;
+
 public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient {
 	CenterClient centerClient;
 	RemoteSkatServer skatServer;
@@ -56,8 +58,18 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 
 	@Override
 	public void startReizen() throws RemoteException {
-		centerClient.startReizen(pos, skatServer.getKarten(pos));
-
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				
+				try {
+					centerClient.startReizen(pos, skatServer.getKarten(pos));
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 	
 	public Semaphore getSem() throws RemoteException {
@@ -65,7 +77,18 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 	}
 	
 	public void reizenStartStats() throws RemoteException {
-		centerClient.reizenStartStats();
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				
+				try {
+					centerClient.reizenStartStats();
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	@Override

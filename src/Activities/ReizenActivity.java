@@ -30,65 +30,66 @@ public class ReizenActivity {
 		this.pos = pos;
 		this.centerClient = centerClient;
 		this.karten = karten;
+	//	Platform.setImplicitExit(false);
 
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				System.out.println(pos);
-				lNR = new Label(); // SpielerNR
-				lGereizt = new Label();// nächster ReizWert oder JA
-				lZustand = new Label();// aktueller Zustand/Aktivität des Spielers
-				lEmpty = new Label();
-				btnNext = new Button();// Aktueller Reizwert
-				btnNext.setPrefSize(80, 20);
-				btnWeg = new Button("Weg");// Weg
-				btnWeg.setPrefSize(80, 20);
+		System.out.println(pos);
+		lNR = new Label(); // SpielerNR
+		lGereizt = new Label();// nächster ReizWert oder JA
+		lZustand = new Label();// aktueller Zustand/Aktivität des Spielers
+		lEmpty = new Label();
+		btnNext = new Button();// Aktueller Reizwert
+		btnNext.setPrefSize(80, 20);
+		btnWeg = new Button("Weg");// Weg
+		btnWeg.setPrefSize(80, 20);
 
-				VBox rechts = new VBox();
-				rechts.getChildren().add(lGereizt);
-				rechts.getChildren().add(btnNext);
-				rechts.getChildren().add(lZustand);
-				rechts.setAlignment(Pos.CENTER);
+		VBox rechts = new VBox();
+		rechts.getChildren().add(lGereizt);
+		rechts.getChildren().add(btnNext);
+		rechts.getChildren().add(lZustand);
+		rechts.setAlignment(Pos.CENTER);
 
-				VBox links = new VBox();
-				links.getChildren().add(lNR);
-				links.getChildren().add(btnWeg);
-				links.getChildren().add(lEmpty);
-				links.setAlignment(Pos.CENTER);
+		VBox links = new VBox();
+		links.getChildren().add(lNR);
+		links.getChildren().add(btnWeg);
+		links.getChildren().add(lEmpty);
+		links.setAlignment(Pos.CENTER);
 
-				field = new TextArea();
-				field.setMaxSize(100, 200);
-				// field.setText("Florian mag FX");
-				// field.setText(field.getText()+"\n"+"lol");
+		field = new TextArea();
+		field.setMaxSize(100, 200);
+		// field.setText("Florian mag FX");
+		// field.setText(field.getText()+"\n"+"lol");
 
-				HBox hbox = new HBox();
-				hbox.setSpacing(20);
-				hbox.getChildren().addAll(links, rechts, field);
-				hbox.setAlignment(Pos.CENTER);
+		HBox hbox = new HBox();
+		hbox.setSpacing(20);
+		hbox.getChildren().addAll(links, rechts, field);
+		hbox.setAlignment(Pos.CENTER);
 
-				Label labelHeader = new Label("SKAT");
-				labelHeader.setStyle("-fx-font-size:2em");
+		Label labelHeader = new Label("SKAT");
+		labelHeader.setStyle("-fx-font-size:2em");
 
-				BorderPane borderPane = new BorderPane();
-				borderPane.setTop(labelHeader);
-				BorderPane.setAlignment(labelHeader, Pos.CENTER);
-				borderPane.setCenter(hbox);
+		BorderPane borderPane = new BorderPane();
+		borderPane.setTop(labelHeader);
+		BorderPane.setAlignment(labelHeader, Pos.CENTER);
+		borderPane.setCenter(hbox);
 
-				Scene scene = new Scene(borderPane, 700, 430);
-				prime.setTitle("SKAT");
-				prime.setScene(scene);
-//				try {
-//					centerClient.getSem().release();
-//				} catch (RemoteException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-				sem.release();
-			}
-		});
+		Scene scene = new Scene(borderPane, 700, 430);
+		prime.setTitle("SKAT");
+		prime.setScene(scene);
+//		try {
+//			centerClient.getSem().release();
+//		} catch (RemoteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		sem.release();
+	
+
 //		changeLabelstart();
 
-	}
+}
+
+
+	
 
 	public void changeLabelstart() {
 //		try {
