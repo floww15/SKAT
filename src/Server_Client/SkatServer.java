@@ -134,6 +134,14 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		return null;
 	}
 
+	@Override
+	public void weg(int pos) throws RemoteException {
+		// TODO Auto-generated method stub
+		reizen.weg(pos);
+	}
+	
+
+
 
 
 //	public Semaphore getSem(int pos) throws RemoteException {

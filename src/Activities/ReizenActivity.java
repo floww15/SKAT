@@ -107,7 +107,7 @@ public class ReizenActivity {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				lNR.setText("" + pos);
+				lNR.setText("" + (pos+1));
 				switch (pos) {
 				case 0:
 					lZustand.setText("gegeben warten");
@@ -133,11 +133,17 @@ public class ReizenActivity {
 	}
 
 	public void btnWegClick() {
-
+		centerClient.btnWegClick();
 	}
 
 	public void btnNextClick() {
 		
 	}
+	
+	public void changeWert(int wert) {
+		lGereizt.setText(""+wert);
+	}
+	
+	
 
 }

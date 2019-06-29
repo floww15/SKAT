@@ -52,5 +52,9 @@ public class CenterClient extends Application {
 	public void reizenStartStats() throws RemoteException {
 		reizenActivity.changeLabelstart();
 	}
+	
+	public void btnWegClick() {
+		client.btnWegClick();
+	}
 
 }

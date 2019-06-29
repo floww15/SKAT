@@ -60,8 +60,7 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 	}
 
 	@Override
-	public void startReizen(Reizen reizen) throws RemoteException {
-		this.reizen=reizen;
+	public void startReizen() throws RemoteException {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -99,5 +98,14 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 	public int getPos() throws RemoteException {
 		// TODO Auto-generated method stub
 		return pos;
+	}
+	
+	public void btnWegClick()  {
+		try {
+			skatServer.weg(pos);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
