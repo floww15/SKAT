@@ -1,6 +1,7 @@
 package Server_Client;
 
 import java.net.MalformedURLException;
+
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -8,11 +9,13 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.concurrent.Semaphore;
 
 import javafx.application.Platform;
+import SpielAblauf.*;
 
 public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient {
 	CenterClient centerClient;
 	RemoteSkatServer skatServer;
 	int pos=0;
+	Reizen reizen;
 	/**
 	 * 
 	 */
@@ -57,7 +60,8 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 	}
 
 	@Override
-	public void startReizen() throws RemoteException {
+	public void startReizen(Reizen reizen) throws RemoteException {
+		this.reizen=reizen;
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -72,9 +76,9 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 		});
 	}
 	
-	public Semaphore getSem() throws RemoteException {
-		return skatServer.getSem(pos);
-	}
+//	public Semaphore getSem() throws RemoteException {
+//		return skatServer.getSem(pos);
+//	}
 	
 	public void reizenStartStats() throws RemoteException {
 		Platform.runLater(new Runnable() {
@@ -96,5 +100,4 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 		// TODO Auto-generated method stub
 		return pos;
 	}
-
 }

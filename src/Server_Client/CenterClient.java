@@ -1,6 +1,7 @@
 package Server_Client;
 
 import java.rmi.RemoteException;
+
 import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
@@ -44,9 +45,9 @@ public class CenterClient extends Application {
 		reizenActivity=startActivity.startReizen(pos, karten);
 	}
 	
-	public Semaphore getSem() throws RemoteException {
-		return client.getSem();
-	}
+//	public Semaphore getSem() throws RemoteException {
+//		return client.getSem();
+//	}
 	
 	public void reizenStartStats() throws RemoteException {
 		reizenActivity.changeLabelstart();

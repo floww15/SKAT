@@ -1,6 +1,7 @@
 package Activities;
 
 import java.rmi.RemoteException;
+
 import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
@@ -30,7 +31,7 @@ public class ReizenActivity {
 		this.pos = pos;
 		this.centerClient = centerClient;
 		this.karten = karten;
-	//	Platform.setImplicitExit(false);
+		// Platform.setImplicitExit(false);
 
 		System.out.println(pos);
 		lNR = new Label(); // SpielerNR
@@ -41,6 +42,9 @@ public class ReizenActivity {
 		btnNext.setPrefSize(80, 20);
 		btnWeg = new Button("Weg");// Weg
 		btnWeg.setPrefSize(80, 20);
+
+		btnWeg.setOnAction(e -> btnWegClick());
+		btnNext.setOnAction(e -> btnNextClick());
 
 		VBox rechts = new VBox();
 		rechts.getChildren().add(lGereizt);
@@ -82,14 +86,10 @@ public class ReizenActivity {
 //			e.printStackTrace();
 //		}
 		sem.release();
-	
 
 //		changeLabelstart();
 
-}
-
-
-	
+	}
 
 	public void changeLabelstart() {
 //		try {
@@ -132,8 +132,12 @@ public class ReizenActivity {
 		});
 	}
 
-	// public static void main(String[] args) {
-	// Application.launch(args);
-	// }
+	public void btnWegClick() {
+
+	}
+
+	public void btnNextClick() {
+		
+	}
 
 }
