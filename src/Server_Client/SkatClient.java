@@ -108,4 +108,28 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 			e.printStackTrace();
 		}
 	}
+	
+	public void btnNextClick() {
+		try {
+			System.out.println("Client ReizenAcc");
+			skatServer.btnNextClick(pos);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void changeLGereizt(String value) throws RemoteException {
+		// TODO Auto-generated method stub
+		centerClient.changeLGereizt(value);
+	
+	}
+	public void changeLEmpty(String value) {
+		centerClient.changeLEmpty(value);
+	}
+	
+	public void changeBtnNext(String value) {
+		centerClient.changeBtnNext(value);
+	}
 }

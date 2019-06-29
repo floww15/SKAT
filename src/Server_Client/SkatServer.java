@@ -139,6 +139,13 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		// TODO Auto-generated method stub
 		reizen.weg(pos);
 	}
+
+	@Override
+	public void btnNextClick(int pos) throws RemoteException {
+		// TODO Auto-generated method stub
+		reizen.nextClick(pos);
+		
+	}
 	
 
 

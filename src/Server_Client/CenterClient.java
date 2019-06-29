@@ -57,4 +57,21 @@ public class CenterClient extends Application {
 		client.btnWegClick();
 	}
 
+	public void btnNextClick() {
+		System.out.println("Next Center");
+		client.btnNextClick();
+	}
+	
+	public void changeLGereizt(String value) {
+		reizenActivity.changeLGereizt(value);
+	}
+	
+	public void changeLEmpty(String value) {
+		reizenActivity.changeLEmpty(value);
+	}
+	
+	public void changeBtnNext(String value) {
+		reizenActivity.changeBtnNext(value);
+	}
+	
 }

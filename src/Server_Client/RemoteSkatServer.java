@@ -15,6 +15,7 @@ public interface RemoteSkatServer extends Remote {
 
 //	public Semaphore getSem(int pos) throws RemoteException;
 	public void weg(int pos) throws RemoteException;
+	public void btnNextClick(int pos) throws RemoteException;
 	
 
 }

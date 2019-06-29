@@ -107,13 +107,14 @@ public class ReizenActivity {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				lNR.setText("" + (pos+1));
+				lNR.setText("" + (pos + 1));
 				switch (pos) {
 				case 0:
 					lZustand.setText("gegeben warten");
 					break;
 				case 1:
 					lZustand.setText("hören");
+					btnNext.setText("JA");
 					break;
 				case 2:
 					lZustand.setText("sagen");
@@ -121,6 +122,10 @@ public class ReizenActivity {
 					break;
 				}
 				lGereizt.setText("---");
+				for(int i=0; i<10 ; i++) {
+					field.setText(field.getText()+karten.get(i)+"\n");
+				}
+				sem.release();
 //		try {
 //			centerClient.getSem().release();
 //		} catch (RemoteException e) {
@@ -130,6 +135,7 @@ public class ReizenActivity {
 //		sem.release();
 			}
 		});
+
 	}
 
 	public void btnWegClick() {
@@ -137,11 +143,56 @@ public class ReizenActivity {
 	}
 
 	public void btnNextClick() {
-		
+		System.out.println("Next ReizenAcc");
+		centerClient.btnNextClick();
+	}
+
+	public void changeLGereizt(String value) {
+		try {
+			sem.acquire();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				lGereizt.setText(value);
+				sem.release();
+			}
+		});
+	}
+
+	public void changeBtnNext(String value) {
+		try {
+			sem.acquire();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				btnNext.setText(value);
+				sem.release();
+			}
+		});
 	}
 	
-	public void changeWert(int wert) {
-		lGereizt.setText(""+wert);
+	public void changeLEmpty(String value) {
+		try {
+			sem.acquire();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				lEmpty.setText(value);
+				sem.release();
+			}
+		});
 	}
 	
 	
