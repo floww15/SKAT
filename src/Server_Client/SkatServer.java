@@ -68,9 +68,9 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 					clients[0].startReizen();
 					clients[1].startReizen();
 					clients[2].startReizen();
-					clients[0].reizenStartStats();
-					clients[1].reizenStartStats();
-					clients[2].reizenStartStats();
+//					clients[0].reizenStartStats();
+//					clients[1].reizenStartStats();
+//					clients[2].reizenStartStats();
 
 				}
 			} catch (RemoteException e) {

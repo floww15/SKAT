@@ -48,7 +48,7 @@ public class CenterClient extends Application {
 	}
 	
 	public void reizenStartStats() throws RemoteException {
-		reizenActivity.changeLabelstart(client.getPos());
+		reizenActivity.changeLabelstart();
 	}
 
 }

@@ -89,10 +89,11 @@ public class ReizenActivity {
 				}
 			}
 		});
-
+//		changeLabelstart();
+		
 	}
 
-	public void changeLabelstart(int pos) {
+	public void changeLabelstart() {
 		try {
 			centerClient.getSem().acquire();
 		} catch (RemoteException | InterruptedException e) {
