@@ -23,6 +23,7 @@ public class CenterClient extends Application {
 	public static void main(String... args) {
 		launch();
 	}
+	
 
 	@Override
 	public void start(Stage prime) throws Exception {
@@ -56,6 +57,7 @@ public class CenterClient extends Application {
 	public void btnWegClick() {
 		client.btnWegClick();
 	}
+	
 
 	public void btnNextClick() {
 		System.out.println("Next Center");
