@@ -1,9 +1,7 @@
 package Activities;
 
-import java.util.ArrayList;
 
 import GameClasses.Hand;
-import GameClasses.Karte;
 import Server_Client.*;
 
 import javafx.geometry.Pos;
