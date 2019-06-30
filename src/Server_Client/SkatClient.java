@@ -14,7 +14,7 @@ import SpielAblauf.*;
 public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient {
 	CenterClient centerClient;
 	RemoteSkatServer skatServer;
-	int pos=0;
+	int pos = 0;
 	Reizen reizen;
 	/**
 	 * 
@@ -64,7 +64,7 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				
+
 				try {
 					centerClient.startReizen(pos, skatServer.getKarten(pos));
 				} catch (RemoteException e) {
@@ -74,16 +74,27 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 			}
 		});
 	}
-	
+
+	public void startDruecken() throws RemoteException {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+
+				centerClient.startDruecken();
+
+			}
+		});
+	}
+
 //	public Semaphore getSem() throws RemoteException {
 //		return skatServer.getSem(pos);
 //	}
-	
+
 	public void reizenStartStats() throws RemoteException {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				
+
 				try {
 					centerClient.reizenStartStats();
 				} catch (RemoteException e) {
@@ -99,8 +110,8 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 		// TODO Auto-generated method stub
 		return pos;
 	}
-	
-	public void btnWegClick()  {
+
+	public void btnWegClick() {
 		try {
 			skatServer.weg(pos);
 		} catch (RemoteException e) {
@@ -108,7 +119,7 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void btnNextClick() {
 		try {
 			System.out.println("Client ReizenAcc");
@@ -132,8 +143,9 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 //	public void changeBtnNext(String value) {
 //		centerClient.changeBtnNext(value);
 //	}
-	
-	public void changes(String Nr, String Weg, String Empty, String Gereizt, String Next, String Zustand) throws RemoteException{
+
+	public void changes(String Nr, String Weg, String Empty, String Gereizt, String Next, String Zustand)
+			throws RemoteException {
 		centerClient.changes(Nr, Weg, Empty, Gereizt, Next, Zustand);
 	}
 }

@@ -25,8 +25,10 @@ public class ReizenActivity {
 	Hand karten;
 	Semaphore sem = new Semaphore(0);
 	int pos = 0;
+	Stage prime;
 
 	public ReizenActivity(Stage prime, CenterClient centerClient, int pos, Hand karten) {
+		this.prime=prime;
 		this.pos = pos;
 		this.centerClient = centerClient;
 		this.karten = karten;
@@ -223,8 +225,10 @@ public class ReizenActivity {
 			}
 			
 		});
-		
-		
+	}
+	
+	public DrueckenActivity startDruecken() {
+		return new DrueckenActivity(prime);
 	}
 	
 	

@@ -75,9 +75,21 @@ public class Reizen {
 				// starten von DrueckenAcvitivy
 				if(weg[(pos+1)%3]) {
 					System.out.println("druecken "+(pos+2)%3);
+					try {
+						clients[(pos+2)%3].startDruecken();
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				if(weg[(pos+2)%3]) {
 					System.out.println("druecken "+(pos+1)%3);
+					try {
+						clients[(pos+1)%3].startDruecken();
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			} else {
 				if (weg[(pos + 1) % 3]) {
@@ -123,6 +135,12 @@ public class Reizen {
 //			return;
 		if(weg[(pos+1)%3]&& weg[(pos+2)%3]) {
 			System.out.println("druecken22 "+pos);
+			try {
+				clients[pos].startDruecken();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return;
 		}
 	

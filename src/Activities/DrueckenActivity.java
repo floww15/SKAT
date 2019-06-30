@@ -1,5 +1,7 @@
 package Activities;
 
+import java.util.concurrent.Semaphore;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,24 +15,27 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class DrueckenActivity {
-
-	public DrueckenActivity(Stage prime) {
-		start(prime);
-	}
+	Semaphore sem= new Semaphore(0);
+	Button btnAufnehmen, btnCommit;
 	
-
-	public void start(Stage primaryStage) {
-		// TODO Auto-generated method stub
-
-		primaryStage.setResizable(false);
-		Button btnAufnehmen = new Button("Skat aufnehmen");
+	CheckBox[] checkBox;
+	ToggleGroup gModus;
+	RadioButton rbtnclub,rbtnspade,rbtnheart,rbtndiamond,rbtngrand,rbtnnull;
+	
+	CheckBox cbOuvert,cbHand,cbSchneider,cbSchwarz;
+	
+	
+	public DrueckenActivity(Stage prime) {
+	
+		prime.setResizable(false);
+		btnAufnehmen = new Button("Skat aufnehmen");
 		btnAufnehmen.setAlignment(Pos.CENTER);
 
 		Label label = new Label("zu drücken Ankreuzen:");
 
 		HBox hBox1 = new HBox();
 
-		CheckBox[] checkBox = new CheckBox[12];
+		checkBox = new CheckBox[12];
 		for (int i = 0; i < 12; i++) {
 			checkBox[i] = new CheckBox("" + (i + 1) + "   ");
 			hBox1.getChildren().add(checkBox[i]);
@@ -60,18 +65,18 @@ public class DrueckenActivity {
 		// hBoxCardsGes.getChildren().add(hBoxCards3);
 		//
 
-		ToggleGroup gModus = new ToggleGroup();
-		RadioButton rbtnclub = new RadioButton("Kreuz");
+		gModus = new ToggleGroup();
+		rbtnclub = new RadioButton("Kreuz");
 		rbtnclub.setToggleGroup(gModus);
-		RadioButton rbtnspade = new RadioButton("Pik");
+		rbtnspade = new RadioButton("Pik");
 		rbtnspade.setToggleGroup(gModus);
-		RadioButton rbtnheart = new RadioButton("Herz");
+		rbtnheart = new RadioButton("Herz");
 		rbtnheart.setToggleGroup(gModus);
-		RadioButton rbtndiamond = new RadioButton("Karo");
+		rbtndiamond = new RadioButton("Karo");
 		rbtndiamond.setToggleGroup(gModus);
-		RadioButton rbtngrand = new RadioButton("Grand");
+		rbtngrand = new RadioButton("Grand");
 		rbtngrand.setToggleGroup(gModus);
-		RadioButton rbtnnull = new RadioButton("Null");
+		rbtnnull = new RadioButton("Null");
 		rbtnnull.setToggleGroup(gModus);
 		Label lAuswahl = new Label("Spielmodus wählen");
 
@@ -85,10 +90,10 @@ public class DrueckenActivity {
 		vBoxModus.getChildren().add(rbtnnull);
 
 		Label lgereiztBis = new Label("Gereizt bis:");
-		CheckBox cbOuvert = new CheckBox("Ouvert");
-		CheckBox cbHand = new CheckBox("Hand");
-		CheckBox cbSchneider = new CheckBox("Schneider");
-		CheckBox cbSchwarz = new CheckBox("Schwarz");
+		cbOuvert = new CheckBox("Ouvert");
+		cbHand = new CheckBox("Hand");
+		cbSchneider = new CheckBox("Schneider");
+		cbSchwarz = new CheckBox("Schwarz");
 
 		VBox vBoxAddOn = new VBox();
 		// vBoxAddOn.setVisible(false);
@@ -98,7 +103,7 @@ public class DrueckenActivity {
 		vBoxAddOn.getChildren().add(cbSchneider);
 		vBoxAddOn.getChildren().add(cbSchwarz);
 
-		Button btnCommit = new Button("Commit");
+		btnCommit = new Button("Commit");
 
 		HBox hBox2 = new HBox();
 		hBox2.setSpacing(20);
@@ -120,10 +125,10 @@ public class DrueckenActivity {
 		borderPane.setCenter(vBoxGes);
 
 		Scene scene = new Scene(borderPane, 700, 430);
-		primaryStage.setTitle("SKAT");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-
+		prime.setTitle("SKAT");
+		prime.setScene(scene);
+		
+		sem.release();
 	}
 
 }

@@ -18,6 +18,7 @@ public class CenterClient extends Application {
 	SkatClient client;
 	StartActivity startActivity;
 	ReizenActivity reizenActivity;
+	DrueckenActivity drueckenActivity;
 	Stage prime;
 
 	public static void main(String... args) {
@@ -44,6 +45,10 @@ public class CenterClient extends Application {
 	public void startReizen(int pos, Hand karten) {
 //		System.out.println(pos);
 		reizenActivity=startActivity.startReizen(pos, karten);
+	}
+	
+	public void startDruecken() {
+		drueckenActivity=reizenActivity.startDruecken();
 	}
 	
 //	public Semaphore getSem() throws RemoteException {
