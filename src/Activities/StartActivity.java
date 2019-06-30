@@ -2,6 +2,7 @@ package Activities;
 
 import java.util.ArrayList;
 
+import GameClasses.Hand;
 import GameClasses.Karte;
 import Server_Client.*;
 
@@ -87,7 +88,7 @@ public class StartActivity {
 		return tfName.getText();
 	}
 	
-	public ReizenActivity startReizen(int pos, ArrayList<Karte> karten) {
+	public ReizenActivity startReizen(int pos, Hand karten) {
 		System.out.println(pos);
 		return new ReizenActivity(prime, centerClient, pos, karten);
 	}

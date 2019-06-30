@@ -3,6 +3,7 @@ package Activities;
 import java.rmi.RemoteException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.Semaphore;
 
 import Server_Client.*;
@@ -23,11 +24,11 @@ public class ReizenActivity {
 	Button btnNext, btnWeg;
 	TextArea field;
 	CenterClient centerClient;
-	ArrayList<Karte> karten;
+	Hand karten;
 	Semaphore sem = new Semaphore(0);
 	int pos = 0;
 
-	public ReizenActivity(Stage prime, CenterClient centerClient, int pos, ArrayList<Karte> karten) {
+	public ReizenActivity(Stage prime, CenterClient centerClient, int pos, Hand karten) {
 		this.pos = pos;
 		this.centerClient = centerClient;
 		this.karten = karten;
@@ -123,7 +124,8 @@ public class ReizenActivity {
 				}
 				lGereizt.setText("---");
 				for(int i=0; i<10 ; i++) {
-					field.setText(field.getText()+karten.get(i)+"\n");
+					Collections.sort(karten.getHandkarten(),new Hand.HandComparator());
+					field.setText(karten.toString());
 				}
 				sem.release();
 //		try {

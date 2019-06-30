@@ -73,8 +73,8 @@ public class Karte implements Serializable {
 		String trumpf;
 		String farbe;
 
-		KartenComparator(String wert, String farbe) {
-			trumpf = wert; // Trumpf bzw. was gespielt wird
+		KartenComparator(String trumpf, String farbe) {
+			this.trumpf = trumpf; // Trumpf bzw. was gespielt wird
 			this.farbe = farbe; // Farbe die beantwortet werden musste
 		}
 

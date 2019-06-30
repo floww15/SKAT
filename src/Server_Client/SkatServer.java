@@ -9,6 +9,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
+import GameClasses.Hand;
 import GameClasses.Karte;
 import GameClasses.KartenStapel;
 import GameClasses.Player;
@@ -16,9 +17,9 @@ import SpielAblauf.*;
 
 public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer {
 	private KartenStapel k = new KartenStapel();
-	private ArrayList<Karte> p1 = new ArrayList<Karte>();
-	private ArrayList<Karte> p2 = new ArrayList<Karte>();
-	private ArrayList<Karte> p3 = new ArrayList<Karte>();
+	private Hand p1 = new Hand();
+	private Hand p2 = new Hand();
+	private Hand p3 = new Hand();
 	private ArrayList<Karte> skat = new ArrayList<Karte>();
 	private RemoteSkatClient[] clients = new RemoteSkatClient[3];
 	private Player[] players = new Player[3];
@@ -121,7 +122,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	}
 
 	@Override
-	public ArrayList<Karte> getKarten(int pos) throws RemoteException {
+	public Hand getKarten(int pos) throws RemoteException {
 		// TODO Auto-generated method stub
 		switch (pos) {
 		case 0:
