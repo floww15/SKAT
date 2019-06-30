@@ -44,10 +44,13 @@ public class Reizen {
 			accWert++;
 			//Anzeige bei allen Spielern ändern.
 			try {
-				clients[0].changeLGereizt(""+werte[accWert]);
-				clients[1].changeLGereizt(""+werte[accWert]);
-				clients[2].changeLGereizt(""+werte[accWert]);
+//				clients[0].changeLGereizt(""+werte[accWert]);
+//				clients[1].changeLGereizt(""+werte[accWert]);
+//				clients[2].changeLGereizt(""+werte[accWert]);
 //				clients[2].changeBtnNext(""+werte[accWert+1]);
+				clients[0].changes(null, null, null, "gereizt bis "+werte[accWert], null, null);
+				clients[1].changes(null, null, null, "gereizt bis "+werte[accWert], null, null);
+				clients[2].changes(null, null, "", "gereizt bis "+werte[accWert], ""+werte[accWert+1], null);
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -57,7 +60,8 @@ public class Reizen {
 		}
 		if(!sagen && ersteRunde && pos==1) {
 			try {
-				clients[2].changeLEmpty("Ja von Sp2");
+//				clients[2].changeLEmpty("Ja von Sp2");
+				clients[2].changes(null, null, "Ja von Sp2", null, null, null);
 				
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block

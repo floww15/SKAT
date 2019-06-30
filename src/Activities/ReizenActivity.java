@@ -147,39 +147,55 @@ public class ReizenActivity {
 		centerClient.btnNextClick();
 	}
 
-	public void changeLGereizt(String value) {
-		try {
-			sem.acquire();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				lGereizt.setText(value);
-				sem.release();
-			}
-		});
-	}
-
-	public void changeBtnNext(String value) {
-		try {
-			sem.acquire();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				btnNext.setText(value);
-				sem.release();
-			}
-		});
-	}
+//	public void changeLGereizt(String value) {
+//		try {
+//			sem.acquire();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		Platform.runLater(new Runnable() {
+//			@Override
+//			public void run() {
+//				lGereizt.setText(value);
+//				sem.release();
+//			}
+//		});
+//	}
+//
+//	public void changeBtnNext(String value) {
+//		try {
+//			sem.acquire();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		Platform.runLater(new Runnable() {
+//			@Override
+//			public void run() {
+//				btnNext.setText(value);
+//				sem.release();
+//			}
+//		});
+//	}
+//	
+//	public void changeLEmpty(String value) {
+//		try {
+//			sem.acquire();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		Platform.runLater(new Runnable() {
+//			@Override
+//			public void run() {
+//				lEmpty.setText(value);
+//				sem.release();
+//			}
+//		});
+//	}
 	
-	public void changeLEmpty(String value) {
+	public void changes(String Nr, String Weg, String Empty, String Gereizt, String Next, String Zustand) {
 		try {
 			sem.acquire();
 		} catch (InterruptedException e) {
@@ -187,12 +203,28 @@ public class ReizenActivity {
 			e.printStackTrace();
 		}
 		Platform.runLater(new Runnable() {
+
 			@Override
 			public void run() {
-				lEmpty.setText(value);
+				// TODO Auto-generated method stub
+				if(Nr!=null) 
+					lNR.setText(Nr);
+				if(Weg!=null)
+					btnWeg.setText(Weg);
+				if(Empty!=null)
+					lEmpty.setText(Empty);
+				if(Gereizt!=null)
+					lGereizt.setText(Gereizt);
+				if(Next!=null)
+					btnNext.setText(Next);
+				if(Zustand!=null)
+					lZustand.setText(Zustand);
 				sem.release();
 			}
+			
 		});
+		
+		
 	}
 	
 	

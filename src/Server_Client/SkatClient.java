@@ -119,17 +119,21 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 		}
 	}
 
-	@Override
-	public void changeLGereizt(String value) throws RemoteException {
-		// TODO Auto-generated method stub
-		centerClient.changeLGereizt(value);
+//	@Override
+//	public void changeLGereizt(String value) throws RemoteException {
+//		// TODO Auto-generated method stub
+//		centerClient.changeLGereizt(value);
+//	
+//	}
+//	public void changeLEmpty(String value) {
+//		centerClient.changeLEmpty(value);
+//	}
+//	
+//	public void changeBtnNext(String value) {
+//		centerClient.changeBtnNext(value);
+//	}
 	
-	}
-	public void changeLEmpty(String value) {
-		centerClient.changeLEmpty(value);
-	}
-	
-	public void changeBtnNext(String value) {
-		centerClient.changeBtnNext(value);
+	public void changes(String Nr, String Weg, String Empty, String Gereizt, String Next, String Zustand) throws RemoteException{
+		centerClient.changes(Nr, Weg, Empty, Gereizt, Next, Zustand);
 	}
 }

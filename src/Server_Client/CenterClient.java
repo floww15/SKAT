@@ -62,16 +62,20 @@ public class CenterClient extends Application {
 		client.btnNextClick();
 	}
 	
-	public void changeLGereizt(String value) {
-		reizenActivity.changeLGereizt(value);
-	}
+//	public void changeLGereizt(String value) {
+//		reizenActivity.changeLGereizt(value);
+//	}
+//	
+//	public void changeLEmpty(String value) {
+//		reizenActivity.changeLEmpty(value);
+//	}
+//	
+//	public void changeBtnNext(String value) {
+//		reizenActivity.changeBtnNext(value);
+//	}
 	
-	public void changeLEmpty(String value) {
-		reizenActivity.changeLEmpty(value);
-	}
-	
-	public void changeBtnNext(String value) {
-		reizenActivity.changeBtnNext(value);
+	public void changes(String Nr, String Weg, String Empty, String Gereizt, String Next, String Zustand) {
+		reizenActivity.changes(Nr, Weg, Empty, Gereizt, Next, Zustand);
 	}
 	
 }
