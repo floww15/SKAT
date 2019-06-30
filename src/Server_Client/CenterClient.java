@@ -47,8 +47,8 @@ public class CenterClient extends Application {
 		reizenActivity=startActivity.startReizen(pos, karten);
 	}
 	
-	public void startDruecken() {
-		drueckenActivity=reizenActivity.startDruecken();
+	public void startDruecken(Hand hand) {
+		drueckenActivity=reizenActivity.startDruecken(hand);
 	}
 	
 //	public Semaphore getSem() throws RemoteException {
@@ -85,4 +85,7 @@ public class CenterClient extends Application {
 		reizenActivity.changes(Nr, Weg, Empty, Gereizt, Next, Zustand);
 	}
 	
+	public ArrayList<Karte> getSkat(){
+		return client.getSkat();
+	}
 }

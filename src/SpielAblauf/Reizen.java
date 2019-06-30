@@ -34,6 +34,8 @@ public class Reizen {
 	public synchronized void weg(int pos) {
 		if (weg[pos])
 			return;
+		if(pos==1 && ersteRunde)
+			return;
 		weg[pos] = true;
 		anzWeg++;
 		if (anzWeg == 3) {

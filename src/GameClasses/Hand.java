@@ -19,6 +19,9 @@ public class Hand implements Serializable {
 		handkarten = list;
 	}
 
+	public int getSize() {
+		return handkarten.size();
+	}
 	public ArrayList<Karte> getHandkarten() {
 		return handkarten;
 	}
@@ -26,9 +29,17 @@ public class Hand implements Serializable {
 	public void add(Karte k) {
 		handkarten.add(k);
 	}
+	
+	public Karte get(int i) {
+		return handkarten.get(i);
+	}
 
 	public void remove(Karte k) {
 		handkarten.remove(k);
+	}
+	
+	public void remove(int i) {
+		handkarten.remove(i);
 	}
 
 	public String toString() {

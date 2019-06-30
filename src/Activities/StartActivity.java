@@ -1,6 +1,5 @@
 package Activities;
 
-
 import GameClasses.Hand;
 import Server_Client.*;
 
@@ -20,17 +19,16 @@ public class StartActivity {
 	ReizenActivity reizenActivity;
 	Stage prime;
 
-	public StartActivity(Stage prime,CenterClient centerClient) {
-		this.centerClient=centerClient;
-		this.prime=prime;
+	public StartActivity(Stage prime, CenterClient centerClient) {
+		this.centerClient = centerClient;
+		this.prime = prime;
 		try {
-			
+
 			start(prime);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
 
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setResizable(false);
@@ -51,12 +49,9 @@ public class StartActivity {
 		BorderPane borderPane = new BorderPane();
 		borderPane.setTop(labelHeader);
 		BorderPane.setAlignment(labelHeader, Pos.CENTER);
-	
-		btnConnect.setOnAction(
-				e->
-					centerClient.registerConnect(getIP(), getName())
-				);
-		
+
+		btnConnect.setOnAction(e -> centerClient.registerConnect(getIP(), getName()));
+
 		GridPane pane = new GridPane();
 		pane.setHgap(2);
 		pane.setVgap(2);
@@ -76,16 +71,16 @@ public class StartActivity {
 	}
 
 	public String getIP() {
-		 if(tfIP.getText().equals("")) {
-			 return "localhost";
-		 }
-		 return tfIP.getText();
+		if (tfIP.getText().equals("")) {
+			return "localhost";
+		}
+		return tfIP.getText();
 	}
 
 	public String getName() {
 		return tfName.getText();
 	}
-	
+
 	public ReizenActivity startReizen(int pos, Hand karten) {
 		System.out.println(pos);
 		return new ReizenActivity(prime, centerClient, pos, karten);

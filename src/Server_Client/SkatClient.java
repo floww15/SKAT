@@ -2,10 +2,14 @@ package Server_Client;
 
 import java.net.MalformedURLException;
 
+import GameClasses.Hand;
+import GameClasses.Karte;
+
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
 import javafx.application.Platform;
@@ -15,7 +19,9 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 	CenterClient centerClient;
 	RemoteSkatServer skatServer;
 	int pos = 0;
+	Hand hand;
 	Reizen reizen;
+	ArrayList<Karte> skat;
 	/**
 	 * 
 	 */
@@ -61,16 +67,13 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 
 	@Override
 	public void startReizen() throws RemoteException {
+		hand = skatServer.getKarten(pos);
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 
-				try {
-					centerClient.startReizen(pos, skatServer.getKarten(pos));
-				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				centerClient.startReizen(pos, hand);
+
 			}
 		});
 	}
@@ -80,7 +83,7 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 			@Override
 			public void run() {
 
-				centerClient.startDruecken();
+				centerClient.startDruecken(hand);
 
 			}
 		});
@@ -148,4 +151,15 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 			throws RemoteException {
 		centerClient.changes(Nr, Weg, Empty, Gereizt, Next, Zustand);
 	}
+	
+	public ArrayList<Karte> getSkat(){
+		try {
+			skat= skatServer.getSkat();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return skat;
+	}
+	
 }

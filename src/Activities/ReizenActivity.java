@@ -227,8 +227,8 @@ public class ReizenActivity {
 		});
 	}
 	
-	public DrueckenActivity startDruecken() {
-		return new DrueckenActivity(prime);
+	public DrueckenActivity startDruecken(Hand hand) {
+		return new DrueckenActivity(prime,centerClient, hand);
 	}
 	
 	

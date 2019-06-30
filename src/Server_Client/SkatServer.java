@@ -2,6 +2,7 @@ package Server_Client;
 
 import java.rmi.Naming;
 
+
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -87,6 +88,10 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 
 		}
 
+	}
+	
+	public ArrayList<Karte> getSkat() throws RemoteException{
+		return skat;
 	}
 
 	private void verteilen() {
