@@ -9,7 +9,7 @@ public class Game {
 	private boolean[] gelegt=new boolean[3];
 	private Karte[] cards=new Karte[3];
 	private Player[] player=new Player[3];
- 	
+ 	//das ist ein Kommentar
 	
 	public void karteLegen(int id,Karte k,String trumpf,Player p) {
 		if(!gelegt[id]) {
