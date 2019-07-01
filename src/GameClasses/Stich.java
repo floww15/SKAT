@@ -1,5 +1,17 @@
 package GameClasses;
 
 public class Stich {
-
+	Karte k1;
+	Karte k2;
+	Karte k3;
+	int punkte;
+	public Stich(Karte k1,Karte k2,Karte k3) {
+		this.k1=k1;
+		this.k2=k2;
+		this.k3=k3;
+		punkte=k1.getPoints()+k2.getPoints()+k3.getPoints();
+	}
+	public int getPoints() {
+		return punkte;
+	}
 }
