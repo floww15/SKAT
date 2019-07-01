@@ -1,75 +1,8 @@
 package GameClasses;
 
-import java.io.Serializable;
 import java.util.Comparator;
 
-public class Karte implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private String farbe;
-	private String wert;
-	private int punkte;
-
-	public Karte(String f, String w) {
-		farbe = f;
-		wert = w;
-		switch (wert) {
-		case "10":
-			punkte = 10;
-			break;
-		case "Bube":
-			punkte = 2;
-			break;
-		case "Dame":
-			punkte = 3;
-			break;
-		case "Koenig":
-			punkte = 4;
-			break;
-		case "Ass":
-			punkte = 11;
-			break;
-		default:
-			punkte = 0;
-			break;
-
-		}
-	}
-
-	public String getFarbe() {
-		return farbe;
-	}
-
-	public String getWert() {
-		return wert;
-	}
-
-	public int getWertAsInt() {
-		return Integer.parseInt(wert);
-	}
-
-	public String toString() {
-		return farbe + " " + wert;
-	}
-
-	public int getPoints() {
-		return punkte;
-	}
-
-	public int getFarbeAsInt() {
-		if (farbe.equals("Kreuz"))
-			return 3;
-		else if (farbe.equals("Pik"))
-			return 2;
-		else if (farbe.equals("Herz"))
-			return 1;
-		else
-			return 0;
-	}
-
-	public class KartenComparator implements Comparator<Karte> {
+public class KartenComparator implements Comparator<Karte> {
 		String trumpf;
 		String farbe;
 
@@ -201,4 +134,3 @@ public class Karte implements Serializable {
 			}
 		}
 	}
-}

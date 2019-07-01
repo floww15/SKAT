@@ -14,4 +14,7 @@ public class Stich {
 	public int getPoints() {
 		return punkte;
 	}
+	public String toString() {
+		return k1+" "+k2+" "+k3;
+	}
 }

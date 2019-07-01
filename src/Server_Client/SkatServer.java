@@ -66,7 +66,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	public synchronized void register(String name, RemoteSkatClient client) {
 		if (player < 3) {
 			clients[player] = client;
-			players[player] = new Player(name);
+			players[player] = new Player(name, p1);
 			System.out.println(name);
 			try {
 				client.setPos(player);
