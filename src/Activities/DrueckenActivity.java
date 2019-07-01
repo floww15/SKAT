@@ -236,6 +236,7 @@ public class DrueckenActivity {
 
 			});
 			return;
+			//return;
 		}
 	}
 
