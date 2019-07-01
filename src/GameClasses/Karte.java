@@ -69,11 +69,11 @@ public class Karte implements Serializable {
 			return 0;
 	}
 
-	class KartenComparator implements Comparator<Karte> {
+	public class KartenComparator implements Comparator<Karte> {
 		String trumpf;
 		String farbe;
 
-		KartenComparator(String trumpf, String farbe) {
+		public KartenComparator(String trumpf, String farbe) {
 			this.trumpf = trumpf; // Trumpf bzw. was gespielt wird
 			this.farbe = farbe; // Farbe die beantwortet werden musste
 		}
