@@ -1,6 +1,5 @@
 package Activities;
 
-
 import java.util.Collections;
 import java.util.concurrent.Semaphore;
 
@@ -28,7 +27,7 @@ public class ReizenActivity {
 	Stage prime;
 
 	public ReizenActivity(Stage prime, CenterClient centerClient, int pos, Hand karten) {
-		this.prime=prime;
+		this.prime = prime;
 		this.pos = pos;
 		this.centerClient = centerClient;
 		this.karten = karten;
@@ -123,10 +122,10 @@ public class ReizenActivity {
 					break;
 				}
 				lGereizt.setText("---");
-				for(int i=0; i<10 ; i++) {
-					Collections.sort(karten.getHandkarten(),new Hand.HandComparator());
-					field.setText(karten.toString());
-				}
+//				for(int i=0; i<10 ; i++) {
+				Collections.sort(karten.getHandkarten(), new Hand.HandComparator());
+				field.setText(karten.toString());
+//				}
 				sem.release();
 //		try {
 //			centerClient.getSem().release();
@@ -196,7 +195,7 @@ public class ReizenActivity {
 //			}
 //		});
 //	}
-	
+
 	public void changes(String Nr, String Weg, String Empty, String Gereizt, String Next, String Zustand) {
 		try {
 			sem.acquire();
@@ -209,28 +208,26 @@ public class ReizenActivity {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				if(Nr!=null) 
+				if (Nr != null)
 					lNR.setText(Nr);
-				if(Weg!=null)
+				if (Weg != null)
 					btnWeg.setText(Weg);
-				if(Empty!=null)
+				if (Empty != null)
 					lEmpty.setText(Empty);
-				if(Gereizt!=null)
+				if (Gereizt != null)
 					lGereizt.setText(Gereizt);
-				if(Next!=null)
+				if (Next != null)
 					btnNext.setText(Next);
-				if(Zustand!=null)
+				if (Zustand != null)
 					lZustand.setText(Zustand);
 				sem.release();
 			}
-			
+
 		});
 	}
-	
+
 	public DrueckenActivity startDruecken(Hand hand) {
-		return new DrueckenActivity(prime,centerClient, hand);
+		return new DrueckenActivity(prime, centerClient, hand);
 	}
-	
-	
 
 }

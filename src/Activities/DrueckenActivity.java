@@ -1,6 +1,7 @@
 package Activities;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.Semaphore;
 
 import GameClasses.Hand;
@@ -17,6 +18,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class DrueckenActivity {
@@ -33,6 +35,7 @@ public class DrueckenActivity {
 	Semaphore sem = new Semaphore(0);
 	CenterClient centerClient;
 	Hand hand;
+	boolean skatAufgenommen = false;
 
 	public DrueckenActivity(Stage prime, CenterClient centerClient, Hand hand) {
 		this.hand = hand;
@@ -45,7 +48,7 @@ public class DrueckenActivity {
 		btnAufnehmen.setOnAction(e -> btnAufnehmenClick());
 		btnAufnehmen.setAlignment(Pos.CENTER);
 
-		label = new Label("zu drücken Ankreuzen:");
+		label = new Label();
 		label.setVisible(false);
 
 		HBox hBox1 = new HBox();
@@ -100,6 +103,7 @@ public class DrueckenActivity {
 
 		Label lgereiztBis = new Label("Gereizt bis:");
 		cbOuvert = new CheckBox("Ouvert");
+		cbOuvert.setVisible(false);
 		cbHand = new CheckBox("Hand");
 		cbSchneider = new CheckBox("Schneider");
 		cbSchwarz = new CheckBox("Schwarz");
@@ -143,31 +147,35 @@ public class DrueckenActivity {
 	}
 
 	private void btnAufnehmenClick() {
+		skatAufgenommen = true;
 		try {
 			sem.acquire();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 //		skat =centerClient.getSkat();
 //		System.out.println(skat.get(0));
 //		System.out.println(skat.get(1));
 		Platform.runLater(new Runnable() {
-		
+
 			@Override
 			public void run() {
-				
+
 				hand.add(centerClient.getSkat().get(0));
 				hand.add(centerClient.getSkat().get(1));
-				checkBox[10].setText("" + hand.get(10) + "     ");
+				Collections.sort(hand.getHandkarten(), new Hand.HandComparator());
+				for (int i = 0; i < 12; i++) {
+					checkBox[i].setText("" + hand.get(i));
+				}
+
 				checkBox[10].setVisible(true);
-				checkBox[11].setText("" + hand.get(11) + "     ");
 				checkBox[11].setVisible(true);
 				label.setVisible(true);
 				System.out.println(hand.getSize());
 				sem.release();
-				
+
 			}
 
 		});
@@ -175,7 +183,60 @@ public class DrueckenActivity {
 	}
 
 	private void btnCommitClick() {
+		label.setVisible(false);
+		System.out.println("btnCommit");
+		int countDruecken = 0;
+		for (int i = 0; i < 12; i++) {
+			if (checkBox[i].isSelected())
+				countDruecken++;
+		}
+		if ((skatAufgenommen && countDruecken == 2) || (!skatAufgenommen && countDruecken == 0)) {
+			
+			
+			return;
+		}
+		if (skatAufgenommen && countDruecken != 2) {
+			System.out.println("mit Skat");
+			try {
+				sem.acquire();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Platform.runLater(new Runnable() {
 
+				@Override
+				public void run() {
+					label.setText("zu drücken Ankreuzen:  Bitte genau zwei Karten drücken!");
+					label.setTextFill(Color.RED);
+					label.setVisible(true);
+					sem.release();
+				}
+
+			});
+			return;
+		}
+		if (!skatAufgenommen && countDruecken != 0) {
+			System.out.println("ohne Skat");
+			try {
+				sem.acquire();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Platform.runLater(new Runnable() {
+
+				@Override
+				public void run() {
+					label.setText(label.getText() + "  Bitte keine Karte drücken. Skat nicht aufgenommen");
+					label.setTextFill(Color.RED);
+					label.setVisible(true);
+					sem.release();
+				}
+
+			});
+			return;
+		}
 	}
 
 }

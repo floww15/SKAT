@@ -18,9 +18,8 @@ import SpielAblauf.*;
 
 public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer {
 	private KartenStapel k = new KartenStapel();
-	private Hand p1 = new Hand();
-	private Hand p2 = new Hand();
-	private Hand p3 = new Hand();
+	ArrayList<Hand> haende= new ArrayList<Hand>();
+	
 	private ArrayList<Karte> skat = new ArrayList<Karte>();
 	private RemoteSkatClient[] clients = new RemoteSkatClient[3];
 	private Player[] players = new Player[3];
@@ -40,9 +39,9 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		semsPlayer[0] = new Semaphore(0);
-//		semsPlayer[1] = new Semaphore(0);
-//		semsPlayer[2] = new Semaphore(0);
+		haende.add(new Hand());
+		haende.add(new Hand());
+		haende.add(new Hand());
 		verteilen();
 	}
 
@@ -84,10 +83,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 				e.printStackTrace();
 			}
 			player++;
-			
-
 		}
-
 	}
 	
 	public ArrayList<Karte> getSkat() throws RemoteException{
@@ -95,49 +91,42 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	}
 
 	private void verteilen() {
+
 		for (int i = 0; i < 3; i++) {
-			p1.add(k.getKarte());
+			haende.get(1).add(k.getKarte());
 		}
 		for (int i = 0; i < 3; i++) {
-			p2.add(k.getKarte());
+			haende.get(2).add(k.getKarte());
 		}
 		for (int i = 0; i < 3; i++) {
-			p3.add(k.getKarte());
+			haende.get(3).add(k.getKarte());
 		}
 		skat.add(k.getKarte());
 		skat.add(k.getKarte());
 		for (int i = 3; i < 7; i++) {
-			p1.add(k.getKarte());
+			haende.get(1).add(k.getKarte());
 		}
 		for (int i = 3; i < 7; i++) {
-			p2.add(k.getKarte());
+			haende.get(2).add(k.getKarte());
 		}
 		for (int i = 3; i < 7; i++) {
-			p3.add(k.getKarte());
+			haende.get(3).add(k.getKarte());
 		}
 		for (int i = 7; i < 10; i++) {
-			p1.add(k.getKarte());
+			haende.get(1).add(k.getKarte());
 		}
 		for (int i = 7; i < 10; i++) {
-			p2.add(k.getKarte());
+			haende.get(2).add(k.getKarte());
 		}
 		for (int i = 7; i < 10; i++) {
-			p3.add(k.getKarte());
+			haende.get(3).add(k.getKarte());
 		}
 	}
 
 	@Override
 	public Hand getKarten(int pos) throws RemoteException {
 		// TODO Auto-generated method stub
-		switch (pos) {
-		case 0:
-			return p1;
-		case 1:
-			return p2;
-		case 2:
-			return p3;
-		}
-		return null;
+		return haende.get(pos);
 	}
 
 	@Override
@@ -153,12 +142,9 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		
 	}
 	
-
-
-
-
 //	public Semaphore getSem(int pos) throws RemoteException {
 //		return semsPlayer[pos];
 //	}
+
 
 }
