@@ -238,5 +238,9 @@ public class Reizen {
 		}
 
 	}
+	
+	public int gereiztBis() {
+		return werte[accWert];
+	}
 
 }
