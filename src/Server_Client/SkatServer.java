@@ -46,6 +46,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		haende.add(new Hand());
 		verteilen();
 	}
+	//das ist ein test kommentar
 
 	public static void main(String[] args) {
 		try {
