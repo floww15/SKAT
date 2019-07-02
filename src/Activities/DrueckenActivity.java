@@ -27,7 +27,7 @@ public class DrueckenActivity {
 
 	CheckBox[] checkBox;
 	ToggleGroup gModus;
-	RadioButton rbtnclub, rbtnspade, rbtnheart, rbtndiamond, rbtngrand, rbtnnull;
+	RadioButton gModusRadioButton[] = new RadioButton[6];
 
 	CheckBox cbOuvert, cbHand, cbSchneider, cbSchwarz;
 	Label label;
@@ -36,6 +36,9 @@ public class DrueckenActivity {
 	CenterClient centerClient;
 	Hand hand;
 	boolean skatAufgenommen = false;
+
+	String spielModus = "";
+	boolean addOns[] = new boolean[4];
 
 	public DrueckenActivity(Stage prime, CenterClient centerClient, Hand hand) {
 		this.hand = hand;
@@ -78,28 +81,28 @@ public class DrueckenActivity {
 		vBox1.setSpacing(20);
 
 		gModus = new ToggleGroup();
-		rbtnclub = new RadioButton("Kreuz");
-		rbtnclub.setToggleGroup(gModus);
-		rbtnspade = new RadioButton("Pik");
-		rbtnspade.setToggleGroup(gModus);
-		rbtnheart = new RadioButton("Herz");
-		rbtnheart.setToggleGroup(gModus);
-		rbtndiamond = new RadioButton("Karo");
-		rbtndiamond.setToggleGroup(gModus);
-		rbtngrand = new RadioButton("Grand");
-		rbtngrand.setToggleGroup(gModus);
-		rbtnnull = new RadioButton("Null");
-		rbtnnull.setToggleGroup(gModus);
+		gModusRadioButton[0] = new RadioButton("Kreuz");
+		gModusRadioButton[0].setToggleGroup(gModus);
+		gModusRadioButton[1] = new RadioButton("Pik");
+		gModusRadioButton[1].setToggleGroup(gModus);
+		gModusRadioButton[2] = new RadioButton("Herz");
+		gModusRadioButton[2].setToggleGroup(gModus);
+		gModusRadioButton[3] = new RadioButton("Karo");
+		gModusRadioButton[3].setToggleGroup(gModus);
+		gModusRadioButton[4] = new RadioButton("Grand");
+		gModusRadioButton[4].setToggleGroup(gModus);
+		gModusRadioButton[5] = new RadioButton("Null");
+		gModusRadioButton[5].setToggleGroup(gModus);
 		Label lAuswahl = new Label("Spielmodus wählen");
 
 		VBox vBoxModus = new VBox();
 		vBoxModus.getChildren().add(lAuswahl);
-		vBoxModus.getChildren().add(rbtnclub);
-		vBoxModus.getChildren().add(rbtnspade);
-		vBoxModus.getChildren().add(rbtnheart);
-		vBoxModus.getChildren().add(rbtndiamond);
-		vBoxModus.getChildren().add(rbtngrand);
-		vBoxModus.getChildren().add(rbtnnull);
+		vBoxModus.getChildren().add(gModusRadioButton[0]);
+		vBoxModus.getChildren().add(gModusRadioButton[1]);
+		vBoxModus.getChildren().add(gModusRadioButton[2]);
+		vBoxModus.getChildren().add(gModusRadioButton[3]);
+		vBoxModus.getChildren().add(gModusRadioButton[4]);
+		vBoxModus.getChildren().add(gModusRadioButton[5]);
 
 		Label lgereiztBis = new Label("Gereizt bis:");
 		cbOuvert = new CheckBox("Ouvert");
@@ -184,17 +187,13 @@ public class DrueckenActivity {
 
 	private void btnCommitClick() {
 		label.setVisible(false);
-		System.out.println("btnCommit");
+//		System.out.println("btnCommit");
 		int countDruecken = 0;
 		for (int i = 0; i < 12; i++) {
 			if (checkBox[i].isSelected())
 				countDruecken++;
 		}
-		if ((skatAufgenommen && countDruecken == 2) || (!skatAufgenommen && countDruecken == 0)) {
-			
-			
-			return;
-		}
+
 		if (skatAufgenommen && countDruecken != 2) {
 			System.out.println("mit Skat");
 			try {
@@ -236,8 +235,40 @@ public class DrueckenActivity {
 
 			});
 			return;
-			//return;
+			// return;
 		}
+		if ((skatAufgenommen && countDruecken == 2) || (!skatAufgenommen && countDruecken == 0)) {
+			System.out.println("skat korrekt");
+			if(skatAufgenommen) {
+				for(int i=0; i<12; i++) {
+					if(checkBox[i].isSelected())
+						hand.remove(i);
+				}
+			}
+			System.out.println(hand.getSize());
+			boolean toggled = false;
+			for (int i = 0; i < 6; i++) {
+				if (gModusRadioButton[i].isSelected()) {
+					toggled = true;
+					spielModus = gModusRadioButton[i].getText();
+				}
+			}
+			if (!toggled) {
+				label.setText("Bitte SpielModus Auswählen!");
+				return;
+			}
+		}
+		//cbOuvert, cbHand, cbSchneider, cbSchwarz
+		if(cbOuvert.isSelected())
+			addOns[0]=true;
+		if(cbHand.isSelected())
+			addOns[1]=true;
+		if(cbSchneider.isSelected())
+			addOns[2]=true;
+		if(cbSchwarz.isSelected())
+			addOns[3]=true;
+		//Start GameMode
+		//Übergabe der eingelesenen Variablen
 	}
 
 }
