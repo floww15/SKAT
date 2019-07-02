@@ -254,7 +254,7 @@ public class DrueckenActivity {
 				}
 			}
 			if (!toggled) {
-				label.setText("Bitte SpielModus Auswählen");
+				label.setText("Bitte SpielModus Auswählen!");
 				return;
 			}
 		}
