@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 
 import GameClasses.Hand;
 import GameClasses.Karte;
+import GameClasses.Player;
 
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -22,6 +23,10 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 	Hand hand;
 	Reizen reizen;
 	ArrayList<Karte> skat;
+	private int punkte = 0;
+	private Player player;
+	private boolean first = false;
+	
 	/**
 	 * 
 	 */
@@ -132,6 +137,36 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 			e.printStackTrace();
 		}
 	}
+	
+	public Player[] getPlayers() {
+		try {
+			return skatServer.getPlayers();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public int getPunkte() {
+		return punkte;
+	}
+	
+	public void setPunkte(int i) {
+		punkte = i;
+	}
+	
+	public Player getPlayer() {
+		return player;
+	}
+	@Override
+	public void setPlayer(Player p) throws RemoteException{
+		player = p;
+	}
+	
+	public RemoteSkatClient[] getClients() throws RemoteException {
+		return skatServer.getClients();
+	}
 
 //	@Override
 //	public void changeLGereizt(String value) throws RemoteException {
@@ -160,6 +195,13 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 			e.printStackTrace();
 		}
 		return skat;
+	}
+	
+	public boolean isFirst() {
+		return first;
+	}
+	public void setFirst() {
+		first = true;
 	}
 	
 }

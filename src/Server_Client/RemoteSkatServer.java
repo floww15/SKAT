@@ -17,5 +17,7 @@ public interface RemoteSkatServer extends Remote {
 	public void weg(int pos) throws RemoteException;
 	public void btnNextClick(int pos) throws RemoteException;
 	public ArrayList<Karte> getSkat() throws RemoteException;
+	public Player[] getPlayers() throws RemoteException;
+	public RemoteSkatClient[] getClients() throws RemoteException;
 
 }

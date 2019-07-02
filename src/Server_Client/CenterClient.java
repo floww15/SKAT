@@ -19,7 +19,10 @@ public class CenterClient extends Application {
 	StartActivity startActivity;
 	ReizenActivity reizenActivity;
 	DrueckenActivity drueckenActivity;
+	GameActivity gameActivity;
+	AuszaehlungActivity auszaehlungActivity;
 	Stage prime;
+	
 
 	public static void main(String... args) {
 		launch();
@@ -59,6 +62,14 @@ public class CenterClient extends Application {
 		reizenActivity.changeLabelstart();
 	}
 	
+	public void startAuszaehlung() {
+//		auszaehlungactivity = gameActivity.startAuszaehlung();
+	}
+	
+	public SkatClient getClient() {
+		return client;
+	}
+	
 	public void btnWegClick() {
 		client.btnWegClick();
 	}
@@ -87,5 +98,9 @@ public class CenterClient extends Application {
 	
 	public ArrayList<Karte> getSkat(){
 		return client.getSkat();
+	}
+	
+	public SkatClient getSkatClient() {
+		return client;
 	}
 }

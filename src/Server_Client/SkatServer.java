@@ -7,7 +7,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.concurrent.Semaphore;
 
 import GameClasses.Hand;
 import GameClasses.Karte;
@@ -62,10 +61,11 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		}
 	}
 
-	public synchronized void register(String name, RemoteSkatClient client) {
+	public synchronized void register(String name, RemoteSkatClient client) throws RemoteException {
 		if (player < 3) {
 			clients[player] = client;
 			players[player] = new Player(name, haende.get(player));
+			clients[player].setPlayer(players[player]);
 			System.out.println(name);
 			try {
 				client.setPos(player);
@@ -142,6 +142,16 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		// TODO Auto-generated method stub
 		reizen.nextClick(pos);
 
+	}
+	@Override
+	public RemoteSkatClient[] getClients() {
+		return clients;
+	}
+
+	@Override
+	public Player[] getPlayers() throws RemoteException {
+		// TODO Auto-generated method stub
+		return players;
 	}
 
 //	public Semaphore getSem(int pos) throws RemoteException {

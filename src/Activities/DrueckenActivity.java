@@ -40,6 +40,7 @@ public class DrueckenActivity {
 	public DrueckenActivity(Stage prime, CenterClient centerClient, Hand hand) {
 		this.hand = hand;
 		this.centerClient = centerClient;
+		centerClient.getClient().setFirst();
 		for (int i = 0; i < 10; i++) {
 			System.out.println(hand.get(i));
 		}
@@ -221,7 +222,6 @@ public class DrueckenActivity {
 			try {
 				sem.acquire();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			Platform.runLater(new Runnable() {
