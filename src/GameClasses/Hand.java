@@ -49,6 +49,42 @@ public class Hand implements Serializable {
 		return res;
 
 	}
+	public boolean contains(String s) {
+		for(int i=0;i<handkarten.size();i++) {
+			if(handkarten.get(i).getFarbe().equals(s)&&!handkarten.get(i).getWert().equals("bube"))
+				return true;
+		}
+		return false;
+	}
+	public boolean containsTrumpf(String s) {
+		for(int i=0;i<handkarten.size();i++) {
+			if(handkarten.get(i).getFarbe().equals(s)||handkarten.get(i).getWert().equals("bube"))
+				return true;
+		}
+		return false;
+		
+	}
+	public boolean containsNull(String s) {
+		for(int i=0;i<handkarten.size();i++) {
+			if(handkarten.get(i).getFarbe().equals(s))
+				return true;
+		}
+		return false;	
+	}
+	public boolean containsBube() {
+		for(int i=0;i<handkarten.size();i++) {
+			if(handkarten.get(i).getWert().equals("bube"))
+				return true;
+		}
+		return false;
+	}
+	public boolean containsTrumpfGrand(String farbe) {
+		for(int i=0;i<handkarten.size();i++) {
+			if(handkarten.get(i).getFarbe().equals(farbe)&&handkarten.get(i).getWert().equals("bube"))
+				return true;
+		}
+		return false;
+	}
 
 	public static class HandComparator implements Comparator<Karte> {
 
