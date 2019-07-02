@@ -65,7 +65,7 @@ public class AuszaehlungActivity {
 							verlierer2 = arr[2].getName();
 						} else if (x == 1) {
 							verlierer1 = arr[0].getName();
-							verlierer2 = arr[2].getName();
+							verlierer2 = arr[2].getName();/** Verlierer und Sieger auswertung**/
 						} else {
 							verlierer1 = arr[1].getName();
 							verlierer2 = arr[0].getName();
