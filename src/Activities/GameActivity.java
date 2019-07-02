@@ -61,6 +61,7 @@ public class GameActivity {
 		vBoxPlayer1.getChildren().addAll(lname1, lPlayedCard1);
 		vBoxPlayer1.setSpacing(10);
 
+		
 		VBox vBoxPlayer2 = new VBox();
 		lname2 = new Label("Player2:");
 		lname2.setStyle("-fx-border-width:2px");
