@@ -3,21 +3,30 @@ package SpielAblauf;
 import GameClasses.Karte;
 import GameClasses.KartenComparator;
 import GameClasses.Stich;
+import GameClasses.WrongCardException;
 import GameClasses.Player;
 
 public class Game {
 	private boolean[] gelegt=new boolean[3];
 	private Karte[] cards=new Karte[3];
 	private Player[] player=new Player[3];
- 	//das ist ein Kommentar
 	
-	public void karteLegen(int id,Karte k,String trumpf,Player p) {
+	public void karteLegen(int id,Karte k,String trumpf,Player p) throws WrongCardException {
 		if(!gelegt[id]) {
 			cards[id]=k;
 			player[id]=p;
 		}
 		if(gelegt[0]&&gelegt[1]&& gelegt[2]) {
 			Stich s=new Stich(cards[0],cards[1],cards[2]);
+			String farbe=cards[0].getFarbe();
+			if(trumpf==null) {
+				if(!cards[1].getFarbe().equals(farbe)&&player[1].getHand().contains(farbe)) {
+					throw new WrongCardException();
+				}				
+				if(!cards[2].getFarbe().equals(farbe)&&player[2].getHand().contains(farbe)) {
+					throw new WrongCardException();
+				}
+			}
 			KartenComparator comp=new KartenComparator(trumpf,cards[0].getFarbe());
 			if(comp.compare(cards[0], cards[1])>0&&comp.compare(cards[0], cards[2])>0)
 				player[0].addStich(s);
