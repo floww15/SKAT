@@ -58,7 +58,7 @@ public class Hand implements Serializable {
 	}
 	public boolean containsTrumpf(String s) {
 		for(int i=0;i<handkarten.size();i++) {
-			if(handkarten.get(i).getFarbe().equals(s)||!handkarten.get(i).getWert().equals("bube"))
+			if(handkarten.get(i).getFarbe().equals(s)||handkarten.get(i).getWert().equals("bube"))
 				return true;
 		}
 		return false;
