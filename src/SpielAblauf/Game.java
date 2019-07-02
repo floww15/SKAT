@@ -27,6 +27,20 @@ public class Game {
 					throw new WrongCardException();
 				}
 			}
+			if(trumpf.equals("Grand")) {
+				if(cards[0].getWert().equals("bube")&&cards[1].getWert().equals("bube")&&player[1].getHand().containsBube())
+					throw new WrongCardException();
+				if(cards[0].getWert().equals("bube")&&cards[2].getWert().equals("bube")&&player[2].getHand().containsBube())
+					throw new WrongCardException();
+				if(!cards[0].getWert().equals("bube")) {
+					if(!cards[1].getFarbe().equals(farbe)&&player[1].getHand().containsTrumpfGrand(farbe)) {
+						throw new WrongCardException();
+					}				
+					if(!cards[2].getFarbe().equals(farbe)&&player[2].getHand().containsTrumpfGrand(farbe)) {
+						throw new WrongCardException();
+					}
+				}
+			}
 			KartenComparator comp=new KartenComparator(trumpf,cards[0].getFarbe());
 			if(comp.compare(cards[0], cards[1])>0&&comp.compare(cards[0], cards[2])>0)
 				player[0].addStich(s);
