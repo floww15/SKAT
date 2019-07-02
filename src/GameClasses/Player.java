@@ -24,4 +24,7 @@ public class Player implements Serializable {
 	public String getName() {
 		return name;
 	}
+	public Hand getHand() {
+		return h;
+	}
 }
