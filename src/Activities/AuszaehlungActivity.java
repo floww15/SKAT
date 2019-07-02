@@ -3,6 +3,7 @@ package Activities;
 import java.rmi.RemoteException;
 import java.util.concurrent.Semaphore;
 
+import GameClasses.Player;
 import GameClasses.Stich;
 import Server_Client.CenterClient;
 import Server_Client.SkatClient;
@@ -32,21 +33,67 @@ public class AuszaehlungActivity {
 		insPunkte = client.getClient().getPunkte();
 		insPunkte += punkte;
 		client.getClient().setPunkte(insPunkte);
+		try {
+			clients = (SkatClient[]) client.getClient().getClients();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (client.getSkatClient().isFirst())
 			spieler = client.getClient().getPlayer().getName();
 		else {
-			try {
-				clients = (SkatClient[]) client.getClient().getClients();
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 			for (SkatClient c : clients) {
 				if (c.isFirst()) {
 					spieler =  c.getPlayer().getName();
 				}
 			}
 		}
+		int x = 0;
+		for (SkatClient s : clients) {
+			if (s.isFirst()) {
+				for (Stich i : s.getPlayer().getStiche()) {
+					if ( i.getPoints() >= 61) {
+						sieger1 = s.getPlayer().getName();
+						Player [] arr = s.getPlayers();
+						for (int z= 0; z<arr.length; z++) {
+							if (arr[z].getName().equals(s.getPlayer().getName()))
+								x = z;
+						}
+						if (x == 0) {
+							verlierer1 = arr[1].getName();
+							verlierer2 = arr[2].getName();
+						} else if (x == 1) {
+							verlierer1 = arr[0].getName();
+							verlierer2 = arr[2].getName();/** Verlierer und Sieger auswertung**/
+						} else {
+							verlierer1 = arr[1].getName();
+							verlierer2 = arr[0].getName();
+						}
+					} else {
+						verlierer1 = s.getPlayer().getName();
+						Player [] arr = s.getPlayers();
+						for (int z= 0; z<arr.length; z++) {
+							if (arr[z].getName().equals(s.getPlayer().getName()))
+								x = z;
+						}
+						if (x == 0) {
+							sieger1 = arr[1].getName();
+							sieger2 = arr[2].getName();
+						} else if (x == 1) {
+							sieger1 = arr[0].getName();
+							sieger2 = arr[2].getName();
+						} else {
+							sieger1 = arr[1].getName();
+							sieger2 = arr[0].getName();
+						}
+					}
+				}
+			}
+			
+				
+		}
+		
 	}
 
 	public void start(Stage primaryStage) {
@@ -70,7 +117,9 @@ public class AuszaehlungActivity {
 
 		HBox hBoxSieger = new HBox();
 		if (sieger1 != null && sieger2 != null) {
-			lSieger = new Label("Gewonnen haben: ");
+			lSieger = new Label("Gewonnen haben: "+sieger1+" und "+sieger2+"\nVerloren hat "+verlierer1);
+		} else {
+			lSieger = new Label("Gewonnen hat: "+sieger1+" \nVerloren haben "+verlierer1+ " und "+verlierer2);
 		}
 		lAufschreiben = new Label("Addierte Punkte: "+insPunkte);
 		lSieger.setStyle("-fx-border-width:2px");
