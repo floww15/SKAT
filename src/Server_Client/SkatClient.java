@@ -26,7 +26,7 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 	private int punkte = 0;
 	private Player player;
 	private boolean first = false;
-	
+
 	/**
 	 * 
 	 */
@@ -72,7 +72,7 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 
 	@Override
 	public void startReizen() throws RemoteException {
-		hand = skatServer.getKarten(pos);
+		hand = skatServer.getHand(pos);
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -92,6 +92,20 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 
 			}
 		});
+	}
+
+	@Override
+	public void startGame() throws RemoteException {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				//GameActivity starten mit Konstruktor
+				
+				
+
+			}
+		});
+
 	}
 
 //	public Semaphore getSem() throws RemoteException {
@@ -137,7 +151,7 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Player[] getPlayers() {
 		try {
 			return skatServer.getPlayers();
@@ -147,23 +161,24 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 		}
 		return null;
 	}
-	
+
 	public int getPunkte() {
 		return punkte;
 	}
-	
+
 	public void setPunkte(int i) {
 		punkte = i;
 	}
-	
+
 	public Player getPlayer() {
 		return player;
 	}
+
 	@Override
-	public void setPlayer(Player p) throws RemoteException{
+	public void setPlayer(Player p) throws RemoteException {
 		player = p;
 	}
-	
+
 	public RemoteSkatClient[] getClients() throws RemoteException {
 		return skatServer.getClients();
 	}
@@ -182,26 +197,41 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 //		centerClient.changeBtnNext(value);
 //	}
 
-	public void changes(String Nr, String Weg, String Empty, String Gereizt, String Next, String Zustand)
+	public void changesReizen(String Nr, String Weg, String Empty, String Gereizt, String Next, String Zustand)
 			throws RemoteException {
-		centerClient.changes(Nr, Weg, Empty, Gereizt, Next, Zustand);
+		centerClient.changesReizen(Nr, Weg, Empty, Gereizt, Next, Zustand);
 	}
-	
-	public ArrayList<Karte> getSkat(){
+
+	public ArrayList<Karte> getSkat() {
 		try {
-			skat= skatServer.getSkat();
+			skat = skatServer.getSkat();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return skat;
 	}
-	
+
 	public boolean isFirst() {
 		return first;
 	}
+
 	public void setFirst() {
 		first = true;
 	}
 	
+	public void setChangesAfterDruecken(String trumpf, Hand hand, ArrayList<Karte> skat, boolean[] addOns) {
+		try {
+			skatServer.setTrumpf(trumpf);
+			skatServer.setHand(pos, hand);
+			skatServer.setSkat(skat);
+			skatServer.setAddOns(addOns);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
 }

@@ -24,6 +24,12 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	Reizen reizen;
 //	private Semaphore[] semsPlayer = new Semaphore[3];
 	int player = 0;
+	
+	String trumpf;
+	boolean addOns[]=new boolean[4];
+	
+	
+	
 	/**
 	 * 
 	 */
@@ -126,12 +132,6 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	}
 
 	@Override
-	public Hand getKarten(int pos) throws RemoteException {
-		// TODO Auto-generated method stub
-		return haende.get(pos);
-	}
-
-	@Override
 	public void weg(int pos) throws RemoteException {
 		// TODO Auto-generated method stub
 		reizen.weg(pos);
@@ -154,6 +154,44 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		return players;
 	}
 
+
+	@Override
+	public Hand getHand(int pos) throws RemoteException {
+		// TODO Auto-generated method stub
+		return haende.get(pos);
+	}
+
+	@Override
+	public void setHand(int pos, Hand hand) throws RemoteException {
+		// TODO Auto-generated method stub
+		haende.set(pos, hand);
+		System.out.println("hand1:");
+		System.out.println(haende.get(0));
+		System.out.println("hand2:");
+		System.out.println(haende.get(1));
+		System.out.println("hand3:");
+		System.out.println(haende.get(2));
+		
+	}
+	
+	public void setTrumpf(String trumpf) {
+		this.trumpf=trumpf;
+		System.out.println(trumpf);
+	}
+	
+	public void setSkat(ArrayList<Karte> skat) {
+		this.skat.set(0, skat.get(0));
+		this.skat.set(1, skat.get(1));
+		System.out.println(skat.get(0)+"   "+skat.get(1));
+	}
+	
+	public void setAddOns(boolean[] addOns) {
+		this.addOns=addOns;
+		for(int i=0; i<4; i++) {
+			System.out.println(this.addOns[i]);
+		}
+	}
+	
 //	public Semaphore getSem(int pos) throws RemoteException {
 //		return semsPlayer[pos];
 //	}

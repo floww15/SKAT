@@ -31,7 +31,7 @@ public class DrueckenActivity {
 
 	CheckBox cbOuvert, cbHand, cbSchneider, cbSchwarz;
 	Label label;
-	ArrayList<Karte> skat;
+	ArrayList<Karte> skat, neuerSkat = new ArrayList<Karte>();
 	Semaphore sem = new Semaphore(0);
 	CenterClient centerClient;
 	Hand hand;
@@ -41,6 +41,7 @@ public class DrueckenActivity {
 	boolean addOns[] = new boolean[4];
 
 	public DrueckenActivity(Stage prime, CenterClient centerClient, Hand hand) {
+
 		this.hand = hand;
 		this.centerClient = centerClient;
 		centerClient.getClient().setFirst();
@@ -177,7 +178,7 @@ public class DrueckenActivity {
 				checkBox[10].setVisible(true);
 				checkBox[11].setVisible(true);
 				label.setVisible(true);
-				System.out.println(hand.getSize());
+//				System.out.println(hand.getSize());
 				sem.release();
 
 			}
@@ -187,6 +188,7 @@ public class DrueckenActivity {
 	}
 
 	private void btnCommitClick() {
+		System.out.println();
 		label.setVisible(false);
 //		System.out.println("btnCommit");
 		int countDruecken = 0;
@@ -239,13 +241,22 @@ public class DrueckenActivity {
 		}
 		if ((skatAufgenommen && countDruecken == 2) || (!skatAufgenommen && countDruecken == 0)) {
 			System.out.println("skat korrekt");
-			if(skatAufgenommen) {
-				for(int i=0; i<12; i++) {
-					if(checkBox[i].isSelected())
-						hand.remove(i);
+			System.out.println("Hand groeße " + hand.getSize());
+			if (skatAufgenommen) {
+				for (int i = 0; i < 12; i++) {
+					if (checkBox[i].isSelected()) {
+//						System.out.println(hand.get(i));
+//						hand.remove(i);
+						neuerSkat.add(hand.get(i));
+					}
 				}
+				System.out.println(neuerSkat.get(0));
+				System.out.println(neuerSkat.get(1));
+				hand.remove(neuerSkat.get(0));
+				hand.remove(neuerSkat.get(1));
+
 			}
-			System.out.println(hand.getSize());
+			System.out.println("Hand groeße " + hand.getSize());
 			boolean toggled = false;
 			for (int i = 0; i < 6; i++) {
 				if (gModusRadioButton[i].isSelected()) {
@@ -255,20 +266,24 @@ public class DrueckenActivity {
 			}
 			if (!toggled) {
 				label.setText("Bitte SpielModus Auswählen!");
+				label.setVisible(true);
 				return;
 			}
 		}
-		//cbOuvert, cbHand, cbSchneider, cbSchwarz
-		if(cbOuvert.isSelected())
-			addOns[0]=true;
-		if(cbHand.isSelected())
-			addOns[1]=true;
-		if(cbSchneider.isSelected())
-			addOns[2]=true;
-		if(cbSchwarz.isSelected())
-			addOns[3]=true;
-		//Start GameMode
-		//Übergabe der eingelesenen Variablen
+		// cbOuvert, cbHand, cbSchneider, cbSchwarz
+		if (cbOuvert.isSelected())
+			addOns[0] = true;
+		if (cbHand.isSelected() && !skatAufgenommen)
+			addOns[1] = true;
+		if (cbSchneider.isSelected())
+			addOns[2] = true;
+		if (cbSchwarz.isSelected())
+			addOns[3] = true;
+
+		// Übergabe der eingelesenen Variablen
+		centerClient.setChangesAfterDruecken(spielModus, hand, neuerSkat, addOns);
+		// Start GameMode
+
 	}
 
 }

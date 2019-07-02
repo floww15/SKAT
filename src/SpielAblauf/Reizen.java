@@ -44,9 +44,9 @@ public class Reizen {
 		}
 		if (ersteRunde && pos == 1) {
 			try {
-				clients[0].changes(null, null, null, null, "" + werte[accWert + 1], "sagen");
-				clients[1].changes(null, "", "raus von Reizen", null, "", "raus");
-				clients[2].changes(null, null, null, null, "", "hören");
+				clients[0].changesReizen(null, null, null, null, "" + werte[accWert + 1], "sagen");
+				clients[1].changesReizen(null, "", "raus von Reizen", null, "", "raus");
+				clients[2].changesReizen(null, null, null, null, "", "hören");
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -54,9 +54,9 @@ public class Reizen {
 		}
 		if (ersteRunde && pos == 2) {
 			try {
-				clients[0].changes(null, null, null, null, "" + werte[accWert + 1], "sagen");
-				clients[1].changes(null, null, null, null, "", "hören");
-				clients[2].changes(null, "", "raus von Reizen", null, "", "raus");
+				clients[0].changesReizen(null, null, null, null, "" + werte[accWert + 1], "sagen");
+				clients[1].changesReizen(null, null, null, null, "", "hören");
+				clients[2].changesReizen(null, "", "raus von Reizen", null, "", "raus");
 			} catch (RemoteException e) {
 
 				e.printStackTrace();
@@ -65,7 +65,7 @@ public class Reizen {
 
 		if (!ersteRunde && weg[1] && weg[2] && werte[accWert] == 0) {
 			try {
-				clients[0].changes(null, null, "alle raus", "18 sagen?", "18", null);
+				clients[0].changesReizen(null, null, "alle raus", "18 sagen?", "18", null);
 			} catch (RemoteException e) {
 
 				e.printStackTrace();
@@ -79,8 +79,8 @@ public class Reizen {
 					System.out.println("druecken "+(pos+2)%3);
 					try {
 						clients[(pos+2)%3].startDruecken();
-						clients[(pos+1)%3].changes("es wird gedrückt", "", "", "bitte warten", "", "");
-						clients[(pos)%3].changes("es wird gedrückt", "", "", "bitte warten", "", "");
+						clients[(pos+1)%3].changesReizen("es wird gedrückt", "", "", "bitte warten", "", "");
+						clients[(pos)%3].changesReizen("es wird gedrückt", "", "", "bitte warten", "", "");
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -90,8 +90,8 @@ public class Reizen {
 					System.out.println("druecken "+(pos+1)%3);
 					try {
 						clients[(pos+1)%3].startDruecken();
-						clients[(pos+2)%3].changes("es wird gedrückt", "", "", "bitte warten", "", "");
-						clients[(pos)%3].changes("es wird gedrückt", "", "", "bitte warten", "", "");
+						clients[(pos+2)%3].changesReizen("es wird gedrückt", "", "", "bitte warten", "", "");
+						clients[(pos)%3].changesReizen("es wird gedrückt", "", "", "bitte warten", "", "");
 				
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
@@ -101,7 +101,7 @@ public class Reizen {
 			} else {
 				if (weg[(pos + 1) % 3]) {
 					try {
-						clients[(pos + 2) % 3].changes(null, null, "alle raus", "18 sagen?", "18", null);
+						clients[(pos + 2) % 3].changesReizen(null, null, "alle raus", "18 sagen?", "18", null);
 						System.out.println("why1");
 					} catch (RemoteException e) {
 
@@ -111,7 +111,7 @@ public class Reizen {
 				}
 				if (weg[(pos + 2) % 3]) {
 					try {
-						clients[(pos + 1) % 3].changes(null, null, "alle raus", "18 sagen?", "18", null);
+						clients[(pos + 1) % 3].changesReizen(null, null, "alle raus", "18 sagen?", "18", null);
 						System.out.println("why2");
 					} catch (RemoteException e) {
 
@@ -144,8 +144,8 @@ public class Reizen {
 			System.out.println("druecken22 "+pos);
 			try {
 				clients[pos].startDruecken();
-				clients[(pos+1)%3].changes("es wird gedrückt", "", "", "bitte warten", "", "");
-				clients[(pos+2)%3].changes("es wird gedrückt", "", "", "bitte warten", "", "");
+				clients[(pos+1)%3].changesReizen("es wird gedrückt", "", "", "bitte warten", "", "");
+				clients[(pos+2)%3].changesReizen("es wird gedrückt", "", "", "bitte warten", "", "");
 		
 				
 			} catch (RemoteException e) {
@@ -163,9 +163,9 @@ public class Reizen {
 //				clients[1].changeLGereizt(""+werte[accWert]);
 //				clients[2].changeLGereizt(""+werte[accWert]);
 //				clients[2].changeBtnNext(""+werte[accWert+1]);
-				clients[0].changes(null, null, null, "gereizt bis " + werte[accWert], null, null);
-				clients[1].changes(null, null, null, "gereizt bis " + werte[accWert], null, null);
-				clients[2].changes(null, null, "", "gereizt bis " + werte[accWert], "" + werte[accWert + 1], null);
+				clients[0].changesReizen(null, null, null, "gereizt bis " + werte[accWert], null, null);
+				clients[1].changesReizen(null, null, null, "gereizt bis " + werte[accWert], null, null);
+				clients[2].changesReizen(null, null, "", "gereizt bis " + werte[accWert], "" + werte[accWert + 1], null);
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -176,7 +176,7 @@ public class Reizen {
 		if (!sagen && ersteRunde && pos == 1) {
 			try {
 //				clients[2].changeLEmpty("Ja von Sp2");
-				clients[2].changes(null, null, "Ja von Sp2", null, null, null);
+				clients[2].changesReizen(null, null, "Ja von Sp2", null, null, null);
 
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
@@ -189,16 +189,16 @@ public class Reizen {
 		if (sagen && !ersteRunde && pos == 0) {
 			accWert++;
 			try {
-				clients[0].changes(null, null, "", "gereizt bis " + werte[accWert], "" + werte[accWert + 1], null);
-//				clients[1].changes(null, null, null, "gereizt bis " + werte[accWert], null, null);
-//				clients[2].changes(null, null, null, "gereizt bis " + werte[accWert], null, null);
+				clients[0].changesReizen(null, null, "", "gereizt bis " + werte[accWert], "" + werte[accWert + 1], null);
+//				clients[1].changesReizen(null, null, null, "gereizt bis " + werte[accWert], null, null);
+//				clients[2].changesReizen(null, null, null, "gereizt bis " + werte[accWert], null, null);
 				if (weg[1]) {
-					clients[1].changes(null, null, null, "gereizt bis " + werte[accWert], null, null);
-					clients[2].changes(null, null, null, "gereizt bis " + werte[accWert], "JA", null);
+					clients[1].changesReizen(null, null, null, "gereizt bis " + werte[accWert], null, null);
+					clients[2].changesReizen(null, null, null, "gereizt bis " + werte[accWert], "JA", null);
 				}
 				if (weg[2]) {
-					clients[1].changes(null, null, null, "gereizt bis " + werte[accWert], "JA", null);
-					clients[2].changes(null, null, null, "gereizt bis " + werte[accWert], null, null);
+					clients[1].changesReizen(null, null, null, "gereizt bis " + werte[accWert], "JA", null);
+					clients[2].changesReizen(null, null, null, "gereizt bis " + werte[accWert], null, null);
 				}
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
@@ -211,7 +211,7 @@ public class Reizen {
 			if (weg[1] && pos == 2) {
 				try {
 //					clients[2].changeLEmpty("Ja von Sp2");
-					clients[0].changes(null, null, "Ja von Sp3", null, null, null);
+					clients[0].changesReizen(null, null, "Ja von Sp3", null, null, null);
 
 				} catch (RemoteException e) {
 					// TODO Auto-generated catch block
@@ -224,7 +224,7 @@ public class Reizen {
 			if (weg[2] && pos == 1) {
 				try {
 //					clients[2].changeLEmpty("Ja von Sp2");
-					clients[0].changes(null, null, "Ja von Sp2", null, null, null);
+					clients[0].changesReizen(null, null, "Ja von Sp2", null, null, null);
 
 				} catch (RemoteException e) {
 					// TODO Auto-generated catch block
