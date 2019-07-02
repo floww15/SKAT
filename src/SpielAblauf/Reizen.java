@@ -79,6 +79,8 @@ public class Reizen {
 					System.out.println("druecken "+(pos+2)%3);
 					try {
 						clients[(pos+2)%3].startDruecken();
+						clients[(pos+1)%3].changes("es wird gedrückt", "", "", "bitte warten", "", "");
+						clients[(pos)%3].changes("es wird gedrückt", "", "", "bitte warten", "", "");
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -88,6 +90,9 @@ public class Reizen {
 					System.out.println("druecken "+(pos+1)%3);
 					try {
 						clients[(pos+1)%3].startDruecken();
+						clients[(pos+2)%3].changes("es wird gedrückt", "", "", "bitte warten", "", "");
+						clients[(pos)%3].changes("es wird gedrückt", "", "", "bitte warten", "", "");
+				
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -139,6 +144,10 @@ public class Reizen {
 			System.out.println("druecken22 "+pos);
 			try {
 				clients[pos].startDruecken();
+				clients[(pos+1)%3].changes("es wird gedrückt", "", "", "bitte warten", "", "");
+				clients[(pos+2)%3].changes("es wird gedrückt", "", "", "bitte warten", "", "");
+		
+				
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
