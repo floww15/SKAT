@@ -1,5 +1,7 @@
 package Activities;
 
+import java.util.concurrent.Semaphore;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,31 +12,31 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class GameActivity {
-	
-	public GameActivity(Stage prime) {
-		createStage(prime);
-	}
+	Button[] btnCards;
+	Label lPlayedCard3, lname3, lPlayedCard2, lname2, lPlayedCard1, lname1, lTeam, lSolo,lType;
+	Semaphore sem = new Semaphore(0);
 
-	void createStage(Stage prime) {
+	public GameActivity(Stage prime) {
+
 		// TextArea taPlayer1= new TextArea("Flo");
 		prime.setResizable(false);
 		// Team, Solo, Spieltyp
 		VBox vBoxTeam = new VBox();
 		vBoxTeam.setStyle("-fx-border-width: 2px");
 		vBoxTeam.setStyle("-fx-border-color: black");
-		Label lTeam = new Label("Team:       ");
+		lTeam = new Label("Team:       ");
 		vBoxTeam.getChildren().add(lTeam);
 
 		VBox vBoxSolo = new VBox();
 		vBoxSolo.setStyle("-fx-border-width: 2px");
 		vBoxSolo.setStyle("-fx-border-color: black");
-		Label lSolo = new Label("Solo:       ");
+		lSolo = new Label("Solo:       ");
 		vBoxSolo.getChildren().add(lSolo);
 
 		VBox vBoxType = new VBox();
 		vBoxType.setStyle("-fx-border-width: 2px");
 		vBoxType.setStyle("-fx-border-color: black");
-		Label lType = new Label("Type:       ");
+		 lType = new Label("Type:       ");
 		vBoxType.getChildren().add(lType);
 
 		HBox hBoxPlayers = new HBox();
@@ -50,30 +52,30 @@ public class GameActivity {
 
 		// Spieler und gespielte Karten
 		VBox vBoxPlayer1 = new VBox();
-		Label lname1 = new Label("Player1:");
+		lname1 = new Label("Player1:");
 		lname1.setStyle("-fx-border-width:2px");
 		lname1.setStyle("-fx-border-color:black");
-		Label lPlayedCard1 = new Label("Herz As");
+		lPlayedCard1 = new Label("Herz As");
 		lPlayedCard1.setStyle("-fx-border-width:2px");
 		lPlayedCard1.setStyle("-fx-border-color:black");
 		vBoxPlayer1.getChildren().addAll(lname1, lPlayedCard1);
 		vBoxPlayer1.setSpacing(10);
 
 		VBox vBoxPlayer2 = new VBox();
-		Label lname2 = new Label("Player2:");
+		lname2 = new Label("Player2:");
 		lname2.setStyle("-fx-border-width:2px");
 		lname2.setStyle("-fx-border-color:black");
-		Label lPlayedCard2 = new Label("Herz As");
+		lPlayedCard2 = new Label("Herz As");
 		lPlayedCard2.setStyle("-fx-border-width:2px");
 		lPlayedCard2.setStyle("-fx-border-color:black");
 		vBoxPlayer2.getChildren().addAll(lname2, lPlayedCard2);
 		vBoxPlayer2.setSpacing(10);
 
 		VBox vBoxPlayer3 = new VBox();
-		Label lname3 = new Label("Player3:");
+		lname3 = new Label("Player3:");
 		lname3.setStyle("-fx-border-width:2px");
 		lname3.setStyle("-fx-border-color:black");
-		Label lPlayedCard3 = new Label("Herz As");
+		lPlayedCard3 = new Label("Herz As");
 		lPlayedCard3.setStyle("-fx-border-width:2px");
 		lPlayedCard3.setStyle("-fx-border-color:black");
 		vBoxPlayer3.getChildren().addAll(lname3, lPlayedCard3);
@@ -87,7 +89,7 @@ public class GameActivity {
 		hBoxPlay.setMaxSize(300, 200);
 		hBoxPlay.setSpacing(20);
 
-		Button[] btnCards = new Button[10];
+		btnCards = new Button[10];
 		HBox hBoxCards1 = new HBox();
 		HBox hBoxCards2 = new HBox();
 		hBoxCards1.setAlignment(Pos.CENTER);
@@ -130,6 +132,8 @@ public class GameActivity {
 		Scene scene = new Scene(borderPane, 700, 430);
 		prime.setTitle("SKAT");
 		prime.setScene(scene);
+
+		sem.release();
 	}
 
 }
