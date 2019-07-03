@@ -33,15 +33,16 @@ public class DrueckenActivity {
 	Label label;
 	ArrayList<Karte> skat, neuerSkat = new ArrayList<Karte>();
 	Semaphore sem = new Semaphore(0);
+	Stage prime;
 	CenterClient centerClient;
 	Hand hand;
 	boolean skatAufgenommen = false;
-
+	
 	String spielModus = "";
 	boolean addOns[] = new boolean[4];
 
 	public DrueckenActivity(Stage prime, CenterClient centerClient, Hand hand) {
-
+		this.prime=prime;
 		this.hand = hand;
 		this.centerClient = centerClient;
 		centerClient.getClient().setFirst();
@@ -283,7 +284,12 @@ public class DrueckenActivity {
 		// Übergabe der eingelesenen Variablen
 		centerClient.setChangesAfterDruecken(spielModus, hand, neuerSkat, addOns);
 		// Start GameMode
-
+		centerClient.startGameActivites();
 	}
+	
+	public GameActivity startGamefromDruecken() {
+		return new GameActivity(prime);
+	}
+
 
 }

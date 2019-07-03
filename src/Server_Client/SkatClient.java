@@ -95,17 +95,34 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 	}
 
 	@Override
-	public void startGame() throws RemoteException {
+	public void startGamefromReizen() throws RemoteException {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				//GameActivity starten mit Konstruktor
-				
+				centerClient.startGamefromReizen();
 				
 
 			}
 		});
 
+	}
+	
+	public void startGamefromDruecken() throws RemoteException{
+		Platform.runLater(new Runnable() {
+			public void run() {
+				centerClient.startGamefromDruecken();
+			}
+		});
+	}
+	
+	public void startGameActivites() {
+		try {
+			skatServer.startGameActivities();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 //	public Semaphore getSem() throws RemoteException {

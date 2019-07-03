@@ -191,9 +191,19 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 			System.out.println(this.addOns[i]);
 		}
 	}
+
+	@Override
+	public void startGameActivities() throws RemoteException {
+		// TODO Auto-generated method stub
+		clients[0].startGamefromReizen();
+		clients[1].startGamefromReizen();
+		clients[2].startGamefromReizen();
+	}
 	
 //	public Semaphore getSem(int pos) throws RemoteException {
 //		return semsPlayer[pos];
 //	}
+	
+	
 
 }

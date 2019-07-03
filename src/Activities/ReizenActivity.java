@@ -229,5 +229,9 @@ public class ReizenActivity {
 	public DrueckenActivity startDruecken(Hand hand) {
 		return new DrueckenActivity(prime, centerClient, hand);
 	}
+	
+	public GameActivity startGamefromReizen() {
+		return new GameActivity(prime);
+	}
 
 }

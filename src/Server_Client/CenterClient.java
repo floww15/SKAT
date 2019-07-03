@@ -51,6 +51,18 @@ public class CenterClient extends Application {
 	public void startDruecken(Hand hand) {
 		drueckenActivity = reizenActivity.startDruecken(hand);
 	}
+	
+	public void startGamefromReizen() {
+		gameActivity= reizenActivity.startGamefromReizen();
+	}
+	
+	public void startGamefromDruecken() {
+		gameActivity= drueckenActivity.startGamefromDruecken();
+	}
+	
+	public void startGameActivites() {
+		client.startGameActivites();
+	}
 
 //	public Semaphore getSem() throws RemoteException {
 //		return client.getSem();

@@ -12,7 +12,8 @@ public interface RemoteSkatClient extends Remote{
 	public int getPos() throws RemoteException;
 	public void startReizen() throws RemoteException;
 	public void startDruecken() throws RemoteException;
-	public void startGame() throws RemoteException;
+	public void startGamefromReizen() throws RemoteException;
+	public void startGamefromDruecken() throws RemoteException;
 	public void reizenStartStats() throws RemoteException;
 	public void setPlayer(Player p)throws RemoteException;
 	
