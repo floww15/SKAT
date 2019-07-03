@@ -231,7 +231,7 @@ public class ReizenActivity {
 	}
 	
 	public GameActivity startGamefromReizen() {
-		return new GameActivity(prime);
+		return new GameActivity(prime,centerClient.getPlayers(),pos,centerClient.getPlayingAlone(),centerClient.getTrumpf());
 	}
 
 }

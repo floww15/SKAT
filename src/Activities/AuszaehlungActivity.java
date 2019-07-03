@@ -26,7 +26,6 @@ public class AuszaehlungActivity {
 	SkatClient[] clients;
 
 	public AuszaehlungActivity(Stage prime, CenterClient client ) {
-		start(prime);
 		this.client = client;
 		for (Stich t : client.getClient().getPlayer().getStiche())
 			punkte += t.getPoints();
@@ -93,13 +92,7 @@ public class AuszaehlungActivity {
 			
 				
 		}
-		
-	}
 
-	public void start(Stage primaryStage) {
-		// TODO Auto-generated method stub
-		primaryStage.setResizable(false);
-		
 
 		HBox hBoxSpielArt = new HBox();
 		lSpielArt = new Label("Spieler "+spieler+" hat "+spielart+" gespielt");
@@ -154,9 +147,9 @@ public class AuszaehlungActivity {
 		borderPane.setCenter(vBoxAll);
 
 		Scene scene = new Scene(borderPane, 700, 430);
-		primaryStage.setTitle("SKAT");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		prime.setTitle("SKAT");
+		prime.setScene(scene);
+		
 
 	}
 

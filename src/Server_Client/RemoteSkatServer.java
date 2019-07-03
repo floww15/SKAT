@@ -27,4 +27,8 @@ public interface RemoteSkatServer extends Remote {
 	public void setSkat(ArrayList<Karte> skat) throws RemoteException;
 	public void setAddOns(boolean[] addOns) throws RemoteException;
 	public void startGameActivities() throws RemoteException;
+	public void putCard(Player player, Karte karte) throws RemoteException;
+	public int getPlayingAlone() throws RemoteException;
+	public void setPlayingAlone(int x) throws RemoteException;
+	public String getTrumpf() throws RemoteException;
 }

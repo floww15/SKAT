@@ -10,6 +10,11 @@ public class Game {
 	private boolean[] gelegt = new boolean[3];
 	private Karte[] cards = new Karte[3];
 	private Player[] player = new Player[3];
+	
+	public int getTurn() {
+		return 0;
+	}
+	
 
 	public void karteLegen(int id, Karte k, String trumpf, Player p) throws WrongCardException {
 		if (!gelegt[id]) {

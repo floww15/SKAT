@@ -116,4 +116,30 @@ public class CenterClient extends Application {
 	public void setChangesAfterDruecken(String trumpf, Hand hand, ArrayList<Karte> skat, boolean[] addOns) {
 		client.setChangesAfterDruecken(trumpf, hand, skat, addOns);
 	}
+	
+	public Player[] getPlayers() {
+		System.out.println("centerclient");
+		for(int i=0; i<3; i++) {
+			System.out.println(client.getPlayers()[i].getName());
+		}
+		return client.getPlayers();
+	}
+	
+	public String getTrumpf() {
+		return client.getTrumpf();
+	}
+	
+	public int getPlayingAlone() {
+		return client.getPlayingAlone();
+	}
+	
+	public int getPos() {
+		try {
+			return client.getPos();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return 99;
+	}
 }

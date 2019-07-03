@@ -10,10 +10,12 @@ public class Player implements Serializable {
 	private String name;
 	private List<Stich> stiche=new ArrayList<Stich>();
 	private Hand h;
+	private int pos;
 	
-	public Player(String name, Hand hand){
+	public Player(String name, Hand hand, int pos){
 		this.name=name;
 		h=hand;
+		this.pos=pos;
 	}
 	public void addStich(Stich s) {
 		stiche.add(s);
@@ -26,5 +28,13 @@ public class Player implements Serializable {
 	}
 	public Hand getHand() {
 		return h;
+	}
+	
+	public int getPos() {
+		return pos;
+	}
+	
+	public void setHand(Hand h) {
+		this.h=h;
 	}
 }

@@ -271,6 +271,9 @@ public class DrueckenActivity {
 				return;
 			}
 		}
+		if(!skatAufgenommen) {
+			neuerSkat=centerClient.getSkat();
+		}
 		// cbOuvert, cbHand, cbSchneider, cbSchwarz
 		if (cbOuvert.isSelected())
 			addOns[0] = true;
@@ -280,7 +283,7 @@ public class DrueckenActivity {
 			addOns[2] = true;
 		if (cbSchwarz.isSelected())
 			addOns[3] = true;
-
+		System.out.println("Punkt5");
 		// Übergabe der eingelesenen Variablen
 		centerClient.setChangesAfterDruecken(spielModus, hand, neuerSkat, addOns);
 		// Start GameMode
@@ -288,7 +291,7 @@ public class DrueckenActivity {
 	}
 	
 	public GameActivity startGamefromDruecken() {
-		return new GameActivity(prime);
+		return new GameActivity(prime,centerClient.getPlayers(),centerClient.getPos(),centerClient.getPlayingAlone(),centerClient.getTrumpf());
 	}
 
 

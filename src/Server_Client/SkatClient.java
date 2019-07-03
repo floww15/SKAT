@@ -84,12 +84,13 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 	}
 
 	public void startDruecken() throws RemoteException {
+		skatServer.setPlayingAlone(pos);
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 
 				centerClient.startDruecken(hand);
-
+				
 			}
 		});
 	}
@@ -99,23 +100,22 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				//GameActivity starten mit Konstruktor
+				// GameActivity starten mit Konstruktor
 				centerClient.startGamefromReizen();
-				
 
 			}
 		});
 
 	}
-	
-	public void startGamefromDruecken() throws RemoteException{
+
+	public void startGamefromDruecken() throws RemoteException {
 		Platform.runLater(new Runnable() {
 			public void run() {
 				centerClient.startGamefromDruecken();
 			}
 		});
 	}
-	
+
 	public void startGameActivites() {
 		try {
 			skatServer.startGameActivities();
@@ -170,6 +170,15 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 	}
 
 	public Player[] getPlayers() {
+		System.out.println("SkatClient");
+		for(int i=0; i<3; i++) {
+			try {
+				System.out.println(skatServer.getPlayers()[i].getName());
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		try {
 			return skatServer.getPlayers();
 		} catch (RemoteException e) {
@@ -236,7 +245,7 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 	public void setFirst() {
 		first = true;
 	}
-	
+
 	public void setChangesAfterDruecken(String trumpf, Hand hand, ArrayList<Karte> skat, boolean[] addOns) {
 		try {
 			skatServer.setTrumpf(trumpf);
@@ -247,8 +256,35 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+	}
+
+	public int getPlayingAlone() {
+		try {
+			return skatServer.getPlayingAlone();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public void setPlayingAlone( int x) {
+		try {
+			skatServer.setPlayingAlone(x);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public String getTrumpf() {
+		try {
+			return skatServer.getTrumpf();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

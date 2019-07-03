@@ -22,10 +22,12 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	private RemoteSkatClient[] clients = new RemoteSkatClient[3];
 	private Player[] players = new Player[3];
 	Reizen reizen;
+	private int playingAlone;
+	Game game= new Game();
 //	private Semaphore[] semsPlayer = new Semaphore[3];
 	int player = 0;
 	
-	String trumpf;
+	private String trumpf;
 	boolean addOns[]=new boolean[4];
 	
 	
@@ -70,7 +72,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	public synchronized void register(String name, RemoteSkatClient client) throws RemoteException {
 		if (player < 3) {
 			clients[player] = client;
-			players[player] = new Player(name, haende.get(player));
+			players[player] = new Player(name, haende.get(player),player);
 			clients[player].setPlayer(players[player]);
 			System.out.println(name);
 			try {
@@ -150,6 +152,10 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 
 	@Override
 	public Player[] getPlayers() throws RemoteException {
+		System.out.println("SkatServer");
+		for(int i=0; i<3; i++) {
+			System.out.println(players[i].getName());
+		}
 		// TODO Auto-generated method stub
 		return players;
 	}
@@ -165,6 +171,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	public void setHand(int pos, Hand hand) throws RemoteException {
 		// TODO Auto-generated method stub
 		haende.set(pos, hand);
+		players[pos].setHand(hand);
 		System.out.println("hand1:");
 		System.out.println(haende.get(0));
 		System.out.println("hand2:");
@@ -180,8 +187,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	}
 	
 	public void setSkat(ArrayList<Karte> skat) {
-		this.skat.set(0, skat.get(0));
-		this.skat.set(1, skat.get(1));
+		this.skat=skat;
 		System.out.println(skat.get(0)+"   "+skat.get(1));
 	}
 	
@@ -199,10 +205,35 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		clients[1].startGamefromReizen();
 		clients[2].startGamefromReizen();
 	}
+
+	@Override
+	public void putCard(Player player, Karte karte) throws RemoteException {
+		// TODO Auto-generated method stub
+//		
+//		if(player.getPos()) {
+//			
+//		}
+	}
 	
 //	public Semaphore getSem(int pos) throws RemoteException {
 //		return semsPlayer[pos];
 //	}
+	
+	public int getPlayingAlone() {
+		return playingAlone;
+	}
+	
+	public void setPlayingAlone(int x) {
+		playingAlone=x;
+	}
+
+	@Override
+	public String getTrumpf() throws RemoteException {
+		// TODO Auto-generated method stub
+		return trumpf;
+	}
+	
+	
 	
 	
 
