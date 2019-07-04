@@ -23,7 +23,7 @@ public class Game {
 			cards[id] = k;
 			player[id] = p;
 			gelegt[id] = true;
-			turn=(turn+1)%3;
+			turn=(turn+1);
 		}
 		if (gelegt[0] && gelegt[1] && gelegt[2]) {
 			Stich s = new Stich(cards[0], cards[1], cards[2]);
