@@ -244,12 +244,6 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 			game.karteLegen(id, k, trumpf, players[id]);
 		} catch (WrongCardException e) {
 			
-		}
-		
+		}		
 	}
-	
-	
-	
-	
-
 }
