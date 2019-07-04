@@ -22,7 +22,7 @@ public interface RemoteSkatServer extends Remote {
 	
 	public void setHand(int pos, Hand hand) throws RemoteException;
 	public Hand getHand(int pos) throws RemoteException;
-	public void legKarte(int id,Karte k)throws RemoteException;
+	public void legKarte(int id,Karte k)throws RemoteException,NotYourTurnException,WrongCardException;
 	public void setTrumpf(String trumpf) throws RemoteException;
 	public void setSkat(ArrayList<Karte> skat) throws RemoteException;
 	public void setAddOns(boolean[] addOns) throws RemoteException;

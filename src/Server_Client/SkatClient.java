@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 
 import GameClasses.Hand;
 import GameClasses.Karte;
+import GameClasses.NotYourTurnException;
 import GameClasses.Player;
 import GameClasses.WrongCardException;
 
@@ -289,7 +290,7 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 	}
 
 	@Override
-	public void legKarte(Karte k, String trumpf) throws RemoteException, WrongCardException {
+	public void legKarte(Karte k) throws RemoteException, WrongCardException, NotYourTurnException {
 		skatServer.legKarte(pos, k);
 		
 	}

@@ -142,4 +142,7 @@ public class CenterClient extends Application {
 		} 
 		return 99;
 	}
+	public void legKarte(Karte k) throws RemoteException, WrongCardException, NotYourTurnException {
+		client.legKarte(k);
+	}
 }

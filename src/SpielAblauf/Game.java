@@ -2,6 +2,7 @@ package SpielAblauf;
 
 import GameClasses.Karte;
 import GameClasses.KartenComparator;
+import GameClasses.NotYourTurnException;
 import GameClasses.Stich;
 import GameClasses.WrongCardException;
 import GameClasses.Player;
@@ -16,14 +17,14 @@ public class Game {
 		return turn;
 	}
 
-	public void karteLegen(int id, Karte k, String trumpf, Player p) throws WrongCardException {
+	public void legKarte(int id, Karte k, String trumpf, Player p) throws WrongCardException, NotYourTurnException {
 		if (id != turn)
-			return;
+			throw new NotYourTurnException();
 		if (!gelegt[id]) {
 			cards[id] = k;
 			player[id] = p;
 			gelegt[id] = true;
-			turn=(turn+1);
+			turn=(turn+1)%3;
 		}
 		if (gelegt[0] && gelegt[1] && gelegt[2]) {
 			Stich s = new Stich(cards[0], cards[1], cards[2]);

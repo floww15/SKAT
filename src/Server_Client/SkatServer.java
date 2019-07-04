@@ -13,6 +13,7 @@ import com.sun.jndi.cosnaming.RemoteToCorba;
 import GameClasses.Hand;
 import GameClasses.Karte;
 import GameClasses.KartenStapel;
+import GameClasses.NotYourTurnException;
 import GameClasses.Player;
 import GameClasses.WrongCardException;
 import SpielAblauf.*;
@@ -26,17 +27,17 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	private Player[] players = new Player[3];
 	Reizen reizen;
 	private int playingAlone;
-	Game game= new Game();
+	Game game = new Game();
 //	private Semaphore[] semsPlayer = new Semaphore[3];
 	int player = 0;
-	
+
 	private String trumpf;
-	boolean addOns[]=new boolean[4];
-	
-	public Game getGame() throws RemoteException{
+	boolean addOns[] = new boolean[4];
+
+	public Game getGame() throws RemoteException {
 		return game;
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -77,7 +78,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	public synchronized void register(String name, RemoteSkatClient client) throws RemoteException {
 		if (player < 3) {
 			clients[player] = client;
-			players[player] = new Player(name, haende.get(player),player);
+			players[player] = new Player(name, haende.get(player), player);
 			clients[player].setPlayer(players[player]);
 			System.out.println(name);
 			try {
@@ -150,6 +151,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		reizen.nextClick(pos);
 
 	}
+
 	@Override
 	public RemoteSkatClient[] getClients() {
 		return clients;
@@ -158,13 +160,12 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	@Override
 	public Player[] getPlayers() throws RemoteException {
 		System.out.println("SkatServer");
-		for(int i=0; i<3; i++) {
+		for (int i = 0; i < 3; i++) {
 			System.out.println(players[i].getName());
 		}
 		// TODO Auto-generated method stub
 		return players;
 	}
-
 
 	@Override
 	public Hand getHand(int pos) throws RemoteException {
@@ -183,22 +184,22 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		System.out.println(haende.get(1));
 		System.out.println("hand3:");
 		System.out.println(haende.get(2));
-		
+
 	}
-	
+
 	public void setTrumpf(String trumpf) {
-		this.trumpf=trumpf;
+		this.trumpf = trumpf;
 		System.out.println(trumpf);
 	}
-	
+
 	public void setSkat(ArrayList<Karte> skat) {
-		this.skat=skat;
-		System.out.println(skat.get(0)+"   "+skat.get(1));
+		this.skat = skat;
+		System.out.println(skat.get(0) + "   " + skat.get(1));
 	}
-	
+
 	public void setAddOns(boolean[] addOns) {
-		this.addOns=addOns;
-		for(int i=0; i<4; i++) {
+		this.addOns = addOns;
+		for (int i = 0; i < 4; i++) {
 			System.out.println(this.addOns[i]);
 		}
 	}
@@ -219,17 +220,17 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 //			
 //		}
 	}
-	
+
 //	public Semaphore getSem(int pos) throws RemoteException {
 //		return semsPlayer[pos];
 //	}
-	
+
 	public int getPlayingAlone() {
 		return playingAlone;
 	}
-	
+
 	public void setPlayingAlone(int x) {
-		playingAlone=x;
+		playingAlone = x;
 	}
 
 	@Override
@@ -239,11 +240,9 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	}
 
 	@Override
-	public void legKarte(int id, Karte k)throws RemoteException {
-		try {
-			game.karteLegen(id, k, trumpf, players[id]);
-		} catch (WrongCardException e) {
-			
-		}		
+	public void legKarte(int id, Karte k) throws RemoteException, NotYourTurnException, WrongCardException {
+
+		game.legKarte(id, k, trumpf, players[id]);
+
 	}
 }

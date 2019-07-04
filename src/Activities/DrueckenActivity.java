@@ -291,7 +291,7 @@ public class DrueckenActivity {
 	}
 	
 	public GameActivity startGamefromDruecken() {
-		return new GameActivity(prime,centerClient.getPlayers(),centerClient.getPos(),centerClient.getPlayingAlone(),centerClient.getTrumpf());
+		return new GameActivity(prime,centerClient.getPlayers(),centerClient.getPos(),centerClient.getPlayingAlone(),centerClient.getTrumpf(),centerClient);
 	}
 
 

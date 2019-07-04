@@ -19,6 +19,7 @@ public class Player implements Serializable {
 	}
 	public void addStich(Stich s) {
 		stiche.add(s);
+		System.out.println(s+"  added");
 	}
 	public List<Stich> getStiche(){
 		return stiche;

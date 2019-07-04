@@ -1,8 +1,13 @@
 package Activities;
 
+import java.rmi.RemoteException;
 import java.util.concurrent.Semaphore;
 
+import GameClasses.Karte;
+import GameClasses.NotYourTurnException;
 import GameClasses.Player;
+import GameClasses.WrongCardException;
+import Server_Client.CenterClient;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,8 +25,10 @@ public class GameActivity {
 	String type;
 	int playingAlone;
 	Stage prime;
+	CenterClient centerClient;
+	int id;
 
-	public GameActivity(Stage prime, Player[] player,int ownNR, int playingAlone,String type) {
+	public GameActivity(Stage prime, Player[] player,int ownNR, int playingAlone,String type, CenterClient centerClient) {
 		System.out.println(player[(playingAlone)%3].getName());
 		System.out.println(player[(playingAlone+1)%3].getName());
 		System.out.println(player[(playingAlone+2)%3].getName());
@@ -29,6 +36,8 @@ public class GameActivity {
 		this.playingAlone=playingAlone;
 		this.player=player;
 		this.type=type;
+		this.centerClient =centerClient;
+		id=ownNR;
 		// TextArea taPlayer1= new TextArea("Flo");
 		prime.setResizable(false);
 		// Team, Solo, Spieltyp
@@ -117,7 +126,20 @@ public class GameActivity {
 			btnCards[i] = new Button(""+player[ownNR].getHand().get(i));
 			hBoxCards2.getChildren().add(btnCards[i]);
 		}
-
+		
+		btnCards[0].setOnAction(e-> btnCardsClick(0));
+		btnCards[1].setOnAction(e-> btnCardsClick(1));
+		btnCards[2].setOnAction(e-> btnCardsClick(2));
+		btnCards[3].setOnAction(e-> btnCardsClick(3));
+		btnCards[4].setOnAction(e-> btnCardsClick(4));
+		btnCards[5].setOnAction(e-> btnCardsClick(5));
+		btnCards[6].setOnAction(e-> btnCardsClick(6));
+		btnCards[7].setOnAction(e-> btnCardsClick(7));
+		btnCards[8].setOnAction(e-> btnCardsClick(8));
+		btnCards[9].setOnAction(e-> btnCardsClick(9));
+					
+	
+		
 		VBox VBoxCards = new VBox();
 		VBoxCards.getChildren().add(hBoxCards1);
 		VBoxCards.getChildren().add(hBoxCards2);
@@ -147,6 +169,25 @@ public class GameActivity {
 		prime.setScene(scene);
 
 		sem.release();
+	}
+
+	private void btnCardsClick(int i) {
+		try {
+			Player temp=player[id];
+			Karte k= temp.getHand().get(i);
+			System.out.println(k);
+			centerClient.legKarte(k);
+			btnCards[i].setVisible(false);
+			System.out.println(i);
+		}
+		catch(WrongCardException | NotYourTurnException  e) {
+			System.out.println("wrongCard or not your turn");
+		} 
+		
+		catch (RemoteException e) {
+			System.out.println("remote");
+		}
+		return ;
 	}
 
 }
