@@ -12,7 +12,7 @@ public class Game {
 	private Karte[] cards = new Karte[3];
 	private Player[] player = new Player[3];
 	private int turn = 1;
-
+	public int sum=0;
 	public int getTurn() {
 		return turn;
 	}
@@ -20,17 +20,22 @@ public class Game {
 	public void legKarte(int id, Karte k, String trumpf, Player p) throws WrongCardException, NotYourTurnException {
 		String farbe = "";
 		Karte first = null;
+		
 		if (id != turn)
 			throw new NotYourTurnException();
-		if (!gelegt[turn] && !gelegt[(turn + 1) % 3] && !gelegt[(turn + 2) % 3]) {
+		//if (!gelegt[turn] && !gelegt[(turn + 1) % 3] && !gelegt[(turn + 2) % 3]) {
+		if(sum==0) {
 			first = k;
 			cards[turn] = k;
 			farbe = k.getFarbe();
 			player[turn] = p;
 			gelegt[turn] = true;
 			turn = (turn + 1) % 3;
+			sum++;
+			return;
 		}
-		if (gelegt[turn] && !gelegt[(turn + 1) % 3] && !gelegt[(turn + 2) % 3]) {
+	//	if (gelegt[(turn-1)%3] && !gelegt[turn] && !gelegt[(turn + 1) % 3]) {
+		if(sum==1) {
 
 			if (trumpf == null) {
 				if (!k.getFarbe().equals(farbe) && p.getHand().contains(farbe)) {
@@ -57,12 +62,14 @@ public class Game {
 					throw new WrongCardException();
 
 			}
-			cards[(turn + 1) % 3] = k;
-			gelegt[(turn + 1) % 3] = true;
+			cards[turn] = k;
+			gelegt[turn] = true;
 			turn=(turn+1)%3;
-
+			sum++;
+			return;
 		}
-		if (gelegt[turn] && gelegt[(turn + 1) % 3] && !gelegt[(turn + 2) % 3]) {
+	//	if (!gelegt[turn] && !gelegt[(turn + 1) % 3] && !gelegt[(turn + 2) % 3]) {
+		if(sum==2) {
 			if (trumpf == null) {
 				if (!k.getFarbe().equals(farbe) && p.getHand().contains(farbe)) {
 					throw new WrongCardException();
@@ -85,15 +92,18 @@ public class Game {
 				if (!k.getFarbe().equals(farbe) && p.getHand().contains(farbe))
 					throw new WrongCardException();
 			}
-			cards[(turn + 2) % 3] = k;
-			gelegt[(turn + 2) % 3] = true;
+			cards[turn] = k;
+			gelegt[turn] = true;
+			sum++;
 
 		}
-		if (gelegt[turn] && gelegt[(turn + 1) % 3] && gelegt[(turn + 2) % 3]) {
+	//	if (gelegt[turn] && gelegt[(turn + 1) % 3] && gelegt[(turn + 2) % 3]) {
+		if(sum==3) {
 			Stich s = new Stich(cards[0], cards[1], cards[2]);
 			gelegt[0] = false;
 			gelegt[1] = false;
 			gelegt[2] = false;
+			sum=0;
 			KartenComparator comp = new KartenComparator(trumpf, cards[0].getFarbe());
 			if (comp.compare(cards[0], cards[1]) > 0 && comp.compare(cards[0], cards[2]) > 0) {
 				player[0].addStich(s);

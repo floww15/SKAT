@@ -178,6 +178,17 @@ public class GameActivity {
 			System.out.println(k);
 			centerClient.legKarte(k);
 			btnCards[i].setVisible(false);
+			switch(id) {
+			case 0:
+				lPlayedCard1.setText(k.toString());
+				break;
+			case 1:
+				lPlayedCard2.setText(k.toString());
+				break;
+			case 2: 
+				lPlayedCard3.setText(k.toString());
+				break;
+			}
 			System.out.println(i);
 		}
 		catch(WrongCardException    e) {

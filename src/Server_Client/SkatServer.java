@@ -243,6 +243,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	public void legKarte(int id, Karte k) throws RemoteException, NotYourTurnException, WrongCardException {
 
 		game.legKarte(id, k, trumpf, players[id]);
+		System.out.println(game.sum);
 
 	}
 }
