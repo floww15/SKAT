@@ -180,12 +180,14 @@ public class GameActivity {
 			btnCards[i].setVisible(false);
 			System.out.println(i);
 		}
-		catch(WrongCardException | NotYourTurnException  e) {
-			System.out.println("wrongCard or not your turn");
+		catch(WrongCardException    e) {
+			System.out.println("wrongCard ");
 		} 
 		
 		catch (RemoteException e) {
 			System.out.println("remote");
+		} catch (NotYourTurnException e) {
+			System.out.println("not your turn");
 		}
 		return ;
 	}
