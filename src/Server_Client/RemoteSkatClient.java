@@ -5,7 +5,9 @@ import SpielAblauf.*;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+import GameClasses.Karte;
 import GameClasses.Player;
+import GameClasses.WrongCardException;
 
 public interface RemoteSkatClient extends Remote{
 	public void setPos(int pos) throws RemoteException;
@@ -16,7 +18,7 @@ public interface RemoteSkatClient extends Remote{
 	public void startGamefromDruecken() throws RemoteException;
 	public void reizenStartStats() throws RemoteException;
 	public void setPlayer(Player p)throws RemoteException;
-	
+	public void legKarte(Karte k,String trumpf)throws RemoteException,WrongCardException;
 //	public void changeLGereizt(String value) throws RemoteException;
 //	public void changeLEmpty(String value) throws RemoteException;
 //	public void changeBtnNext(String value) throws RemoteException;

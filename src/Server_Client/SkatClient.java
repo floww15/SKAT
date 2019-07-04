@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import GameClasses.Hand;
 import GameClasses.Karte;
 import GameClasses.Player;
+import GameClasses.WrongCardException;
 
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -285,6 +286,12 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public void legKarte(Karte k, String trumpf) throws RemoteException, WrongCardException {
+		skatServer.legKarte(pos, k);
+		
 	}
 
 }

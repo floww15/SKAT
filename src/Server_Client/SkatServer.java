@@ -8,10 +8,13 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+import com.sun.jndi.cosnaming.RemoteToCorba;
+
 import GameClasses.Hand;
 import GameClasses.Karte;
 import GameClasses.KartenStapel;
 import GameClasses.Player;
+import GameClasses.WrongCardException;
 import SpielAblauf.*;
 
 public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer {
@@ -30,7 +33,9 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	private String trumpf;
 	boolean addOns[]=new boolean[4];
 	
-	
+	public Game getGame() throws RemoteException{
+		return game;
+	}
 	
 	/**
 	 * 
@@ -231,6 +236,16 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	public String getTrumpf() throws RemoteException {
 		// TODO Auto-generated method stub
 		return trumpf;
+	}
+
+	@Override
+	public void legKarte(int id, Karte k)throws RemoteException {
+		try {
+			game.karteLegen(id, k, trumpf, players[id]);
+		} catch (WrongCardException e) {
+			
+		}
+		
 	}
 	
 	
