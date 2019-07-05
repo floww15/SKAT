@@ -48,7 +48,7 @@ public class GameActivity {
 		vBoxTeam.setStyle("-fx-border-color: black");
 
 		lTeam = new Label(
-				"Team:" + player[(playingAlone + 1) % 3].getName() + " " + player[(playingAlone + 1) % 3].getName());
+				"Team:" + player[(playingAlone + 1) % 3].getName() + " " + player[(playingAlone + 2) % 3].getName());
 		vBoxTeam.getChildren().add(lTeam);
 
 		VBox vBoxSolo = new VBox();
@@ -146,7 +146,7 @@ public class GameActivity {
 		VBoxCards.setAlignment(Pos.CENTER);
 		VBoxCards.setStyle("-fx-border-width:2px");
 		VBoxCards.setStyle("-fx-border-color:black");
-		VBoxCards.setMaxSize(400, 300);
+		VBoxCards.setMaxSize(500, 300);
 		VBoxCards.setSpacing(20);
 
 		// alle hBoxen zusammengefasst
@@ -164,7 +164,7 @@ public class GameActivity {
 		BorderPane.setAlignment(labelHeader, Pos.CENTER);
 		borderPane.setCenter(vBoxAll);
 
-		Scene scene = new Scene(borderPane, 700, 430);
+		Scene scene = new Scene(borderPane, 700, 400);
 		prime.setTitle("SKAT");
 		prime.setScene(scene);
 
@@ -178,11 +178,9 @@ public class GameActivity {
 			System.out.println(k);
 			centerClient.legKarte(k);
 			btnCards[i].setVisible(false);
-			System.out.println(i);
 		} catch (WrongCardException e) {
 			System.out.println("wrongCard ");
 		}
-
 		catch (RemoteException e) {
 			e.printStackTrace();
 		} catch (NotYourTurnException e) {

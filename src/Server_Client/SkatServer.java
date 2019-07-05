@@ -31,6 +31,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	private String trumpf;
 	boolean addOns[] = new boolean[4];
 	int sum=0;
+	int stiche =0;
 
 	public Game getGame() throws RemoteException {
 		return game;
@@ -262,6 +263,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		}
 		if(sum==3) {
 			sum=0;
+			stiche++;
 			
 			for(int i=0;i<3;i++) {
 				clients[i].setCard0Text("---");
@@ -269,6 +271,8 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 				clients[i].setCard2Text("---");
 			}
 		}
+		if(stiche==10)
+			//hier die auszählen activity starten
 
 		System.out.println(game.sum);
 

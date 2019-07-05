@@ -146,7 +146,6 @@ public class CenterClient extends Application {
 		client.legKarte(k);
 	}
 	public void setCard0Text(String s) {
-		System.out.println("Centerclient0Text");
 		gameActivity.CardChanges(s, null, null);
 	}
 	public void setCard1Text(String s) {

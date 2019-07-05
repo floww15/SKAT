@@ -153,6 +153,8 @@ public class DrueckenActivity {
 	}
 
 	private void btnAufnehmenClick() {
+		if(skatAufgenommen)
+			return;
 		skatAufgenommen = true;
 		try {
 			sem.acquire();
