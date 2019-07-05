@@ -24,5 +24,7 @@ public interface RemoteSkatClient extends Remote{
 //	public void changeLEmpty(String value) throws RemoteException;
 //	public void changeBtnNext(String value) throws RemoteException;
 	public void changesReizen(String Nr, String Weg, String Empty, String Gereizt, String Next, String Zustand) throws RemoteException;
-
+	public void setCard0Text(String s)throws RemoteException;
+	public void setCard1Text(String s)throws RemoteException;
+	public void setCard2Text(String s)throws RemoteException;
 }

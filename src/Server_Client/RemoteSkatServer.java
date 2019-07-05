@@ -19,7 +19,6 @@ public interface RemoteSkatServer extends Remote {
 	public ArrayList<Karte> getSkat() throws RemoteException;
 	public Player[] getPlayers() throws RemoteException;
 	public RemoteSkatClient[] getClients() throws RemoteException;
-	
 	public void setHand(int pos, Hand hand) throws RemoteException;
 	public Hand getHand(int pos) throws RemoteException;
 	public void legKarte(int id,Karte k)throws RemoteException,NotYourTurnException,WrongCardException;

@@ -7,9 +7,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-
-import com.sun.jndi.cosnaming.RemoteToCorba;
-
 import GameClasses.Hand;
 import GameClasses.Karte;
 import GameClasses.KartenStapel;
@@ -30,7 +27,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	Game game = new Game();
 //	private Semaphore[] semsPlayer = new Semaphore[3];
 	int player = 0;
-
+	Karte[] cards = new Karte[3];
 	private String trumpf;
 	boolean addOns[] = new boolean[4];
 
@@ -243,7 +240,31 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	public void legKarte(int id, Karte k) throws RemoteException, NotYourTurnException, WrongCardException {
 
 		game.legKarte(id, k, trumpf, players[id]);
+		cards = game.getCards();
+		try {
+			for (int i = 0; i < 3; i++) {
+				clients[i].setCard0Text(cards[0].toString());
+
+			}
+		} catch (NullPointerException e) {
+		}
+		try {
+			for (int i = 0; i < 3; i++) {
+
+				clients[i].setCard0Text(cards[1].toString());
+			}
+		} catch (NullPointerException e) {
+		}
+		try {
+			for (int i = 0; i < 3; i++) {
+
+				clients[i].setCard0Text(cards[2].toString());
+			}
+		} catch (NullPointerException e) {
+		}
+
 		System.out.println(game.sum);
 
 	}
+
 }

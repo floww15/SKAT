@@ -178,17 +178,6 @@ public class GameActivity {
 			System.out.println(k);
 			centerClient.legKarte(k);
 			btnCards[i].setVisible(false);
-			switch(id) {
-			case 0:
-				lPlayedCard1.setText(k.toString());
-				break;
-			case 1:
-				lPlayedCard2.setText(k.toString());
-				break;
-			case 2: 
-				lPlayedCard3.setText(k.toString());
-				break;
-			}
 			System.out.println(i);
 		}
 		catch(WrongCardException    e) {
@@ -196,11 +185,21 @@ public class GameActivity {
 		} 
 		
 		catch (RemoteException e) {
-			System.out.println("remote");
+			e.printStackTrace();
 		} catch (NotYourTurnException e) {
 			System.out.println("not your turn");
 		}
+		
 		return ;
+	}
+	public void Card0Text(String s) {
+		lPlayedCard1.setText(s);
+	}
+	public void Card1Text(String s) {
+		lPlayedCard2.setText(s);
+	}
+	public void Card2Text(String s) {
+		lPlayedCard3.setText(s);
 	}
 
 }

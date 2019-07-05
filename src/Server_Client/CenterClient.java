@@ -145,4 +145,13 @@ public class CenterClient extends Application {
 	public void legKarte(Karte k) throws RemoteException, WrongCardException, NotYourTurnException {
 		client.legKarte(k);
 	}
+	public void setCard0Text(String s) {
+		gameActivity.Card0Text(s);
+	}
+	public void setCard1Text(String s) {
+		gameActivity.Card1Text(s);
+	}
+	public void setCard2Text(String s) {
+		gameActivity.Card2Text(s);
+	}
 }
