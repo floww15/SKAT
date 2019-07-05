@@ -296,6 +296,7 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 	}
 
 	public void setCard0Text(String s)throws RemoteException {
+		System.out.println("skatclientText0");
 		centerClient.setCard0Text(s);
 		}
 	public void setCard1Text(String s) throws RemoteException{

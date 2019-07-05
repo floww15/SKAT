@@ -30,6 +30,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	Karte[] cards = new Karte[3];
 	private String trumpf;
 	boolean addOns[] = new boolean[4];
+	int sum=0;
 
 	public Game getGame() throws RemoteException {
 		return game;
@@ -241,26 +242,32 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 
 		game.legKarte(id, k, trumpf, players[id]);
 		cards = game.getCards();
-		try {
-			for (int i = 0; i < 3; i++) {
-				clients[i].setCard0Text(cards[0].toString());
-
-			}
-		} catch (NullPointerException e) {
+		sum++;
+		switch(id) {
+		case 0:
+			clients[0].setCard0Text(k.toString());
+			clients[1].setCard0Text(k.toString());
+			clients[2].setCard0Text(k.toString());
+			break;
+		case 1: 
+			clients[0].setCard1Text(k.toString());
+			clients[1].setCard1Text(k.toString());
+			clients[2].setCard1Text(k.toString());
+			break;
+		case 2:
+			clients[0].setCard2Text(k.toString());
+			clients[1].setCard2Text(k.toString());
+			clients[2].setCard2Text(k.toString());
+			break;
 		}
-		try {
-			for (int i = 0; i < 3; i++) {
-
-				clients[i].setCard0Text(cards[1].toString());
+		if(sum==3) {
+			sum=0;
+			
+			for(int i=0;i<3;i++) {
+				clients[i].setCard0Text("---");
+				clients[i].setCard1Text("---");
+				clients[i].setCard2Text("---");
 			}
-		} catch (NullPointerException e) {
-		}
-		try {
-			for (int i = 0; i < 3; i++) {
-
-				clients[i].setCard0Text(cards[2].toString());
-			}
-		} catch (NullPointerException e) {
 		}
 
 		System.out.println(game.sum);

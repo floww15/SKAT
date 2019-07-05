@@ -8,6 +8,7 @@ import GameClasses.NotYourTurnException;
 import GameClasses.Player;
 import GameClasses.WrongCardException;
 import Server_Client.CenterClient;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -28,36 +29,38 @@ public class GameActivity {
 	CenterClient centerClient;
 	int id;
 
-	public GameActivity(Stage prime, Player[] player,int ownNR, int playingAlone,String type, CenterClient centerClient) {
-		System.out.println(player[(playingAlone)%3].getName());
-		System.out.println(player[(playingAlone+1)%3].getName());
-		System.out.println(player[(playingAlone+2)%3].getName());
-		this.prime=prime;
-		this.playingAlone=playingAlone;
-		this.player=player;
-		this.type=type;
-		this.centerClient =centerClient;
-		id=ownNR;
+	public GameActivity(Stage prime, Player[] player, int ownNR, int playingAlone, String type,
+			CenterClient centerClient) {
+		System.out.println(player[(playingAlone) % 3].getName());
+		System.out.println(player[(playingAlone + 1) % 3].getName());
+		System.out.println(player[(playingAlone + 2) % 3].getName());
+		this.prime = prime;
+		this.playingAlone = playingAlone;
+		this.player = player;
+		this.type = type;
+		this.centerClient = centerClient;
+		id = ownNR;
 		// TextArea taPlayer1= new TextArea("Flo");
 		prime.setResizable(false);
 		// Team, Solo, Spieltyp
 		VBox vBoxTeam = new VBox();
 		vBoxTeam.setStyle("-fx-border-width: 2px");
 		vBoxTeam.setStyle("-fx-border-color: black");
-	
-		lTeam = new Label("Team:"+player[(playingAlone+1)%3].getName()+ " "+ player[(playingAlone+1)%3].getName());
+
+		lTeam = new Label(
+				"Team:" + player[(playingAlone + 1) % 3].getName() + " " + player[(playingAlone + 1) % 3].getName());
 		vBoxTeam.getChildren().add(lTeam);
 
 		VBox vBoxSolo = new VBox();
 		vBoxSolo.setStyle("-fx-border-width: 2px");
 		vBoxSolo.setStyle("-fx-border-color: black");
-		lSolo = new Label("Solo: "+player[playingAlone].getName());
+		lSolo = new Label("Solo: " + player[playingAlone].getName());
 		vBoxSolo.getChildren().add(lSolo);
 
 		VBox vBoxType = new VBox();
 		vBoxType.setStyle("-fx-border-width: 2px");
 		vBoxType.setStyle("-fx-border-color: black");
-		 lType = new Label("Type: "+type);
+		lType = new Label("Type: " + type);
 		vBoxType.getChildren().add(lType);
 
 		HBox hBoxPlayers = new HBox();
@@ -82,7 +85,6 @@ public class GameActivity {
 		vBoxPlayer1.getChildren().addAll(lname1, lPlayedCard1);
 		vBoxPlayer1.setSpacing(10);
 
-		
 		VBox vBoxPlayer2 = new VBox();
 		lname2 = new Label(player[2].getName());
 		lname2.setStyle("-fx-border-width:2px");
@@ -119,27 +121,25 @@ public class GameActivity {
 		hBoxCards2.setAlignment(Pos.CENTER);
 		hBoxCards2.setSpacing(10);
 		for (int i = 0; i < 5; i++) {
-			btnCards[i] = new Button(""+player[ownNR].getHand().get(i));
+			btnCards[i] = new Button("" + player[ownNR].getHand().get(i));
 			hBoxCards1.getChildren().add(btnCards[i]);
 		}
 		for (int i = 5; i < 10; i++) {
-			btnCards[i] = new Button(""+player[ownNR].getHand().get(i));
+			btnCards[i] = new Button("" + player[ownNR].getHand().get(i));
 			hBoxCards2.getChildren().add(btnCards[i]);
 		}
-		
-		btnCards[0].setOnAction(e-> btnCardsClick(0));
-		btnCards[1].setOnAction(e-> btnCardsClick(1));
-		btnCards[2].setOnAction(e-> btnCardsClick(2));
-		btnCards[3].setOnAction(e-> btnCardsClick(3));
-		btnCards[4].setOnAction(e-> btnCardsClick(4));
-		btnCards[5].setOnAction(e-> btnCardsClick(5));
-		btnCards[6].setOnAction(e-> btnCardsClick(6));
-		btnCards[7].setOnAction(e-> btnCardsClick(7));
-		btnCards[8].setOnAction(e-> btnCardsClick(8));
-		btnCards[9].setOnAction(e-> btnCardsClick(9));
-					
-	
-		
+
+		btnCards[0].setOnAction(e -> btnCardsClick(0));
+		btnCards[1].setOnAction(e -> btnCardsClick(1));
+		btnCards[2].setOnAction(e -> btnCardsClick(2));
+		btnCards[3].setOnAction(e -> btnCardsClick(3));
+		btnCards[4].setOnAction(e -> btnCardsClick(4));
+		btnCards[5].setOnAction(e -> btnCardsClick(5));
+		btnCards[6].setOnAction(e -> btnCardsClick(6));
+		btnCards[7].setOnAction(e -> btnCardsClick(7));
+		btnCards[8].setOnAction(e -> btnCardsClick(8));
+		btnCards[9].setOnAction(e -> btnCardsClick(9));
+
 		VBox VBoxCards = new VBox();
 		VBoxCards.getChildren().add(hBoxCards1);
 		VBoxCards.getChildren().add(hBoxCards2);
@@ -173,33 +173,59 @@ public class GameActivity {
 
 	private void btnCardsClick(int i) {
 		try {
-			Player temp=player[id];
-			Karte k= temp.getHand().get(i);
+			Player temp = player[id];
+			Karte k = temp.getHand().get(i);
 			System.out.println(k);
 			centerClient.legKarte(k);
 			btnCards[i].setVisible(false);
 			System.out.println(i);
-		}
-		catch(WrongCardException    e) {
+		} catch (WrongCardException e) {
 			System.out.println("wrongCard ");
-		} 
-		
+		}
+
 		catch (RemoteException e) {
 			e.printStackTrace();
 		} catch (NotYourTurnException e) {
 			System.out.println("not your turn");
 		}
-		
-		return ;
+
+		return;
 	}
+
 	public void Card0Text(String s) {
 		lPlayedCard1.setText(s);
 	}
+
 	public void Card1Text(String s) {
 		lPlayedCard2.setText(s);
 	}
+
 	public void Card2Text(String s) {
 		lPlayedCard3.setText(s);
+	}
+
+	public void CardChanges(String s1, String s2, String s3) {
+
+//		try {
+//			sem.acquire();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				if (s1 != null)
+					lPlayedCard1.setText(s1);
+				if (s2 != null)
+					lPlayedCard2.setText(s2);
+				if (s3 != null)
+					lPlayedCard3.setText(s3);
+//				sem.release();
+			}
+		});
+
 	}
 
 }

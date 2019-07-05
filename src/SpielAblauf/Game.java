@@ -148,18 +148,18 @@ public class Game {
 			gelegt[2] = false;
 			sum=0;
 			KartenComparator comp = new KartenComparator(trumpf, first.getFarbe());
-			if (comp.compare(cards[0], cards[1]) > 0 && comp.compare(cards[0], cards[2]) > 0) {
+			if (comp.compare(cards[0], cards[1]) < 0 && comp.compare(cards[0], cards[2]) < 0) {
 				player[0].addStich(s);
 				turn = 0;
 				return;
 			}
-			if (comp.compare(cards[1], cards[0]) > 0 && comp.compare(cards[1], cards[2]) > 0) {
+			if (comp.compare(cards[1], cards[0]) < 0 && comp.compare(cards[1], cards[2]) < 0) {
 				player[1].addStich(s);
 				turn = 1;
 				return;
 
 			}
-			if (comp.compare(cards[2], cards[1]) > 0 && comp.compare(cards[2], cards[0]) > 0) {
+			if (comp.compare(cards[2], cards[1]) < 0 && comp.compare(cards[2], cards[0]) < 0) {
 				player[2].addStich(s);
 				turn = 2;
 
