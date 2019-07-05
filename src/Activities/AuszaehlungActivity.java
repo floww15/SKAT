@@ -89,7 +89,11 @@ public class AuszaehlungActivity {
 					}
 				}
 			}
-			
+			if (client.getSkatClient().getPlayer().getName().equals(spieler) ){
+				if (spieler.equals(verlierer1)) {
+					insPunkte = insPunkte*-1;
+				}
+			}
 				
 		}
 
