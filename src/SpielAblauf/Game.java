@@ -14,6 +14,7 @@ public class Game {
 	private int turn = 1;
 	public int sum = 0;
 	private Karte first = null;
+	String farbe = "";
 
 	public int getTurn() {
 		return turn;
@@ -135,16 +136,17 @@ public class Game {
 	}
 
 	public void legKarte(int id, Karte k, String trumpf, Player p) throws WrongCardException, NotYourTurnException {
-		String farbe = "";
+		
 		if (id != turn)
 			throw new NotYourTurnException();
 		if (sum == 0) {
 			first = k;
 			farbe = first.getFarbe();
-			System.out.println(farbe+ " = farbe,"+ trumpf+" =trumpf");
+			
 		}
+		System.out.println(farbe+ " = farbe,"+ trumpf+" =trumpf "+k.getFarbe()+" =farbe");
 		if (sum == 1 || sum==2) {
-			if (trumpf .equals("null")) {
+			if (trumpf .equals("Null")) {
 				if (!k.getFarbe().equals(farbe) && p.getHand().containsNull(farbe)) {
 					throw new WrongCardException();
 				}
@@ -165,7 +167,7 @@ public class Game {
 					throw new WrongCardException();
 
 			}
-			if (!trumpf.equals("null")&& !trumpf.equals("Grand") && !trumpf.equals(farbe)) {
+			if (!trumpf.equals("Null")&& !trumpf.equals("Grand") && !trumpf.equals(farbe)) {
 				if (!k.getFarbe().equals(farbe) && p.getHand().contains(farbe))
 					throw new WrongCardException();
 

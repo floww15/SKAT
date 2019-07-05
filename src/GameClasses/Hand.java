@@ -51,14 +51,14 @@ public class Hand implements Serializable {
 	}
 	public boolean contains(String s) {
 		for(int i=0;i<handkarten.size();i++) {
-			if(handkarten.get(i).getFarbe().equals(s)&&!handkarten.get(i).getWert().equals("bube"))
+			if(handkarten.get(i).getFarbe().equals(s) && !handkarten.get(i).getWert().equals("Bube"))
 				return true;
 		}
 		return false;
 	}
 	public boolean containsTrumpf(String s) {
 		for(int i=0;i<handkarten.size();i++) {
-			if(handkarten.get(i).getFarbe().equals(s)||handkarten.get(i).getWert().equals("bube"))
+			if(handkarten.get(i).getFarbe().equals(s)||handkarten.get(i).getWert().equals("Bube"))
 				return true;
 		}
 		return false;
@@ -73,14 +73,14 @@ public class Hand implements Serializable {
 	}
 	public boolean containsBube() {
 		for(int i=0;i<handkarten.size();i++) {
-			if(handkarten.get(i).getWert().equals("bube"))
+			if(handkarten.get(i).getWert().equals("Bube"))
 				return true;
 		}
 		return false;
 	}
 	public boolean containsTrumpfGrand(String farbe) {
 		for(int i=0;i<handkarten.size();i++) {
-			if(handkarten.get(i).getFarbe().equals(farbe)&&handkarten.get(i).getWert().equals("bube"))
+			if(handkarten.get(i).getFarbe().equals(farbe)&&handkarten.get(i).getWert().equals("Bube"))
 				return true;
 		}
 		return false;

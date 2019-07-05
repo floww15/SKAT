@@ -1,8 +1,10 @@
 package Activities;
 
 import java.rmi.RemoteException;
+import java.util.Collections;
 import java.util.concurrent.Semaphore;
 
+import GameClasses.Hand;
 import GameClasses.Karte;
 import GameClasses.NotYourTurnException;
 import GameClasses.Player;
@@ -120,6 +122,7 @@ public class GameActivity {
 		hBoxCards1.setSpacing(10);
 		hBoxCards2.setAlignment(Pos.CENTER);
 		hBoxCards2.setSpacing(10);
+		Collections.sort(player[ownNR].getHand().getHandkarten(), new Hand.HandComparator());
 		for (int i = 0; i < 5; i++) {
 			btnCards[i] = new Button("" + player[ownNR].getHand().get(i));
 			hBoxCards1.getChildren().add(btnCards[i]);
