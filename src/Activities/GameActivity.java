@@ -18,11 +18,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class GameActivity {
 	Button[] btnCards;
-	Label lPlayedCard3, lname3, lPlayedCard2, lname2, lPlayedCard1, lname1, lTeam, lSolo, lType;
+	Label lPlayedCard3, lname3, lPlayedCard2, lname2, lPlayedCard1, lname1, lTeam, lSolo, lType,lError;
 	Semaphore sem = new Semaphore(0);
 	Player[] player;
 	String type;
@@ -30,6 +31,7 @@ public class GameActivity {
 	Stage prime;
 	CenterClient centerClient;
 	int id;
+	
 
 	public GameActivity(Stage prime, Player[] player, int ownNR, int playingAlone, String type,
 			CenterClient centerClient) {
@@ -44,6 +46,11 @@ public class GameActivity {
 		id = ownNR;
 		// TextArea taPlayer1= new TextArea("Flo");
 		prime.setResizable(false);
+		
+		lError=new Label("Karte nicht spielbar. Bitte richtige Karte auswählen");
+		lError.setVisible(false);
+		lError.setTextFill(Color.RED);
+		
 		// Team, Solo, Spieltyp
 		VBox vBoxTeam = new VBox();
 		vBoxTeam.setStyle("-fx-border-width: 2px");
@@ -155,7 +162,7 @@ public class GameActivity {
 		// alle hBoxen zusammengefasst
 		VBox vBoxAll = new VBox();
 		vBoxAll.setAlignment(Pos.CENTER);
-		vBoxAll.getChildren().addAll(hBoxPlayers, hBoxPlay, VBoxCards);
+		vBoxAll.getChildren().addAll(lError,hBoxPlayers, hBoxPlay, VBoxCards);
 		vBoxAll.setSpacing(20);
 
 		Label labelHeader = new Label("Spielen");
@@ -181,7 +188,9 @@ public class GameActivity {
 			System.out.println(k);
 			centerClient.legKarte(k);
 			btnCards[i].setVisible(false);
+			lError.setVisible(false);
 		} catch (WrongCardException e) {
+			lError.setVisible(true);
 			System.out.println("wrongCard ");
 		}
 		catch (RemoteException e) {
