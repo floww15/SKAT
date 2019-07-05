@@ -38,8 +38,10 @@ public class Hand implements Serializable {
 		handkarten.remove(k);
 	}
 	
-	public void remove(int i) {
-		handkarten.remove(i);
+	public Karte remove(int i) {
+		Karte k=handkarten.get(i);
+		handkarten.set(i, null);
+		return k;
 	}
 
 	public String toString() {

@@ -85,7 +85,7 @@ public class GameActivity {
 
 		// Spieler und gespielte Karten
 		VBox vBoxPlayer1 = new VBox();
-		lname1 = new Label(player[1].getName());
+		lname1 = new Label(player[0].getName());
 		lname1.setStyle("-fx-border-width:2px");
 		lname1.setStyle("-fx-border-color:black");
 		lPlayedCard1 = new Label("---");
@@ -95,7 +95,7 @@ public class GameActivity {
 		vBoxPlayer1.setSpacing(10);
 
 		VBox vBoxPlayer2 = new VBox();
-		lname2 = new Label(player[2].getName());
+		lname2 = new Label(player[1].getName());
 		lname2.setStyle("-fx-border-width:2px");
 		lname2.setStyle("-fx-border-color:black");
 		lPlayedCard2 = new Label("---");
@@ -105,7 +105,7 @@ public class GameActivity {
 		vBoxPlayer2.setSpacing(10);
 
 		VBox vBoxPlayer3 = new VBox();
-		lname3 = new Label(player[0].getName());
+		lname3 = new Label(player[2].getName());
 		lname3.setStyle("-fx-border-width:2px");
 		lname3.setStyle("-fx-border-color:black");
 		lPlayedCard3 = new Label("---");
@@ -182,9 +182,11 @@ public class GameActivity {
 	}
 
 	private void btnCardsClick(int i) {
+		Player temp = player[id];
+		Karte k = temp.getHand().remove(i);
 		try {
-			Player temp = player[id];
-			Karte k = temp.getHand().get(i);
+			
+			
 			System.out.println(k);
 			centerClient.legKarte(k);
 			btnCards[i].setVisible(false);
@@ -192,12 +194,15 @@ public class GameActivity {
 		} catch (WrongCardException e) {
 			lError.setVisible(true);
 			System.out.println("wrongCard ");
+			
 		}
 		catch (RemoteException e) {
 			e.printStackTrace();
 		} catch (NotYourTurnException e) {
 			System.out.println("not your turn");
+			player[id].getHand().getHandkarten().add(i, k);
 		}
+		catch(NullPointerException e) {}
 
 		return;
 	}

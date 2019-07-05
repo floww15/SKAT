@@ -136,12 +136,15 @@ public class Game {
 	}
 
 	public void legKarte(int id, Karte k, String trumpf, Player p) throws WrongCardException, NotYourTurnException {
-		
+		if(k==null) {
+			throw new NullPointerException();
+		}
 		if (id != turn)
 			throw new NotYourTurnException();
 		if (sum == 0) {
 			first = k;
 			farbe = first.getFarbe();
+			
 			
 		}
 		System.out.println(farbe+ " = farbe,"+ trumpf+" =trumpf "+k.getFarbe()+" =farbe");
@@ -178,6 +181,8 @@ public class Game {
 		player[turn] = p;
 		turn = (turn + 1) % 3;
 		sum++;
+		p.getHand().getHandkarten().remove(k);
+		System.out.println(p.getHand().getSize());
 		if (sum == 3) {
 			sum = 0;
 			Stich s = new Stich(cards[0], cards[1], cards[2]);
