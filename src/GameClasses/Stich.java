@@ -15,6 +15,6 @@ public class Stich {
 		return punkte;
 	}
 	public String toString() {
-		return k1+" "+k2+" "+k3;
+		return k1+", "+k2+", "+k3;
 	}
 }
