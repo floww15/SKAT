@@ -71,18 +71,18 @@ public class Hand implements Serializable {
 
 	}
 
-	public boolean contains(String s) {
+	public boolean contains(String s) {	/** contains methode, falls eine farbe angespielt wird, die nicht trumpf ist**/
 		for (int i = 0; i < handkarten.size(); i++) {
 			System.out.println(handkarten);
 			if (handkarten.get(i) != null) {
-			if (handkarten.get(i).getFarbe().equals(s) /* && !handkarten.get(i).getWert().equals("Bube") */)
-				return true;
+				if (handkarten.get(i).getFarbe().equals(s)  && !handkarten.get(i).getWert().equals("Bube") )
+					return true;
 			}
 		}
 		return false;
 	}
 
-	public boolean containsTrumpf(String s) {
+	public boolean containsTrumpf(String s) {	/** contains methode, falls die farbe angespielt wird, die auch trumpf ist**/
 		for (int i = 0; i < handkarten.size(); i++) {
 			System.out.println(handkarten);
 			if (handkarten.get(i) != null) {
@@ -95,31 +95,31 @@ public class Hand implements Serializable {
 		// BUBE IST
 	}
 
-	public boolean containsNull(String s) {
+	public boolean containsNull(String s) {	/**contains für spielmodus null**/
 		for (int i = 0; i < handkarten.size(); i++) {
 			if (handkarten.get(i) != null) {
-			if (handkarten.get(i).getFarbe().equals(s))
-				return true;
+				if (handkarten.get(i).getFarbe().equals(s))
+					return true;
 			}
 		}
 		return false;
 	}
 
-	public boolean containsBube() {
+	public boolean containsBube() {/** containsmethode, die bei grand schaut, ob ein trumpf vorhanden ist**/
 		for (int i = 0; i < handkarten.size(); i++) {
 			if (handkarten.get(i) != null) {
-			if (handkarten.get(i).getWert().equals("Bube"))
-				return true;
+				if (handkarten.get(i).getWert().equals("Bube"))
+					return true;
 			}
 		}
 		return false;
 	}
 
-	public boolean containsTrumpfGrand(String farbe) {
+	public boolean containsTrumpfGrand(String farbe) {	/** contains methode, für grand, wenn kein trumpf gespielt wurde**/
 		for (int i = 0; i < handkarten.size(); i++) {
 			if (handkarten.get(i) != null) {
-			if (handkarten.get(i).getFarbe().equals(farbe) && handkarten.get(i).getWert().equals("Bube"))
-				return true;
+				if (handkarten.get(i).getFarbe().equals(farbe) && !handkarten.get(i).getWert().equals("Bube"))
+					return true;
 			}
 		}
 		return false;
