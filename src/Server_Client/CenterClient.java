@@ -60,6 +60,8 @@ public class CenterClient extends Application {
 		gameActivity= drueckenActivity.startGamefromDruecken();
 	}
 	
+	
+	
 	public void startGameActivites() {
 		client.startGameActivites();
 	}

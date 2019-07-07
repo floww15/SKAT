@@ -315,6 +315,17 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 		centerClient.setCard2Text(s);
 	}
 
+	@Override
+	public void startAuszaehlen() throws RemoteException {
+		// TODO Auto-generated method stub
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				centerClient.startAuszaehlung();
+			}
+		});
+	}
+
 
 
 }

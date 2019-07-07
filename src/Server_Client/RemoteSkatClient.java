@@ -17,6 +17,7 @@ public interface RemoteSkatClient extends Remote{
 	public void startDruecken() throws RemoteException;
 	public void startGamefromReizen() throws RemoteException;
 	public void startGamefromDruecken() throws RemoteException;
+	public void startAuszaehlen() throws RemoteException;
 	public void reizenStartStats() throws RemoteException;
 	public void setPlayer(Player p)throws RemoteException;
 	public void legKarte(Karte k)throws RemoteException,WrongCardException,NotYourTurnException;

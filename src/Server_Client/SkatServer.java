@@ -273,9 +273,12 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 				clients[i].setCard2Text("---");
 			}
 		}
-		if(stiche==10)
+		if(stiche==10) {
 			//hier die auszählen activity starten
-
+			clients[0].startAuszaehlen();
+			clients[1].startAuszaehlen();
+			clients[2].startAuszaehlen();
+		}
 		System.out.println(game.sum);
 
 	}

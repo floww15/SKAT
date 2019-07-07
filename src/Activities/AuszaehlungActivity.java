@@ -48,7 +48,7 @@ public class AuszaehlungActivity {
 				} else {
 					if (playAlone == 0) {
 						verlierer1 = spieler;
-						punkte = punkte * -1;
+//						punkte = punkte * -1;
 						sieger1 = clients[1].getName();
 						sieger2 = clients[2].getName();
 					} else if (playAlone == 1) {
@@ -65,7 +65,7 @@ public class AuszaehlungActivity {
 		}
 
 		HBox hBoxSpielArt = new HBox();
-		lSpielArt = new Label("Spieler " + spieler + " hat " + spielart + " gespielt");
+		lSpielArt = new Label("Spieler " + spieler + " hat " + client.getTrumpf() + " gespielt");
 		lSpielArt.setStyle("-fx-border-width:2px");
 		lSpielArt.setStyle("-fx-border-color:black");
 		hBoxSpielArt.getChildren().add(lSpielArt);
@@ -84,21 +84,22 @@ public class AuszaehlungActivity {
 		} else {
 			lSieger = new Label("Gewonnen hat: " + sieger1 + " \nVerloren haben " + verlierer1 + " und " + verlierer2);
 		}
-		lAufschreiben = new Label("Addierte Punkte: " + insPunkte);
+//		lAufschreiben = new Label("Addierte Punkte: " + insPunkte);
 		lSieger.setStyle("-fx-border-width:2px");
 		lSieger.setStyle("-fx-border-color:black");
-		lAufschreiben.setStyle("-fx-border-width:2px");
-		lAufschreiben.setStyle("-fx-border-color:black");
-		hBoxSieger.getChildren().addAll(lSieger, lAufschreiben);
+//		lAufschreiben.setStyle("-fx-border-width:2px");
+//		lAufschreiben.setStyle("-fx-border-color:black");
+		hBoxSieger.getChildren().addAll(lSieger/*,lAufschreiben*/);
 		hBoxSieger.setAlignment(Pos.CENTER);
 		hBoxSieger.setSpacing(40);
 
 		HBox hBoxButtons = new HBox();
-		Button btnRestart = new Button("Restart");
+//		Button btnRestart = new Button("Restart");
 		Button btnClose = new Button("Close");
-		btnRestart.setPrefSize(80, 20);
+		btnClose.setOnAction(e->btnCloseClick());
+//		btnRestart.setPrefSize(80, 20);
 		btnClose.setPrefSize(80, 20);
-		hBoxButtons.getChildren().addAll(btnRestart, btnClose);
+		hBoxButtons.getChildren().addAll(/*btnRestart,*/ btnClose);
 		hBoxButtons.setSpacing(20);
 		hBoxButtons.setAlignment(Pos.CENTER);
 
@@ -120,6 +121,11 @@ public class AuszaehlungActivity {
 		prime.setTitle("SKAT");
 		prime.setScene(scene);
 
+	}
+
+	private void btnCloseClick() {
+		// TODO Auto-generated method stub
+		System.exit(0);
 	}
 
 }
