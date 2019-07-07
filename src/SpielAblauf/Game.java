@@ -1,10 +1,13 @@
 package SpielAblauf;
 
+import java.rmi.RemoteException;
+
 import GameClasses.Karte;
 import GameClasses.KartenComparator;
 import GameClasses.NotYourTurnException;
 import GameClasses.Stich;
 import GameClasses.WrongCardException;
+import Server_Client.SkatServer;
 import GameClasses.Player;
 
 public class Game {
@@ -15,6 +18,11 @@ public class Game {
 	public int sum = 0;
 	private Karte first = null;
 	String farbe = "";
+	private SkatServer skatServer;
+	
+	public Game(SkatServer skatServer){
+		this.skatServer=skatServer;
+	}
 
 	public int getTurn() {
 		return turn;
@@ -23,119 +31,121 @@ public class Game {
 	public Karte[] getCards() {
 		return cards;
 	}
+	
+	
 
-	public void legKarte2(int id, Karte k, String trumpf, Player p) throws WrongCardException, NotYourTurnException {
-		String farbe = "";
-		Karte first = null;
+//	public void legKarte2(int id, Karte k, String trumpf, Player p) throws WrongCardException, NotYourTurnException {
+//		String farbe = "";
+//		Karte first = null;
+//
+//		if (id != turn)
+//			throw new NotYourTurnException();
+//		// if (!gelegt[turn] && !gelegt[(turn + 1) % 3] && !gelegt[(turn + 2) % 3]) {
+//		if (sum == 0) {
+//			first = k;
+//			cards[turn] = k;
+//			farbe = k.getFarbe();
+//			player[turn] = p;
+//			gelegt[turn] = true;
+//			turn = (turn + 1) % 3;
+//			sum++;
+//			return;
+//		}
+//		// if (gelegt[(turn-1)%3] && !gelegt[turn] && !gelegt[(turn + 1) % 3]) {
+//		if (sum == 1) {
+//
+//			if (trumpf == null) {
+//				if (!k.getFarbe().equals(farbe) && p.getHand().contains(farbe)) {
+//					throw new WrongCardException();
+//				}
+//			}
+//			if (trumpf != null && trumpf.equals("Grand")) {
+//				if (first.getWert().equals("Bube") && k.getWert().equals("Bube") && p.getHand().containsBube())
+//					throw new WrongCardException();
+//				if (!first.getWert().equals("Bube")) {
+//					if (!k.getFarbe().equals(farbe) && p.getHand().containsTrumpfGrand(farbe)) {
+//						throw new WrongCardException();
+//					}
+//				}
+//			}
+//
+//			if (trumpf != null && !trumpf.equals("Grand") && trumpf.equals(farbe)) {
+//				if (!k.getFarbe().equals(farbe) && p.getHand().containsTrumpf(trumpf))
+//					throw new WrongCardException();
+//
+//			}
+//			if (trumpf != null && !trumpf.equals("Grand") && !trumpf.equals(farbe)) {
+//				if (!k.getFarbe().equals(farbe) && p.getHand().contains(farbe))
+//					throw new WrongCardException();
+//
+//			}
+//			cards[turn] = k;
+//			gelegt[turn] = true;
+//			turn = (turn + 1) % 3;
+//			sum++;
+//			return;
+//		}
+//		// if (!gelegt[turn] && !gelegt[(turn + 1) % 3] && !gelegt[(turn + 2) % 3]) {
+//		if (sum == 2) {
+//			if (trumpf == null) {
+//				if (!k.getFarbe().equals(farbe) && p.getHand().contains(farbe)) {
+//					throw new WrongCardException();
+//				}
+//			}
+//			if (trumpf != null && trumpf.equals("Grand")) {
+//				if (first.getWert().equals("Bube") && k.getWert().equals("Bube") && p.getHand().containsBube())
+//					throw new WrongCardException();
+//				if (!first.getWert().equals("Bube")) {
+//					if (!k.getFarbe().equals(farbe) && p.getHand().containsTrumpfGrand(farbe)) {
+//						throw new WrongCardException();
+//					}
+//				}
+//			}
+//			if (trumpf != null && !trumpf.equals("Grand") && trumpf.equals(farbe)) {
+//				if (!k.getFarbe().equals(farbe) && p.getHand().containsTrumpf(trumpf))
+//					throw new WrongCardException();
+//			}
+//			if (trumpf != null && !trumpf.equals("Grand") && !trumpf.equals(farbe)) {
+//				if (!k.getFarbe().equals(farbe) && p.getHand().contains(farbe))
+//					throw new WrongCardException();
+//			}
+//			cards[turn] = k;
+//			gelegt[turn] = true;
+//			sum++;
+//
+//		}
+//		// if (gelegt[turn] && gelegt[(turn + 1) % 3] && gelegt[(turn + 2) % 3]) {
+//		if (sum == 3) {
+//			sum = 0;
+//			Stich s = new Stich(cards[0], cards[1], cards[2]);
+//			gelegt[0] = false;
+//			gelegt[1] = false;
+//			gelegt[2] = false;
+//			sum = 0;
+//			KartenComparator comp = new KartenComparator(trumpf, first.getFarbe());
+//			if (comp.compare(cards[0], cards[1]) > 0 && comp.compare(cards[0], cards[2]) > 0) {
+//				player[0].addStich(s);
+//				turn = 0;
+//				return;
+//			}
+//			if (comp.compare(cards[1], cards[0]) > 0 && comp.compare(cards[1], cards[2]) > 0) {
+//				player[1].addStich(s);
+//				turn = 1;
+//				return;
+//
+//			}
+//			if (comp.compare(cards[2], cards[1]) > 0 && comp.compare(cards[2], cards[0]) > 0) {
+//				player[2].addStich(s);
+//				turn = 2;
+//
+//				return;
+//			}
+//
+//		}
+//
+//	}
 
-		if (id != turn)
-			throw new NotYourTurnException();
-		// if (!gelegt[turn] && !gelegt[(turn + 1) % 3] && !gelegt[(turn + 2) % 3]) {
-		if (sum == 0) {
-			first = k;
-			cards[turn] = k;
-			farbe = k.getFarbe();
-			player[turn] = p;
-			gelegt[turn] = true;
-			turn = (turn + 1) % 3;
-			sum++;
-			return;
-		}
-		// if (gelegt[(turn-1)%3] && !gelegt[turn] && !gelegt[(turn + 1) % 3]) {
-		if (sum == 1) {
-
-			if (trumpf == null) {
-				if (!k.getFarbe().equals(farbe) && p.getHand().contains(farbe)) {
-					throw new WrongCardException();
-				}
-			}
-			if (trumpf != null && trumpf.equals("Grand")) {
-				if (first.getWert().equals("Bube") && k.getWert().equals("Bube") && p.getHand().containsBube())
-					throw new WrongCardException();
-				if (!first.getWert().equals("Bube")) {
-					if (!k.getFarbe().equals(farbe) && p.getHand().containsTrumpfGrand(farbe)) {
-						throw new WrongCardException();
-					}
-				}
-			}
-
-			if (trumpf != null && !trumpf.equals("Grand") && trumpf.equals(farbe)) {
-				if (!k.getFarbe().equals(farbe) && p.getHand().containsTrumpf(trumpf))
-					throw new WrongCardException();
-
-			}
-			if (trumpf != null && !trumpf.equals("Grand") && !trumpf.equals(farbe)) {
-				if (!k.getFarbe().equals(farbe) && p.getHand().contains(farbe))
-					throw new WrongCardException();
-
-			}
-			cards[turn] = k;
-			gelegt[turn] = true;
-			turn = (turn + 1) % 3;
-			sum++;
-			return;
-		}
-		// if (!gelegt[turn] && !gelegt[(turn + 1) % 3] && !gelegt[(turn + 2) % 3]) {
-		if (sum == 2) {
-			if (trumpf == null) {
-				if (!k.getFarbe().equals(farbe) && p.getHand().contains(farbe)) {
-					throw new WrongCardException();
-				}
-			}
-			if (trumpf != null && trumpf.equals("Grand")) {
-				if (first.getWert().equals("Bube") && k.getWert().equals("Bube") && p.getHand().containsBube())
-					throw new WrongCardException();
-				if (!first.getWert().equals("Bube")) {
-					if (!k.getFarbe().equals(farbe) && p.getHand().containsTrumpfGrand(farbe)) {
-						throw new WrongCardException();
-					}
-				}
-			}
-			if (trumpf != null && !trumpf.equals("Grand") && trumpf.equals(farbe)) {
-				if (!k.getFarbe().equals(farbe) && p.getHand().containsTrumpf(trumpf))
-					throw new WrongCardException();
-			}
-			if (trumpf != null && !trumpf.equals("Grand") && !trumpf.equals(farbe)) {
-				if (!k.getFarbe().equals(farbe) && p.getHand().contains(farbe))
-					throw new WrongCardException();
-			}
-			cards[turn] = k;
-			gelegt[turn] = true;
-			sum++;
-
-		}
-		// if (gelegt[turn] && gelegt[(turn + 1) % 3] && gelegt[(turn + 2) % 3]) {
-		if (sum == 3) {
-			sum = 0;
-			Stich s = new Stich(cards[0], cards[1], cards[2]);
-			gelegt[0] = false;
-			gelegt[1] = false;
-			gelegt[2] = false;
-			sum = 0;
-			KartenComparator comp = new KartenComparator(trumpf, first.getFarbe());
-			if (comp.compare(cards[0], cards[1]) > 0 && comp.compare(cards[0], cards[2]) > 0) {
-				player[0].addStich(s);
-				turn = 0;
-				return;
-			}
-			if (comp.compare(cards[1], cards[0]) > 0 && comp.compare(cards[1], cards[2]) > 0) {
-				player[1].addStich(s);
-				turn = 1;
-				return;
-
-			}
-			if (comp.compare(cards[2], cards[1]) > 0 && comp.compare(cards[2], cards[0]) > 0) {
-				player[2].addStich(s);
-				turn = 2;
-
-				return;
-			}
-
-		}
-
-	}
-
-	public void legKarte(int id, Karte k, String trumpf, Player p) throws WrongCardException, NotYourTurnException {
+	public void legKarte(int id, Karte k, String trumpf) throws WrongCardException, NotYourTurnException, RemoteException {
 		if(k==null) {
 			throw new NullPointerException();
 		}
@@ -150,15 +160,15 @@ public class Game {
 		System.out.println(farbe+ " = farbe,"+ trumpf+" =trumpf "+k.getFarbe()+" =farbe");
 		if (sum == 1 || sum==2) {
 			if (trumpf .equals("Null")) {
-				if (!k.getFarbe().equals(farbe) && p.getHand().containsNull(farbe)) {
+				if (!k.getFarbe().equals(farbe) && skatServer.getPlayers()[id].getHand().containsNull(farbe)) {
 					throw new WrongCardException();
 				}
 			}
 			if (trumpf.equals("Grand")) {
-				if (first.getWert().equals("Bube") && k.getWert().equals("Bube") && p.getHand().containsBube())
+				if (first.getWert().equals("Bube") && k.getWert().equals("Bube") && skatServer.getPlayers()[id].getHand().containsBube())
 					throw new WrongCardException();
 				if (!first.getWert().equals("Bube")) {
-					if ((!k.getFarbe().equals(farbe) )&& p.getHand().containsTrumpfGrand(farbe)) {
+					if ((!k.getFarbe().equals(farbe) )&&skatServer.getPlayers()[id].getHand().containsTrumpfGrand(farbe)) {
 						throw new WrongCardException();
 					}
 				}
@@ -166,25 +176,25 @@ public class Game {
 
 			if (trumpf.equals(farbe)) {
 				System.out.println(trumpf+ " "+farbe);
-				System.out.println(p.getHand().containsTrumpf(trumpf));
-				if (!k.getFarbe().equals(farbe) && !k.getWert().equals("Bube") && p.getHand().containsTrumpf(trumpf))
+				System.out.println(skatServer.getPlayers()[id].getHand().containsTrumpf(trumpf));
+				if (!k.getFarbe().equals(farbe) && !k.getWert().equals("Bube") && skatServer.getPlayers()[id].getHand().containsTrumpf(trumpf))
 					throw new WrongCardException();
 
 			}
 			if (!trumpf.equals("Null")&& !trumpf.equals("Grand") && !trumpf.equals(farbe)) {
-				System.out.println(p.getHand().contains(farbe)+" hier");
-				if (!k.getFarbe().equals(farbe) && p.getHand().contains(farbe))
+				System.out.println(skatServer.getPlayers()[id].getHand().contains(farbe)+" hier");
+				if (!k.getFarbe().equals(farbe) && skatServer.getPlayers()[id].getHand().contains(farbe))
 					throw new WrongCardException();
 
 			}
 		}
 		
 		cards[turn] = k;
-		player[turn] = p;
+		player[turn] = skatServer.getPlayers()[id];
 		turn = (turn + 1) % 3;
 		sum++;
-		p.getHand().getHandkarten().remove(k);
-		System.out.println(p.getHand().getSize());
+		skatServer.getPlayers()[id].getHand().getHandkarten().remove(k);
+		System.out.println(skatServer.getPlayers()[id].getHand().getSize());
 		if (sum == 3) {
 			sum = 0;
 			Stich s = new Stich(cards[0], cards[1], cards[2]);

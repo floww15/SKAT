@@ -130,13 +130,13 @@ public class GameActivity {
 		hBoxCards1.setSpacing(10);
 		hBoxCards2.setAlignment(Pos.CENTER);
 		hBoxCards2.setSpacing(10);
-		Collections.sort(player[ownNR].getHand().getHandkarten(), new Hand.HandComparator());
+		Collections.sort(centerClient.getPlayers()[ownNR].getHand().getHandkarten(), new Hand.HandComparator());
 		for (int i = 0; i < 5; i++) {
-			btnCards[i] = new Button("" + player[ownNR].getHand().get(i));
+			btnCards[i] = new Button("" + centerClient.getPlayers()[ownNR].getHand().get(i));
 			hBoxCards1.getChildren().add(btnCards[i]);
 		}
 		for (int i = 5; i < 10; i++) {
-			btnCards[i] = new Button("" + player[ownNR].getHand().get(i));
+			btnCards[i] = new Button("" + centerClient.getPlayers()[ownNR].getHand().get(i));
 			hBoxCards2.getChildren().add(btnCards[i]);
 		}
 
@@ -183,7 +183,7 @@ public class GameActivity {
 	}
 
 	private void btnCardsClick(int i) {
-		Karte k = player[id].getHand().remove(i);
+		Karte k = centerClient.getPlayers()[id].getHand().remove(i);
 		try {
 //			Karte k = temp.getHand().remove(i);
 			
@@ -195,14 +195,14 @@ public class GameActivity {
 		} catch (WrongCardException e) {
 			lError.setVisible(true);
 			System.out.println("wrongCard ");
-			player[id].getHand().getHandkarten().set(i, k);
+			centerClient.getPlayers()[id].getHand().getHandkarten().set(i, k);
 		}
 		catch (RemoteException e) {
 			e.printStackTrace();
 		} catch (NotYourTurnException e) {
 			System.out.println("not your turn");
-			player[id].getHand().getHandkarten().set(i, k);
-			System.out.println(player[id].getHand().getHandkarten()); // zum testen
+			centerClient.getPlayers()[id].getHand().getHandkarten().set(i, k);
+			System.out.println(centerClient.getPlayers()[id].getHand().getHandkarten()); // zum testen
 		}
 		catch(NullPointerException e) {}
 		if (++played == 10) {

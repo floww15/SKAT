@@ -1,6 +1,8 @@
 package GameClasses;
 
-public class Stich {
+import java.io.Serializable;
+
+public class Stich implements Serializable{
 	Karte k1;
 	Karte k2;
 	Karte k3;

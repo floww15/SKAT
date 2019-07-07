@@ -24,7 +24,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	private Player[] players = new Player[3];
 	Reizen reizen;
 	private int playingAlone;
-	Game game = new Game();
+	Game game;
 //	private Semaphore[] semsPlayer = new Semaphore[3];
 	int player = 0;
 	Karte[] cards = new Karte[3];
@@ -55,6 +55,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 		haende.add(new Hand());
 		haende.add(new Hand());
 		verteilen();
+		game= new Game(this);
 	}
 	// das ist ein test kommentar
 
@@ -241,7 +242,7 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 	@Override
 	public void legKarte(int id, Karte k) throws RemoteException, NotYourTurnException, WrongCardException {
 
-		game.legKarte(id, k, trumpf, players[id]);
+		game.legKarte(id, k, trumpf);
 		players[id].getHand().getHandkarten().remove(k);
 		cards = game.getCards();
 		sum++;

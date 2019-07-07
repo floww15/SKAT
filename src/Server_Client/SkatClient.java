@@ -21,7 +21,7 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 	CenterClient centerClient;
 	RemoteSkatServer skatServer;
 	int pos = 0;
-	Hand hand;
+//	Hand hand;
 	Reizen reizen;
 	ArrayList<Karte> skat;
 	private int punkte = 0;
@@ -73,12 +73,17 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 
 	@Override
 	public void startReizen() throws RemoteException {
-		hand = skatServer.getHand(pos);
+//		hand = skatServer.getHand(pos);
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 
-				centerClient.startReizen(pos, hand);
+				try {
+					centerClient.startReizen(pos, skatServer.getHand(pos));
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			}
 		});
@@ -90,7 +95,12 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 			@Override
 			public void run() {
 
-				centerClient.startDruecken(hand);
+				try {
+					centerClient.startDruecken(skatServer.getHand(pos));
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			}
 		});
