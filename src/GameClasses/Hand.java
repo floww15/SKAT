@@ -11,35 +11,35 @@ public class Hand implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Karte> handkarten;
 
-	public Hand() {
+	public Hand() {	/** standard constructor**/
 		handkarten = new ArrayList<Karte>();
 	}
 
-	Hand(ArrayList<Karte> list) {
+	public Hand(ArrayList<Karte> list) {/**custom constructor, dem eine arraylist aus karten übergeben wird**/
 		handkarten = list;
 	}
 
-	public int getSize() {
+	public int getSize() {/** gibt die anzahl an karten auf der hand an**/
 		return handkarten.size();
 	}
 
-	public ArrayList<Karte> getHandkarten() {
+	public ArrayList<Karte> getHandkarten() {/** gibt die arraylist an karten auf der hand aus**/
 		return handkarten;
 	}
 
-	public void add(Karte k) {
+	public void add(Karte k) {/** fügt der hand eine Karte hinzu   **/
 		handkarten.add(k);
 	}
 
-	public Karte get(int i) {
+	public Karte get(int i) {/**  gibt die karte auf position i der hand zurück  **/
 		return handkarten.get(i);
 	}
 
-	public void removeD(Karte k) {
+	public void removeD(Karte k) {/**  löscht die karte k von der hand  **/
 		handkarten.remove(k);
 	}
 
-	public boolean remove(Karte k) {
+	public boolean remove(Karte k) {	/** setzt die karte k auf der hand auf den wert null  **/
 		for (Karte t : handkarten) {
 			if (t != null) {
 				if (t.getFarbe().equals(k.getFarbe())) {
@@ -55,7 +55,7 @@ public class Hand implements Serializable {
 		return false;
 	}
 
-	public Karte remove(int i) {
+	public Karte remove(int i) {/**  löscht die karte an position i   **/
 		System.out.println(handkarten);
 		Karte k = handkarten.get(i);
 		this.remove(handkarten.get(i));
@@ -63,7 +63,7 @@ public class Hand implements Serializable {
 		return k;
 	}
 
-	public String toString() {
+	public String toString() {/**  gibt eine string repräsentation der Hand wieder  **/
 		String res = "";
 		for (int i = 0; i < handkarten.size(); i++)
 			res += handkarten.get(i) + "\n";
@@ -125,7 +125,7 @@ public class Hand implements Serializable {
 		return false;
 	}
 
-	public static class HandComparator implements Comparator<Karte> {
+	public static class HandComparator implements Comparator<Karte> {/**   comparator, der benutzt wird, um die handkarten zu sortieren   **/
 
 		@Override
 		public int compare(Karte k1, Karte k2) {
