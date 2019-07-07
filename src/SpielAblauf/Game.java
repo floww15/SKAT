@@ -50,9 +50,9 @@ public class Game {
 				}
 			}
 			if (trumpf != null && trumpf.equals("Grand")) {
-				if (first.getWert().equals("bube") && k.getWert().equals("bube") && p.getHand().containsBube())
+				if (first.getWert().equals("Bube") && k.getWert().equals("Bube") && p.getHand().containsBube())
 					throw new WrongCardException();
-				if (!first.getWert().equals("bube")) {
+				if (!first.getWert().equals("Bube")) {
 					if (!k.getFarbe().equals(farbe) && p.getHand().containsTrumpfGrand(farbe)) {
 						throw new WrongCardException();
 					}
