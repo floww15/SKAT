@@ -206,10 +206,9 @@ public class GameActivity {
 			System.out.println(player[id].getHand().getHandkarten()); // zum testen
 		}
 		catch(NullPointerException e) {}
-		if (played++ == 10) {
-			
+		if (++played == 10) {
+			this.startAuszaehlung();
 		}
-
 		return;
 	}
 
