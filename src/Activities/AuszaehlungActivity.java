@@ -7,7 +7,6 @@ import GameClasses.Player;
 import GameClasses.Stich;
 import Server_Client.CenterClient;
 import Server_Client.SkatClient;
-import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

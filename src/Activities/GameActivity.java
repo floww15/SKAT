@@ -183,8 +183,7 @@ public class GameActivity {
 	}
 
 	private void btnCardsClick(int i) {
-		Player temp = player[id];
-		Karte k = temp.getHand().remove(i);
+		Karte k = player[id].getHand().remove(i);
 		try {
 //			Karte k = temp.getHand().remove(i);
 			

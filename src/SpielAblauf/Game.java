@@ -166,11 +166,13 @@ public class Game {
 
 			if (trumpf.equals(farbe)) {
 				System.out.println(trumpf+ " "+farbe);
-				if (!k.getFarbe().equals(farbe) && p.getHand().containsTrumpf(trumpf))
+				System.out.println(p.getHand().containsTrumpf(trumpf));
+				if (!k.getFarbe().equals(farbe) && !k.getWert().equals("Bube") && p.getHand().containsTrumpf(trumpf))
 					throw new WrongCardException();
 
 			}
 			if (!trumpf.equals("Null")&& !trumpf.equals("Grand") && !trumpf.equals(farbe)) {
+				System.out.println(p.getHand().contains(farbe)+" hier");
 				if (!k.getFarbe().equals(farbe) && p.getHand().contains(farbe))
 					throw new WrongCardException();
 

@@ -1,6 +1,6 @@
 package Server_Client;
 
-import SpielAblauf.*;
+
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

@@ -39,8 +39,9 @@ public class Hand implements Serializable {
 	}
 	
 	public Karte remove(int i) {
+		System.out.println(handkarten);
 		Karte k=handkarten.get(i);
-		handkarten.set(i, null);
+		handkarten.set(i, new Karte("null","null"));
 		System.out.println(handkarten); //zum testen
 		return k;
 	}
@@ -54,18 +55,20 @@ public class Hand implements Serializable {
 	}
 	public boolean contains(String s) {
 		for(int i=0;i<handkarten.size();i++) {
-			if(handkarten.get(i).getFarbe().equals(s) && !handkarten.get(i).getWert().equals("Bube"))
+			System.out.println(handkarten);
+			if(handkarten.get(i).getFarbe().equals(s) /*&& !handkarten.get(i).getWert().equals("Bube")*/)
 				return true;
 		}
 		return false;
 	}
 	public boolean containsTrumpf(String s) {
 		for(int i=0;i<handkarten.size();i++) {
+			System.out.println(handkarten);
 			if(handkarten.get(i).getFarbe().equals(s)||handkarten.get(i).getWert().equals("Bube"))
 				return true;
 		}
 		return false;
-		
+		//CONTAINS MUESSEN AUCH NOCH UEBERPRUEFEN, OB DER WERT BEIM FARBEN UEBERPRUEFEN BUBE IST
 	}
 	public boolean containsNull(String s) {
 		for(int i=0;i<handkarten.size();i++) {
