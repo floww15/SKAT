@@ -41,6 +41,7 @@ public class Hand implements Serializable {
 	public Karte remove(int i) {
 		Karte k=handkarten.get(i);
 		handkarten.set(i, null);
+		System.out.println(handkarten); //zum testen
 		return k;
 	}
 

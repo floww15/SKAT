@@ -186,22 +186,24 @@ public class GameActivity {
 		Player temp = player[id];
 		Karte k = temp.getHand().remove(i);
 		try {
-			
+//			Karte k = temp.getHand().remove(i);
 			
 			System.out.println(k);
+			System.out.println("-- von buttonsclick"); // zum testen
 			centerClient.legKarte(k);
 			btnCards[i].setVisible(false);
 			lError.setVisible(false);
 		} catch (WrongCardException e) {
 			lError.setVisible(true);
 			System.out.println("wrongCard ");
-			
+			player[id].getHand().getHandkarten().set(i, k);
 		}
 		catch (RemoteException e) {
 			e.printStackTrace();
 		} catch (NotYourTurnException e) {
 			System.out.println("not your turn");
-			player[id].getHand().getHandkarten().add(i, k);
+			player[id].getHand().getHandkarten().set(i, k);
+			System.out.println(player[id].getHand().getHandkarten()); // zum testen
 		}
 		catch(NullPointerException e) {}
 		if (played++ == 10) {
