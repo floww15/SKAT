@@ -19,7 +19,7 @@ public class AuszaehlungActivity {
 	CenterClient client;
 	Semaphore sem = new Semaphore(1);
 	String spielart, sieger1, sieger2, verlierer1, verlierer2, spieler;
-	int insPunkte, punkte = 0;
+	int insPunkte = 0, punkte = 0;
 	Player[] clients;
 	int playAlone;
 
@@ -48,7 +48,12 @@ public class AuszaehlungActivity {
 				} else {
 					if (playAlone == 0) {
 						verlierer1 = spieler;
+<<<<<<< HEAD
 //						punkte = punkte * -1;
+=======
+						punkte = punkte * -1;
+						insPunkte += punkte;
+>>>>>>> branch 'master' of https://github.com/floww15/SKAT.git
 						sieger1 = clients[1].getName();
 						sieger2 = clients[2].getName();
 					} else if (playAlone == 1) {
