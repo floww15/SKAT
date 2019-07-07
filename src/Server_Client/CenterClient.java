@@ -73,7 +73,7 @@ public class CenterClient extends Application {
 	}
 
 	public void startAuszaehlung() {
-//		auszaehlungactivity = gameActivity.startAuszaehlung();
+		auszaehlungActivity = gameActivity.startAuszaehlung();
 	}
 
 	public SkatClient getClient() {

@@ -25,7 +25,9 @@ public class KartenComparator implements Comparator<Karte> {
 				} else {
 					if (k2.getWert().equals("Bube")) {
 						return 1; /** Falls k2 ein Bube ist, aber k1 nicht **/
-					} else {
+					} else { 
+						if (!k2.getFarbe().equals(farbe))/**Kontrolle, ob k2 eine abwerfkarte ist**/
+							return -1;
 						if (k1.getPoints() > k2.getPoints())
 							return -1; /** Falls die erste Karte der höhere Trumpf ist **/
 						else if (k1.getPoints() < k2.getPoints())

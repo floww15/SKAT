@@ -31,7 +31,7 @@ public class GameActivity {
 	Stage prime;
 	CenterClient centerClient;
 	int id;
-	
+	int played;
 
 	public GameActivity(Stage prime, Player[] player, int ownNR, int playingAlone, String type,
 			CenterClient centerClient) {
@@ -44,6 +44,7 @@ public class GameActivity {
 		this.type = type;
 		this.centerClient = centerClient;
 		id = ownNR;
+		played = 0;
 		// TextArea taPlayer1= new TextArea("Flo");
 		prime.setResizable(false);
 		
@@ -203,6 +204,9 @@ public class GameActivity {
 			player[id].getHand().getHandkarten().add(i, k);
 		}
 		catch(NullPointerException e) {}
+		if (played++ == 10) {
+			
+		}
 
 		return;
 	}
@@ -217,6 +221,10 @@ public class GameActivity {
 
 	public void Card2Text(String s) {
 		lPlayedCard3.setText(s);
+	}
+	
+	public AuszaehlungActivity startAuszaehlung() {
+		return new AuszaehlungActivity(this.prime,this.centerClient);
 	}
 
 	public void CardChanges(String s1, String s2, String s3) {
