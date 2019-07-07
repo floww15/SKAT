@@ -48,12 +48,7 @@ public class AuszaehlungActivity {
 				} else {
 					if (playAlone == 0) {
 						verlierer1 = spieler;
-<<<<<<< HEAD
-//						punkte = punkte * -1;
-=======
-						punkte = punkte * -1;
-						insPunkte += punkte;
->>>>>>> branch 'master' of https://github.com/floww15/SKAT.git
+
 						sieger1 = clients[1].getName();
 						sieger2 = clients[2].getName();
 					} else if (playAlone == 1) {
