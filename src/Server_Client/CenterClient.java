@@ -118,10 +118,10 @@ public class CenterClient extends Application {
 	}
 	
 	public Player[] getPlayers() {
-		System.out.println("centerclient");
-		for(int i=0; i<3; i++) {
-			System.out.println(client.getPlayers()[i].getName());
-		}
+//		System.out.println("centerclient");
+//		for(int i=0; i<3; i++) {
+//			System.out.println(client.getPlayers()[i].getName());
+//		}
 		return client.getPlayers();
 	}
 	

@@ -159,10 +159,10 @@ public class SkatServer extends UnicastRemoteObject implements RemoteSkatServer 
 
 	@Override
 	public Player[] getPlayers() throws RemoteException {
-		System.out.println("SkatServer");
-		for (int i = 0; i < 3; i++) {
-			System.out.println(players[i].getName());
-		}
+//		System.out.println("SkatServer");
+//		for (int i = 0; i < 3; i++) {
+//			System.out.println(players[i].getName());
+//		}
 		// TODO Auto-generated method stub
 		return players;
 	}

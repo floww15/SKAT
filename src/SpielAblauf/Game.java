@@ -193,8 +193,10 @@ public class Game {
 		player[turn] = skatServer.getPlayers()[id];
 		turn = (turn + 1) % 3;
 		sum++;
-		skatServer.getPlayers()[id].getHand().getHandkarten().remove(k);
-		System.out.println(skatServer.getPlayers()[id].getHand().getSize());
+		System.out.println(k);
+		System.out.println(skatServer.getPlayers()[id].getHand().remove(k));
+		System.out.println(skatServer.getPlayers()[id].getHand().getSize()+" +");
+		System.out.println(skatServer.getPlayers()[id].getHand());
 		if (sum == 3) {
 			sum = 0;
 			Stich s = new Stich(cards[0], cards[1], cards[2]);

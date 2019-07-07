@@ -1,12 +1,10 @@
 package Activities;
 
-import java.rmi.RemoteException;
 import java.util.concurrent.Semaphore;
 
 import GameClasses.Player;
 import GameClasses.Stich;
 import Server_Client.CenterClient;
-import Server_Client.SkatClient;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,90 +20,59 @@ public class AuszaehlungActivity {
 	Semaphore sem = new Semaphore(1);
 	String spielart, sieger1, sieger2, verlierer1, verlierer2, spieler;
 	int insPunkte, punkte = 0;
-	SkatClient[] clients;
+	Player[] clients;
+	int playAlone;
 
-	public AuszaehlungActivity(Stage prime, CenterClient client ) {
+	public AuszaehlungActivity(Stage prime, CenterClient client) {
 		this.client = client;
-		for (Stich t : client.getClient().getPlayer().getStiche())
-			punkte += t.getPoints();
-		insPunkte = client.getClient().getPunkte();
-		insPunkte += punkte;
-		client.getClient().setPunkte(insPunkte);
-		try {
-			clients = (SkatClient[]) client.getClient().getClients();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (client.getSkatClient().isFirst())
-			spieler = client.getClient().getPlayer().getName();
-		else {
-			
-			for (SkatClient c : clients) {
-				if (c.isFirst()) {
-					spieler =  c.getPlayer().getName();
+		playAlone = client.getClient().getPlayingAlone();
+		clients = client.getClient().getPlayers();
+		spieler = client.getClient().getPlayers()[playAlone].getName();
+		for (Player p : clients) {
+			if (p.getName().equals(spieler)) {
+				for (Stich i : p.getStiche()) {
+					punkte += i.getPoints();
 				}
-			}
-		}
-		int x = 0;
-		for (SkatClient s : clients) {
-			if (s.isFirst()) {
-				for (Stich i : s.getPlayer().getStiche()) {
-					if ( i.getPoints() >= 61) {
-						sieger1 = s.getPlayer().getName();
-						Player [] arr = s.getPlayers();
-						for (int z= 0; z<arr.length; z++) {
-							if (arr[z].getName().equals(s.getPlayer().getName()))
-								x = z;
-						}
-						if (x == 0) {
-							verlierer1 = arr[1].getName();
-							verlierer2 = arr[2].getName();
-						} else if (x == 1) {
-							verlierer1 = arr[0].getName();
-							verlierer2 = arr[2].getName();/** Verlierer und Sieger auswertung**/
-						} else {
-							verlierer1 = arr[1].getName();
-							verlierer2 = arr[0].getName();
-						}
+				if (punkte >= 61) {
+					sieger1 = spieler;
+					if (playAlone == 0) {
+						verlierer1 = clients[1].getName();
+						verlierer2 = clients[2].getName();
+					} else if (playAlone == 1) {
+						verlierer1 = clients[0].getName();
+						verlierer2 = clients[2].getName();/** Verlierer und Sieger auswertung **/
 					} else {
-						verlierer1 = s.getPlayer().getName();
-						Player [] arr = s.getPlayers();
-						for (int z= 0; z<arr.length; z++) {
-							if (arr[z].getName().equals(s.getPlayer().getName()))
-								x = z;
-						}
-						if (x == 0) {
-							sieger1 = arr[1].getName();
-							sieger2 = arr[2].getName();
-						} else if (x == 1) {
-							sieger1 = arr[0].getName();
-							sieger2 = arr[2].getName();
-						} else {
-							sieger1 = arr[1].getName();
-							sieger2 = arr[0].getName();
-						}
+						verlierer1 = clients[1].getName();
+						verlierer2 = clients[0].getName();
 					}
-				}
-			}
-			if (client.getSkatClient().getPlayer().getName().equals(spieler) ){
-				if (spieler.equals(verlierer1)) {
-					insPunkte = insPunkte*-1;
-				}
-			}
-				
-		}
+				} else {
+					if (playAlone == 0) {
+						verlierer1 = spieler;
+						punkte = punkte * -1;
+						sieger1 = clients[1].getName();
+						sieger2 = clients[2].getName();
+					} else if (playAlone == 1) {
+						sieger1 = clients[0].getName();
+						sieger2 = clients[2].getName();
+					} else {
+						sieger1 = clients[1].getName();
+						sieger2 = clients[0].getName();
+					}
 
+				}
+			}
+
+		}
 
 		HBox hBoxSpielArt = new HBox();
-		lSpielArt = new Label("Spieler "+spieler+" hat "+spielart+" gespielt");
+		lSpielArt = new Label("Spieler " + spieler + " hat " + spielart + " gespielt");
 		lSpielArt.setStyle("-fx-border-width:2px");
 		lSpielArt.setStyle("-fx-border-color:black");
 		hBoxSpielArt.getChildren().add(lSpielArt);
 		hBoxSpielArt.setAlignment(Pos.CENTER);
 
 		HBox hBoxPunkte = new HBox();
-		lPunkte = new Label("Punkte geholt: "+punkte);
+		lPunkte = new Label("Punkte geholt: " + punkte);
 		lPunkte.setStyle("-fx-border-width:2px");
 		lPunkte.setStyle("-fx-border-color:black");
 		hBoxPunkte.getChildren().add(lPunkte);
@@ -113,11 +80,11 @@ public class AuszaehlungActivity {
 
 		HBox hBoxSieger = new HBox();
 		if (sieger1 != null && sieger2 != null) {
-			lSieger = new Label("Gewonnen haben: "+sieger1+" und "+sieger2+"\nVerloren hat "+verlierer1);
+			lSieger = new Label("Gewonnen haben: " + sieger1 + " und " + sieger2 + "\nVerloren hat " + verlierer1);
 		} else {
-			lSieger = new Label("Gewonnen hat: "+sieger1+" \nVerloren haben "+verlierer1+ " und "+verlierer2);
+			lSieger = new Label("Gewonnen hat: " + sieger1 + " \nVerloren haben " + verlierer1 + " und " + verlierer2);
 		}
-		lAufschreiben = new Label("Addierte Punkte: "+insPunkte);
+		lAufschreiben = new Label("Addierte Punkte: " + insPunkte);
 		lSieger.setStyle("-fx-border-width:2px");
 		lSieger.setStyle("-fx-border-color:black");
 		lAufschreiben.setStyle("-fx-border-width:2px");
@@ -152,9 +119,7 @@ public class AuszaehlungActivity {
 		Scene scene = new Scene(borderPane, 700, 430);
 		prime.setTitle("SKAT");
 		prime.setScene(scene);
-		
 
 	}
 
-	
 }

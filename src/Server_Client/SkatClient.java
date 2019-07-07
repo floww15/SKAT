@@ -181,15 +181,15 @@ public class SkatClient extends UnicastRemoteObject implements RemoteSkatClient 
 	}
 
 	public Player[] getPlayers() {
-		System.out.println("SkatClient");
-		for(int i=0; i<3; i++) {
-			try {
-				System.out.println(skatServer.getPlayers()[i].getName());
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+//		System.out.println("SkatClient");
+//		for(int i=0; i<3; i++) {
+//			try {
+//				System.out.println(skatServer.getPlayers()[i].getName());
+//			} catch (RemoteException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
 		try {
 			return skatServer.getPlayers();
 		} catch (RemoteException e) {

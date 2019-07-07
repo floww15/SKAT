@@ -255,8 +255,8 @@ public class DrueckenActivity {
 				}
 				System.out.println(neuerSkat.get(0));
 				System.out.println(neuerSkat.get(1));
-				hand.remove(neuerSkat.get(0));
-				hand.remove(neuerSkat.get(1));
+				hand.removeD(neuerSkat.get(0));
+				hand.removeD(neuerSkat.get(1));
 
 			}
 			System.out.println("Hand groeﬂe " + hand.getSize());
