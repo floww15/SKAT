@@ -41,9 +41,12 @@ public class Game {
 			throw new NotYourTurnException();
 		if (sum == 0) {
 			first = k;
-			farbe = first.getFarbe();
+			if (!trumpf.equals("Grand") && !trumpf.equals("Null") && first.getWert().equals("Bube"))
+				farbe = trumpf;
+			else {
+				farbe = first.getFarbe();
 			
-			
+			}
 		}
 		System.out.println(farbe+ " = farbe,"+ trumpf+" =trumpf "+k.getFarbe()+" =farbe");
 		if (sum == 1 || sum==2) {
@@ -65,6 +68,13 @@ public class Game {
 			if (trumpf.equals(farbe)) {
 				System.out.println(trumpf+ " "+farbe);
 				System.out.println(skatServer.getPlayers()[id].getHand().containsTrumpf(trumpf));
+				if (first.getWert().equals("Bube")) {
+					if (!k.getWert().equals("Bube")) {
+						if (!k.getFarbe().equals(farbe) && skatServer.getPlayers()[id].getHand().containsTrumpf(trumpf)) {
+							throw new WrongCardException();
+						}
+					}
+				} else 
 				if (!k.getFarbe().equals(farbe) && !k.getWert().equals("Bube") && skatServer.getPlayers()[id].getHand().containsTrumpf(trumpf))
 					throw new WrongCardException();
 
